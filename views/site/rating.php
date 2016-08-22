@@ -27,7 +27,7 @@ use yii\widgets\LinkPager;
 			<tr>
 				<td>1</td>
 				<td>100</td>
-				<td><a href="#activist" rel="modal"><?= Html::encode("{$tempuser->uname}") ?>:</a></td>
+				<td><a href="#activist" rel="modal"><?= Html::encode("{$tempuser->uname}") ?></a></td>
 				<td>3</td>
 				<td>Эконом</td>
 			</tr>
