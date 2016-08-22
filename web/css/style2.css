@@ -1,0 +1,225 @@
+.an-exit {
+  position: relative; }
+
+.an-exit__krest {
+  display: inline-block;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  cursor: pointer; }
+
+.an-exit__krest_style2 {
+  top: 0px;
+  right: 0px; }
+
+.regevent {
+  background-color: #fff;
+  width: 600px; }
+
+.registr {
+  width: 565px;
+  height: auto;
+  padding: 30px;
+  margin: 0 auto; }
+
+.titregbox {
+  border-bottom: 1px solid #50D0FF; }
+
+.titreg {
+  display: block;
+  font-family: "OpenSans-Regular";
+  font-size: 20px;
+  line-height: 21px;
+  text-transform: uppercase;
+  color: #50D0FF;
+  padding-bottom: 10px; }
+
+.formwrapper label {
+  font-family: "OpenSans-Regular";
+  font-size: 14px;
+  line-height: 17px;
+  cursor: pointer;
+  color: #000; }
+
+.formwrapper1 {
+  width: 100%;
+  padding: 20px 0; }
+  .formwrapper1 input[type=text] {
+    width: 83%;
+    margin-top: 5px;
+    cursor: pointer;
+    padding: 0 5px; }
+
+.formwrapper2 {
+  width: 100%;
+  padding-bottom: 20px; }
+  .formwrapper2 input[type=text] {
+    width: 83%;
+    margin-top: 5px;
+    cursor: pointer;
+    padding: 0 5px; }
+
+.formwrapper3 {
+  width: 100%;
+  padding-bottom: 20px; }
+  .formwrapper3 input[type=month] {
+    width: 70%;
+    margin-top: 5px;
+    cursor: pointer;
+    padding: 0 5px; }
+
+.formwrapper4 {
+  border-top: 1px solid #50D0FF;
+  padding-top: 10px; }
+
+.ah-span {
+  font-family: "OpenSans-Bold";
+  font-size: 14px;
+  line-height: 16px;
+  color: #000; }
+
+.ah-span2 {
+  font-family: "OpenSans-Regular";
+  font-size: 14px;
+  line-height: 16px;
+  color: #000; }
+
+.formwrapper4_1 {
+  margin-bottom: 15px; }
+  .formwrapper4_1 input[type=checkbox] {
+    margin-left: 15px;
+    cursor: pointer; }
+  .formwrapper4_1 label {
+    margin-left: 10px;
+    cursor: pointer; }
+
+.formwrapper4_2 {
+  margin-bottom: 10px; }
+  .formwrapper4_2 input[type=text] {
+    width: 80%;
+    cursor: pointer;
+    font-size: 13px; }
+  .formwrapper4_2 .ah-reseptionist1 {
+    margin-top: 5px;
+    margin-left: 99px; }
+
+.formwrapper4_3 {
+  border-bottom: 1px solid #50D0FF;
+  padding-bottom: 10px; }
+  .formwrapper4_3 input[type=checkbox] {
+    margin-left: 19px;
+    cursor: pointer; }
+  .formwrapper4_3 label {
+    margin-left: 11px;
+    cursor: pointer; }
+
+.padd {
+  display: block;
+  padding: 10px 0; }
+
+.formwrapper5box {
+  margin-bottom: 5px; }
+  .formwrapper5box label {
+    margin-right: 20px; }
+
+.formwrapper6box {
+  margin-bottom: 5px; }
+
+.ah-border {
+  border-top: 1px solid #50D0FF;
+  margin-top: 10px; }
+
+.ah-border1 {
+  border-top: 1px solid #50D0FF;
+  margin: 20px 15px 15px 15px;
+  display: block; }
+
+.textbox {
+  padding: 20px 50px;
+  background-color: #50D0FF;
+  margin-bottom: 10px; }
+
+.ah-color {
+  color: #fff; }
+
+.formwrapper7 input[type=text] {
+  width: 80%;
+  cursor: pointer;
+  font-size: 13px; }
+.formwrapper7 textarea {
+  width: 100%;
+  height: 100px;
+  resize: none; }
+
+.checkbox {
+  display: inline-block; }
+
+.ah-formsubmit {
+  margin-top: 10px;
+  width: 150px;
+  height: 35px !important;
+  font-family: "OpenSans-Bold";
+  font-size: 14px;
+  line-height: 36px;
+  color: #FFFFFF;
+  background-color: #50D0FF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border: none;
+  box-sizing: border-box;
+  text-align: center;
+  text-transform: uppercase; }
+
+.ah-formsubmit:hover {
+  background-color: #50AFFF; }
+
+/*==========  Desktop First Method  ==========*/
+/* Large Devices, Wide Screens */
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  #ah-myup {
+    width: 90%; }
+
+  .regevent {
+    width: 100%; }
+
+  .registr {
+    width: 100%; }
+
+  .ah-mspan {
+    display: block; }
+
+  .formwrapper4_2 input[type=text] {
+    margin-top: 10px; }
+
+  .formwrapper4_2 .ah-reseptionist1 {
+    margin-left: 0; }
+
+  .textbox {
+    padding: 15px 20px; }
+
+  .formwrapper7 textarea {
+    margin-top: 10px; } }
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+  .formwrapper3 input[type=month] {
+    width: 30%; } }
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  .formwrapper5box label {
+    margin-right: 63px; }
+
+  .formwrapper3 input[type=month] {
+    width: 70%; } }
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+  .formwrapper3 input[type=month] {
+    width: 70%; } }
+/*==========  Mobile First Method  ==========*/
+/* Custom, iPhone Retina */
+/* Extra Small Devices, Phones */
+/* Small Devices, Tablets */
+/* Medium Devices, Desktops */
+/* Large Devices, Wide Screens */
+/***************/
+
+/*# sourceMappingURL=style2.css.map */
