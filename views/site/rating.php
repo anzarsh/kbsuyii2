@@ -1,3 +1,9 @@
+<?php 
+use yii\helpers\Html;
+use yii\widgets\LinkPager;
+?>
+
+
 <section class="az-sec-table">
 	<h2>рейтинг студентов</h2>
 	<form action="" class="az-form az-row">
@@ -16,13 +22,16 @@
 			</tr>
 		</thead>
 		<tbody class="table-content">
+		
+		<?php foreach ($users as $tempuser): ?>
 			<tr>
 				<td>1</td>
 				<td>100</td>
-				<td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
+				<td><a href="#activist" rel="modal"><?= Html::encode("{$tempuser->uname}") ?>:</a></td>
 				<td>3</td>
 				<td>Эконом</td>
 			</tr>
+		<?php endforeach; ?>
 			<tr>
 				<td>2</td>
 				<td>99</td>
@@ -54,8 +63,10 @@
 
 		</tbody>
 	</table>
+
 	<ul class="next-prev">
 		<li class="az-disabled"><a href="#">Предыдущая</a></li>
 		<li><a href="#">Следующая</a></li>
 	</ul>
+	<?= LinkPager::widget(['pagination' => $pagination]) ?>
 </section>

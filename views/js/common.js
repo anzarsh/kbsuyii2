@@ -1,10 +1,18 @@
 
 $(document).ready(function(){
-    RESPONSIVEUI.responsiveTabs();
-
+    //RESPONSIVEUI.responsiveTabs();
+    //alert(1);
     $('.main-menu a').each(function(){
-        if (location.href.search($(this).attr('href')+'$') >= 0){
-            $(this).addClass('current-link');
+        var link1 = $(this).attr('href');
+        var link2 = location.href;
+        var ll = link2.indexOf(link1);
+        //alert(link2.lastIndexOf(link1)+link1.length);
+        //alert(link2.length);
+        //var patern = '/.*?'+$(this).attr('href')+'$/';
+        if (ll >= 0){
+            if (ll + link1.length == link2.length){
+                $(this).addClass('current-link');
+            }
         }
     });
 
@@ -14,10 +22,10 @@ $(document).ready(function(){
         $(this).find('.fa-angle-double-up').toggleClass('az-disp-none');
     });
 
-    $('#azfile').on("change", function(){ 
-        alert($(this).val().match(/(\\.+?\\).+?/));
+    // $('#azfile').on("change", function(){ 
+    //     alert($(this).val().match(/(\\.+?\\).+?/));
         
-    });
+    // });
 
 
 
@@ -28,40 +36,12 @@ $(document).ready(function(){
     //funcun = function(){$('.menu-list-pressed').css({'animation-duration': '1s'});}
     //setTimeout(funcun,1000);
 
-    $(".phone").mask("+ 7 (999) 999 - 99 - 99?"); 
 
-
-
-    // ***************************************** ah *****************************************************
-
-$('.ah-block3-button').click(function(e) {
-    e.preventDefault();
-    $(".ah-wrapper-box").removeClass('ah-wrapper-box');
-    $(this).addClass('ah-wrapper-box');
-    
-});
 
 
     // ****************************************** ah ****************************************************
 
-    $(".single_image").fancybox();
 
-    $("a[rel=group]").fancybox({
-      'transitionIn' : 'none',
-      'transitionOut' : 'none',
-      'titlePosition' : 'over',
-      'titleFormat' : function(title, currentArray, currentIndex, currentOpts) {
-       return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
-       }
-    });
-    $("a[rel=group2]").fancybox({
-      'transitionIn' : 'none',
-      'transitionOut' : 'none',
-      'titlePosition' : 'over',
-      'titleFormat' : function(title, currentArray, currentIndex, currentOpts) {
-       return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
-       }
-    });
 
     // $('a[name=modal]').click(function(e) {
     //     e.preventDefault();
@@ -79,6 +59,7 @@ $('.ah-block3-button').click(function(e) {
     // });
 
     $('a[rel=modal]').click(function(e) {
+        //alert(1);
         if ($('.az-fixed').hasClass('az-fixed2')){
             $('#mask, .window').hide();
             $('.window').hide();

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use yii\data\Pagination;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -62,7 +63,24 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('rating');
+
+        $query = users::find();
+        
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+        $users = $query->orderBy('uname')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        return $this->render('rating', [
+            'users' => $users,
+            'pagination' => $pagination,
+        ]);
+        
     }
 
     /**
