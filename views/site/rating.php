@@ -22,51 +22,27 @@ use yii\widgets\LinkPager;
 			</tr>
 		</thead>
 		<tbody class="table-content">
-		
+		<?php $i=1; ?>
+		<?php $num = ($pagination->page)*($pagination->defaultPageSize); ?>
 		<?php foreach ($users as $tempuser): ?>
 			<tr>
-				<td>1</td>
+				<td><?php echo $num+$i++; ?></td>
 				<td>100</td>
-				<td><a href="#activist" rel="modal"><?= Html::encode("{$tempuser->uname}") ?></a></td>
-				<td>3</td>
+				<td><a href="#activist" rel="modal"><?= Html::encode("{$tempuser->middlename} {$tempuser->uname} {$tempuser->lastname}") ?></a></td>
+				<td><?= Html::encode("{$tempuser->course}") ?></td>
 				<td>Эконом</td>
 			</tr>
 		<?php endforeach; ?>
-			<tr>
-				<td>2</td>
-				<td>99</td>
-				<td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-				<td>4</td>
-				<td>Эконом</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>88</td>
-				<td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-				<td>5</td>
-				<td>Эконом</td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td>77</td>
-				<td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-				<td>2</td>
-				<td>Эконом</td>
-			</tr>
-			<tr>
-				<td>5</td>
-				<td>66</td>
-				<td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-				<td>1</td>
-				<td>Эконом</td>
-			</tr>
-
 		</tbody>
 	</table>
 
 	<ul class="next-prev">
-		<li class="az-disabled"><a href="#">Предыдущая</a></li>
-		<li><a href="#">Следующая</a></li>
+		<li class="
+		<?php if(!$pagination->links['prev']){echo 'az-disabled';} ?>
+		"><a href="<?php echo $pagination->links['prev'] ?>">Предыдущая</a></li>
+		<li class="
+		<?php if(!$pagination->links['next']){echo 'az-disabled';} ?>
+		"><a href="<?php echo $pagination->links['next']; ?>">Следующая</a></li>
 	</ul>
-	<?= LinkPager::widget(['pagination' => $pagination]) ?>
+	
 </section>

@@ -71,14 +71,14 @@ class SiteController extends Controller
             'totalCount' => $query->count(),
         ]);
 
-        $users = $query->orderBy('uname')
+        $users = $query->orderBy('middlename')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
 
         return $this->render('rating', [
             'users' => $users,
-            'pagination' => $pagination,
+            'pagination' => $pagination
         ]);
         
     }
