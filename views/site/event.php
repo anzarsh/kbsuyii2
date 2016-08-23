@@ -1,3 +1,8 @@
+<?php 
+use yii\helpers\Html;
+use yii\widgets\LinkPager;
+?>
+
 <section class="az-sec-table">
 	<h2>Мероприятия</h2>
 	<form action="" class="az-form">
@@ -85,45 +90,26 @@
 			</tr>
 		</thead>
 		<tbody class="table-content">
+		
+			<?php $i=1; ?>
+			<?php $num = ($pagination->page)*($pagination->defaultPageSize); ?>
+			<?php foreach ($events as $event): ?>
 			<tr>
-				<td>02.07.2016<br>01.07.2016</td>
-				<td><a href="#event" rel="modal">Пресс-конференция "Умы России"</a></td>
-				<td>мировой</td>
-				<td>А.С.Ксенофонтов</td>
+				<td><?= Html::encode("{$event->finishdate}") ?><br><?= Html::encode("{$event->startdate}") ?></td>
+				<td><a href="#event" rel="modal"><?= Html::encode("{$event->uname}") ?></a></td>
+				<td><?= Html::encode("{$event->eventlevel->uname}") ?></td>
+				<td><?= mb_substr($event->iCoordinator->uname, 0, 1, 'UTF-8') ?>.<?= mb_substr($event->iCoordinator->lastname, 0, 1, 'UTF-8') ?>.<?= Html::encode("{$event->iCoordinator->middlename}") ?></td>
 				<td>20</td>
 			</tr>
-			<tr>
-				<td>02.06.2016<br>01.06.2016</td>
-				<td><a href="#event" rel="modal">Пресс-конференция "Умы Таджикистана"</a></td>
-				<td>Россия</td>
-				<td>А.С.Ксенофонтов</td>
-				<td>23</td>
-			</tr>
-			<tr>
-				<td>02.05.2016<br>01.05.2016</td>
-				<td><a href="#event" rel="modal">Пресс-конференция "Умы Киргизии"</a></td>
-				<td>Регион</td>
-				<td>А.С.Ксенофонтов</td>
-				<td>21</td>
-			</tr>
-			<tr>
-				<td>02.04.2016<br>01.04.2016</td>
-				<td><a href="#event" rel="modal">Пресс-конференция "Умы Венгрии"</a></td>
-				<td>Университет</td>
-				<td>А.С.Ксенофонтов</td>
-				<td>1</td>
-			</tr>
-			<tr>
-				<td>02.03.2016<br>01.03.2016</td>
-				<td><a href="#event" rel="modal">Пресс-конференция "Умы России"</a></td>
-				<td>мировой</td>
-				<td>А.С.Ксенофонтов</td>
-				<td>18</td>
-			</tr>
+			<?php endforeach; ?>
 		</tbody>
 	</table>
 	<ul class="next-prev">
-		<li class="az-disabled"><a href="#">Предыдущая</a></li>
-		<li><a href="#">Следующая</a></li>
+		<li class="
+		<?php if(!$pagination->links['prev']){echo 'az-disabled';} ?>
+		"><a href="<?php echo $pagination->links['prev'] ?>">Предыдущая</a></li>
+		<li class="
+		<?php if(!$pagination->links['next']){echo 'az-disabled';} ?>
+		"><a href="<?php echo $pagination->links['next']; ?>">Следующая</a></li>
 	</ul>
 </section>

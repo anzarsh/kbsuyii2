@@ -11,6 +11,8 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\entryForm;
 use app\models\users;
+use app\models\event;
+use app\models\groups;
 
 class SiteController extends Controller
 {
@@ -138,17 +140,46 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
+
     public function actionEvent()
     {
-        return $this->render('event');
+        $query = event::find();
+        
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+        $events = $query->orderBy('startdate desc')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        return $this->render('event', [
+            'events' => $events,
+            'pagination' => $pagination
+        ]);
+        
     }
     public function actionGroups()
     {
-        return $this->render('groups');
+        $query = groups::find();
+        
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+        $events = $query->orderBy('id desc')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        return $this->render('groups', [
+            'groups' => $groups,
+            'pagination' => $pagination
+        ]);
+
     }
     public function actionMemo()
     {

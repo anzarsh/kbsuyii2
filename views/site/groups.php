@@ -1,3 +1,8 @@
+<?php 
+use yii\helpers\Html;
+use yii\widgets\LinkPager;
+?>
+
 <section class="az-sec-table">
 	<h2>Группы</h2>
 	<form action="" class="az-form az-row">
@@ -13,9 +18,11 @@
 		</thead>
 		<tbody class="table-content">
 			<tr>
-				<td><a href="#group" rel="modal">Послы русского языка</a></td>
+			<?php foreach ($groups as $groupp): ?>
+				<td><a href="#group" rel="modal"><?= Html::encode("{$groupp->uname}") ?></a></td>
 				<td>100</td>
 			</tr>
+			<?php endforeach; ?>
 			<tr>
 				<td>Сборная России по футболу</td>
 				<td>99</td>
