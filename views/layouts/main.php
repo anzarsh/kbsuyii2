@@ -21,19 +21,19 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <link rel="stylesheet" href="views/libs/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="views/libs/font-awesome-4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../views/libs/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../views/libs/font-awesome-4.6.3/css/font-awesome.min.css" />
     <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="views/css/build.css">
-    <link rel="stylesheet" href="views/css/style.css">
-    <link rel="stylesheet" href="views/css/style2.css">
-    <link rel="stylesheet" href="views/css/style3.css">
-    <link rel="stylesheet" href="views/css/fonts.css">
+    <link rel="stylesheet" href="../../views/css/build.css">
+    <link rel="stylesheet" href="../../views/css/style.css">
+    <link rel="stylesheet" href="../../views/css/style2.css">
+    <link rel="stylesheet" href="../../views/css/style3.css">
+    <link rel="stylesheet" href="../../views/css/fonts.css">
 </head>
 <body>
-    <script src="views/libs/jquery/jquery-1.11.1.min.js"></script>
-    <script src="views/js/jquery.maskedinput.min.js"></script>
-    <script src="views/js/common.js"></script>
+    <script src="../../views/libs/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../../views/js/jquery.maskedinput.min.js"></script>
+    <script src="../../views/js/common.js"></script>
 <?php $this->beginBody() ?>
 
 <div class="az-fixed">
@@ -60,11 +60,11 @@ AppAsset::register($this);
             <div class="menu-list-pressed">
                 <ul class="main-menu">
                     <li><h2>Карта активиста</h2></li>
-                    <li><a href="/index.php">рейтинг</a></li>
-                    <li><a href="/index.php?r=site/event">мероприятия</a></li>
-                    <li><a href="/index.php?r=site/groups">группы</a></li>
-                    <li><a href="/index.php?r=site/memo">печать с/з</a></li>
-                    <li><a href="/index.php?r=site/settings">настройки</a></li>
+                    <li><a href="/">рейтинг</a></li>
+                    <li><a href="/site/event">мероприятия</a></li>
+                    <li><a href="/site/groups">группы</a></li>
+                    <li><a href="/site/memo">печать с/з</a></li>
+                    <li><a href="/site/settings">настройки</a></li>
                 </ul>
             </div>
         </div>

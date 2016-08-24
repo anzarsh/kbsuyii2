@@ -17,32 +17,20 @@ use yii\widgets\LinkPager;
 			</tr>
 		</thead>
 		<tbody class="table-content">
+			<?php foreach ($groups as $group): ?>
 			<tr>
-			<?php foreach ($groups as $groupp): ?>
-				<td><a href="#group" rel="modal"><?= Html::encode("{$groupp->uname}") ?></a></td>
-				<td>100</td>
+				<td><a href="#group" rel="modal"><?= Html::encode("{$group->uname}") ?></a></td>
+				<td><?= count($group->number); ?></td>
 			</tr>
 			<?php endforeach; ?>
-			<tr>
-				<td>Сборная России по футболу</td>
-				<td>99</td>
-			</tr>
-			<tr>
-				<td>Кодеры</td>
-				<td>88</td>
-			</tr>
-			<tr>
-				<td>Быдлокодеры</td>
-				<td>77</td>
-			</tr>
-			<tr>
-				<td>Студенческий совет</td>
-				<td>66</td>
-			</tr>
 		</tbody>
 	</table>
 	<ul class="next-prev">
-		<li class="az-disabled"><a href="#">Предыдущая</a></li>
-		<li><a href="#">Следующая</a></li>
+		<li class="
+		<?php if(!$pagination->links['prev']){echo 'az-disabled';} ?>
+		"><a href="<?php echo $pagination->links['prev'] ?>">Предыдущая</a></li>
+		<li class="
+		<?php if(!$pagination->links['next']){echo 'az-disabled';} ?>
+		"><a href="<?php echo $pagination->links['next']; ?>">Следующая</a></li>
 	</ul>
 </section>

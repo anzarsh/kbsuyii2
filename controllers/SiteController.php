@@ -170,7 +170,7 @@ class SiteController extends Controller
             'totalCount' => $query->count(),
         ]);
 
-        $events = $query->orderBy('id desc')
+        $groups = $query->orderBy('id desc')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
