@@ -255,38 +255,38 @@ AppAsset::register($this);
                 <span class="an-exit__krest an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></span>
             </div>
         <!-- <div class="container-fluid"> -->
-            <h2>Пресс-конференция "Умы России"</h2>
+            <h2 id="event0">Пресс-конференция "Умы России"</h2>
             <div class="az-form az-row">
                 <div>
                     <span class="az-style2 az-col-100-px">Уровень:</span>
-                    <span class="az-style1 az-col-44-100-px az-col-push-10 az-col-xs-99-100-px az-col-xs-push-0">всероссийский</span>
+                    <span id="event1" class="az-style1 az-col-44-100-px az-col-push-10 az-col-xs-99-100-px az-col-xs-push-0"></span>
                     <span class="az-style2 az-col-100-px">Координатор:</span>
-                    <span class="az-style1 az-col-44-100-px az-col-xs-99-100-px az-col-xs-push-0">А.С.Ксенофонтов</span>
+                    <span id="event2" class="az-style1 az-col-44-100-px az-col-xs-99-100-px az-col-xs-push-0"></span>
                 </div>
                 <div>
                     <span class="az-style2 az-col-100-px">Начало:</span>
-                    <span class="az-style1 az-col-44-100-px az-col-push-10 az-col-xs-99-100-px az-col-xs-push-0">01.07.2016</span>
+                    <span id="event3" class="az-style1 az-col-44-100-px az-col-push-10 az-col-xs-99-100-px az-col-xs-push-0"></span>
                     <span class="az-style2 az-col-100-px">Регистратор:</span>
-                    <span class="az-style1 az-col-44-100-px az-col-xs-99-100-px az-col-xs-push-0">А.С.Ксенофонтов</span>
+                    <span id="event4" class="az-style1 az-col-44-100-px az-col-xs-99-100-px az-col-xs-push-0"></span>
                 </div>
                 <div>
                     <span class="az-style2 az-col-100-px">Окончание:</span>
-                    <span class="az-style1 az-col-44-100-px az-col-push-10 az-col-xs-99-100-px az-col-xs-push-0">02.07.2016</span>
+                    <span id="event5" class="az-style1 az-col-44-100-px az-col-push-10 az-col-xs-99-100-px az-col-xs-push-0"></span>
                     <span class="az-style2 az-col-100-px">Вид:</span>
-                    <span class="az-style1 az-col-44-100-px az-col-xs-99-100-px az-col-xs-push-0">Общественное</span>
+                    <span id="event6" class="az-style1 az-col-44-100-px az-col-xs-99-100-px az-col-xs-push-0"></span>
                 </div>
                 <div>
                     <span class="az-style2 az-col-100-px">Место:</span>
-                    <span class="az-style1 az-col-44-100-px az-col-push-10 az-col-xs-99-100-px az-col-xs-push-0">КБГУ</span>
+                    <span id="event7" class="az-style1 az-col-44-100-px az-col-push-10 az-col-xs-99-100-px az-col-xs-push-0"></span>
                     <span class="az-style2 az-col-100-px">Тип:</span>
-                    <span class="az-style1 az-col-44-100-px az-col-xs-99-100-px az-col-xs-push-0">Организационое</span>
+                    <span id="event8" class="az-style1 az-col-44-100-px az-col-xs-99-100-px az-col-xs-push-0"></span>
                 </div>
                 <!-- <span class="az-style2 az-col-100-px">Уровень:</span>
                 <span class="az-style1 az-col-44-100-px az-col-push-10 az-col-xs-99-100-px az-col-xs-push-0">всероссийский</span> -->
             </div>
             <div class="az-form az-row">
             <span class="az-style2 az-col-100">Комментарий:</span>
-                <span class="az-style1 az-col-100">Несмотря на внутренние противоречия, элемент политического процесса теоретически представляет собой эмпирический субъект политического процесса. Политическое учение Руссо, несмотря на внешние воздействия, фактически символизирует постиндустриализм. Технология коммуникации теоретически доказывает прагматический коллапс Советского Союза.</span>
+                <span id="event9" class="az-style1 az-col-100">Несмотря на внутренние противоречия, элемент политического процесса теоретически представляет собой эмпирический субъект политического процесса. Политическое учение Руссо, несмотря на внешние воздействия, фактически символизирует постиндустриализм. Технология коммуникации теоретически доказывает прагматический коллапс Советского Союза.</span>
             </div>
             <table class="az-table">
         <thead class="table-head">

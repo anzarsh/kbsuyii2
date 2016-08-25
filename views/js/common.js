@@ -41,6 +41,27 @@ $(document).ready(function(){
 
     // ****************************************** ah ****************************************************
 
+    var az_posTop = -1;
+    var temp;
+
+    function f_event(temp){
+        //alert(temp.startdate);
+        $('#event0').text(temp.uname);
+        $('#event1').text(temp.eventlevel.uname);
+        $('#event2').text(
+            temp.iCoordinator.uname.slice(0,1)+'.'+
+            temp.iCoordinator.lastname.slice(0,1)+'.'+
+            temp.iCoordinator.middlename
+            );
+        $('#event3').text(temp.startdate);
+        $('#event4').text(temp.uname);
+        $('#event5').text(temp.finishdate);
+        $('#event6').text(temp.uname);
+        $('#event7').text(temp.uname);
+        $('#event8').text(temp.eventtype);
+        //alert(temp.temp.event.uname);
+    }
+
 
 
 
@@ -67,40 +88,42 @@ $(document).ready(function(){
             },
             success: function (data) {
                 data = '('+data+')';
-                //var temp = eval(data);
-                //alert(temp.str);
-                alert(data);
+                temp = eval(data);
+                if(id == '#event'){f_event(temp.query);}
+                //alert(1);
+                
+                //alert(temp);
             }
         });
         
 
         var maskHeight = $(document).height();
-        var maskWidth = $(window).width();
+        var maskWidth = $(window).width() + 30;
         $('#mask').css({'width':maskWidth,'height':maskHeight});
         $('#mask').fadeTo("slow",0.8); 
         var winH = $(window).height();
         var winW = $(window).width();
-        posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-        $(id).css('top',  posTop + 20);
+        if (az_posTop == -1){
+            az_posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+        }
+        $(id).css('top', 30);
         $(id).css('left', winW/2-$(id).width()/2);
         $(id).fadeIn(500);
         $('.az-fixed').addClass('az-fixed2');
+        $('.az-fixed2').css('top',  -az_posTop);
     });
 
-    
-     
-    $('.window .close').click(function (e) {
-        e.preventDefault();
-        $('#mask, .window').hide();
-        $('.window').hide();
-        $('.az-fixed').removeClass('az-fixed2');
-    }); 
-      
+
     $('#mask, .an-exit__krest').click(function () {
+        //e.preventDefault();
+        //alert(az_posTop);
         $('#mask').hide();
         $('.window').hide();
+        $('.az-fixed').attr('style', '');
         $('.az-fixed').removeClass('az-fixed2');
-    }); 
+        $(document).scrollTop(az_posTop);
+        az_posTop = -1;
+   }); 
 
  
    function cleanTnakns(form){

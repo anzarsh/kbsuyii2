@@ -23,51 +23,18 @@ class AjaxController extends Controller
         $id = $_GET['id'];
         if ($id == '#event'){
             $id_event = $_GET['id_event'];
-            $query = event::findOne($id_event);
+            $query = event::find($id_event)
+                ->with('eventlevel')
+                ->with('iCoordinator')
+                ->with('users')
+                ->with('eventtype')
+                ->with('activity')
+                ->with('comp')
+                ->asArray()->one();
         
-            $query_user = $query->users;
-
-            
-            $pagination = new Pagination([
-                'defaultPageSize' => 5,
-                'totalCount' => $query_user->count(),
-            ]);
-
-            $users = $query_user->orderBy('id')
-                ->offset($pagination->offset)
-                ->set_time_limit($pagination->limit)
-                ->all();
-            $temp = array("event" => $query, "users" => $users);
-            // return $this->render('rating', [
-            //     'users' => $users,
-            //     'pagination' => $pagination
-
-            // ]);
-            //$str = '({"name":"Valik","age":"20","country":"Moldova"})';
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return array("event" => $temp); //array('the_event' => '$query', 'users' => '$users');
+            return array("query" => $query); //array('the_event' => '$query', 'users' => '$users');
         }
-        // if (Yii::$app->request->isAjax) {
-        //     $data = Yii::$app->request->post();
-        //     $searchname= explode(":", $data['searchname']);
-        //     $searchby= explode(":", $data['searchby']);
-        //     $searchname= $searchname[0];
-        //     $searchby= $searchby[0];
-        //     $search = 'hi';
-        //     Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        //     return [
-        //         'search' => $search,
-        //         'code' => 100,
-        //     ];
-        // }
-        //return "hi";
-        // if (Yii::$app->request->isAjax) {
-        //     $flag = 777;
-        //     // .....
-        //    \Yii::$app->response->format = Response::FORMAT_JSON;
-        //     //return ['flag' => $flag];
-        // }
-        //return $_GET['id_event'];
     }
 
 }
