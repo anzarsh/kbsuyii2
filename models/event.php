@@ -6,7 +6,7 @@ use yii\db\ActiveRecord;
 use app\models\eventlevel;
 use app\models\eventtype;
 use app\models\users;
-use app\models\event_user_status;
+use app\models\event_user_status_role;
 use app\models\event_eventtype;
 
 class event extends ActiveRecord
@@ -17,12 +17,31 @@ class event extends ActiveRecord
     }
     public function getICoordinator()
     {
-    	return $this->hasOne(users::className(), ['id' => 'coordinator']);
+    	return $this->hasOne(users::className(), ['id' => 'id_user'])
+            ->viaTable('event_user_status_role', ['id_event' => 'id'], function ($query) {
+                    $query->andWhere(['id_status' => 2]);
+                });
     }
     public function getUsers()
     {
         return $this->hasMany(users::className(), ['id' => 'id_user'])
-            ->viaTable('event_user_status', ['id_event' => 'id']);
+            ->viaTable('event_user_status_role', ['id_event' => 'id'], function ($query) {
+                    $query->andWhere(['id_status' => 0]);
+                });
+    }
+    public function getRegistrator()
+    {
+        return $this->hasMany(users::className(), ['id' => 'id_user'])
+            ->viaTable('event_user_status_role', ['id_event' => 'id'], function ($query) {
+                    $query->andWhere(['id_status' => 1]);
+                });
+    }
+    public function getRoles()
+    {
+        return $this->hasMany(users::className(), ['id' => 'id_user'])
+            ->viaTable('event_user_status_role', ['id_event' => 'id'], function ($query) {
+                    $query->with('roles');
+                });
     }
     public function getEventtype()
     {
@@ -38,4 +57,8 @@ class event extends ActiveRecord
     {
         return $this->hasOne(eventcomp::className(), ['id' => 'id_eventcomp']);
     }
+    // public function getStatus()
+    // {
+    //     return $this->hasOne(eventcomp::className(), ['id' => 'id_eventcomp']);
+    // }
 }

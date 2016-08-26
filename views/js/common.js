@@ -44,6 +44,24 @@ $(document).ready(function(){
     var az_posTop = -1;
     var temp;
 
+    function event_table(z, temp){
+        var begin = z*5;
+        var end = begin+5;
+        var k;
+        //temp.forE
+        var strtemp = '';
+        for (i=begin; i<end&&i<temp.length; i++){
+            strtemp += '<tr><td>' + (i+1) + 
+                '</td><td><a href="#activist" rel="modal">' + temp[i].middlename + ' ' +
+                temp[i].uname + ' ' + temp[i].lastname +
+                '</a></td><td>' + temp[i].uname +
+                '</td><td>' + temp[i].course +
+                '</td><td>' + temp[i].id_department +
+                '</td></tr>';
+        }
+        $('#eventtable').html(strtemp);
+    }
+
     function f_event(temp){
         //alert(temp.startdate);
         $('#event0').text(temp.uname);
@@ -54,11 +72,35 @@ $(document).ready(function(){
             temp.iCoordinator.middlename
             );
         $('#event3').text(temp.startdate);
-        $('#event4').text(temp.uname);
+        var strtemp = '';
+        temp.registrator.forEach(function(item, j){
+            strtemp +=  (j==0)?(
+                        item.uname.slice(0,1) + '.' +
+                        item.lastname.slice(0,1) + '.' +
+                        item.middlename
+                        ):(
+                        ', ' + 
+                        item.uname.slice(0,1) + '.' +
+                        item.lastname.slice(0,1) + '.' +
+                        item.middlename
+                        );
+        });
+        $('#event4').text(strtemp);
         $('#event5').text(temp.finishdate);
-        $('#event6').text(temp.uname);
-        $('#event7').text(temp.uname);
-        $('#event8').text(temp.eventtype);
+        strtemp = '';
+            temp.activity.forEach(function(item, j){
+                strtemp +=  (j==0)?(item.uname):(', ' + item.uname);
+            });
+        $('#event6').text(strtemp);
+        $('#event7').text(temp.location);
+        strtemp = '';
+        temp.eventtype.forEach(function(item, j){
+            strtemp +=  (j==0)?(item.uname):(', ' + item.uname);
+        });
+        $('#event8').text(strtemp);
+        $('#event9').text(temp.comment);
+        event_table(0, temp.users);
+
         //alert(temp.temp.event.uname);
     }
 
@@ -75,7 +117,9 @@ $(document).ready(function(){
         }
         e.preventDefault();
         var id = $(this).attr('href');
+        
         var id_event = Number($(this).parents('tr').attr('dataId'));
+        //alert(id_event);
         //alert(id_event);
         //var id2 = id.splice(1);
         $.ajax({
@@ -88,11 +132,11 @@ $(document).ready(function(){
             },
             success: function (data) {
                 data = '('+data+')';
-                temp = eval(data);
-                if(id == '#event'){f_event(temp.query);}
+                //temp = eval(data);
+                //if(id == '#event'){f_event(temp.query);}
                 //alert(1);
-                
-                //alert(temp);
+                $('#event9').text(data);
+                //alert(data);
             }
         });
         
@@ -125,7 +169,10 @@ $(document).ready(function(){
         az_posTop = -1;
    }); 
 
- 
+
+
+
+
    function cleanTnakns(form){
         $('input[type="text"]').removeClass("error-input");
         $("input[type=text], textarea").val("");

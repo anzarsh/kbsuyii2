@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 25 2016 г., 12:43
+-- Время создания: Авг 26 2016 г., 15:45
 -- Версия сервера: 5.5.50
 -- Версия PHP: 5.4.45
 
@@ -48,10 +48,9 @@ INSERT INTO `activity` (`id`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `department` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_unit` int(11) NOT NULL,
-  `uname` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `uname` varchar(256) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 --
@@ -115,35 +114,35 @@ INSERT INTO `department` (`id`, `id_unit`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` text NOT NULL,
   `id_eventlevel` int(11) NOT NULL,
   `location` text NOT NULL,
   `extorg` text NOT NULL,
   `startdate` date NOT NULL,
   `finishdate` date NOT NULL,
+  `coordinator` int(11) NOT NULL,
   `id_activity` int(11) NOT NULL,
   `id_eventtype` int(11) NOT NULL,
   `id_eventcomp` int(11) NOT NULL,
-  `comment` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `comment` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `event`
 --
 
-INSERT INTO `event` (`id`, `uname`, `id_eventlevel`, `location`, `extorg`, `startdate`, `finishdate`, `id_activity`, `id_eventtype`, `id_eventcomp`, `comment`) VALUES
-(0, 'Пресс-конференция "Умы России"', 1, 'Нальчик', '', '2016-08-01', '2016-08-03', 1, 1, 0, 'хорошее мероприятие'),
-(1, 'Пресс-конференция "Умы Таджикистана"', 2, 'Москва', '', '2016-08-03', '2016-08-04',1, 2, 0, 'очень хорошая конференция'),
-(2, 'Пресс-конференция "Умы Киргизии"', 3, 'Терек', 'Глава Терского района', '2016-08-03', '2016-08-11', 2, 3, 1, 'Проводится в Терском районе'),
-(3, 'Пресс-конференция "Умы Венгрии"', 4, 'Венгрия', 'Венгерское правительство', '2016-08-01', '2016-08-02', 3, 4, 1, 'Венгерский конкурс проводимый в рамках организации Объединенных Наций'),
-(4, 'Пресс-конференция "Умы Уфы"', 5, 'Нальчик', '', '2016-08-09', '2016-08-10', 2, 5, 0, ''),
-(5, 'Пресс-конференция "Умы Карелии"', 1, 'Нальчик', '', '2016-08-01', '2016-08-03', 1, 1, 0, 'хорошее мероприятие'),
-(6, 'Пресс-конференция "Умы Баксана"', 2, 'Москва', '', '2016-08-03', '2016-08-04', 1, 2, 0, 'очень хорошая конференция'),
-(7, 'Пресс-конференция "Умы Псытхала"', 3, 'Терек', 'Глава Терского района', '2016-08-03', '2016-08-11', 2, 3, 1, 'Проводится в Терском районе'),
-(8, 'Пресс-конференция "Умы Нарткалы"', 4, 'Венгрия', 'Венгерское правительство', '2016-08-01', '2016-08-02', 3, 4, 1, 'Венгерский конкурс проводимый в рамках организации Объединенных Наций'),
-(9, 'Пресс-конференция "Умы Майского"', 5, 'Нальчик', '', '2016-08-09', '2016-08-10', 2, 5, 0, '');
+INSERT INTO `event` (`id`, `uname`, `id_eventlevel`, `location`, `extorg`, `startdate`, `finishdate`, `coordinator`, `id_activity`, `id_eventtype`, `id_eventcomp`, `comment`) VALUES
+(0, 'Пресс-конференция "Умы России"', 1, 'Нальчик', '', '2016-08-01', '2016-08-03', 3, 1, 1, 0, 'хорошее мероприятие'),
+(1, 'Пресс-конференция "Умы Таджикистана"', 2, 'Москва', '', '2016-08-03', '2016-08-04', 2, 1, 2, 0, 'очень хорошая конференция'),
+(2, 'Пресс-конференция "Умы Киргизии"', 3, 'Терек', 'Глава Терского района', '2016-08-03', '2016-08-11', 1, 2, 3, 1, 'Проводится в Терском районе'),
+(3, 'Пресс-конференция "Умы Венгрии"', 4, 'Венгрия', 'Венгерское правительство', '2016-08-01', '2016-08-02', 1, 3, 4, 1, 'Венгерский конкурс проводимый в рамках организации Объединенных Наций'),
+(4, 'Пресс-конференция "Умы Уфы"', 5, 'Нальчик', '', '2016-08-09', '2016-08-10', 2, 2, 5, 0, ''),
+(5, 'Пресс-конференция "Умы Карелии"', 1, 'Нальчик', '', '2016-08-01', '2016-08-03', 3, 1, 1, 0, 'хорошее мероприятие'),
+(6, 'Пресс-конференция "Умы Баксана"', 2, 'Москва', '', '2016-08-03', '2016-08-04', 2, 1, 2, 0, 'очень хорошая конференция'),
+(7, 'Пресс-конференция "Умы Псытхала"', 3, 'Терек', 'Глава Терского района', '2016-08-03', '2016-08-11', 1, 2, 3, 1, 'Проводится в Терском районе'),
+(8, 'Пресс-конференция "Умы Нарткалы"', 4, 'Венгрия', 'Венгерское правительство', '2016-08-01', '2016-08-02', 1, 3, 4, 1, 'Венгерский конкурс проводимый в рамках организации Объединенных Наций'),
+(9, 'Пресс-конференция "Умы Майского"', 5, 'Нальчик', '', '2016-08-09', '2016-08-10', 2, 2, 5, 0, '');
 
 -- --------------------------------------------------------
 
@@ -221,10 +220,9 @@ INSERT INTO `eventtype` (`id`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event_activity` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_event` int(11) NOT NULL,
-  `id_activity` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_activity` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
@@ -254,10 +252,9 @@ INSERT INTO `event_activity` (`id`, `id_event`, `id_activity`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event_eventtype` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_event` int(11) NOT NULL,
-  `id_eventtype` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_eventtype` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
@@ -291,67 +288,65 @@ INSERT INTO `event_eventtype` (`id`, `id_event`, `id_eventtype`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `event_user_status_role`
+-- Структура таблицы `event_user_status`
 --
 
-CREATE TABLE IF NOT EXISTS `event_user_status_role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `event_user_status` (
+  `id` int(11) NOT NULL,
   `id_event` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `id_status` int(11) NOT NULL,
-  `id_role` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_status` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `event_user_status_role`
+-- Дамп данных таблицы `event_user_status`
 --
 
-INSERT INTO `event_user_status_role` (`id`, `id_event`, `id_user`, `id_status`, `id_role`) VALUES
-(0, 0, 4, 0, 1),
-(1, 0, 5, 0, 1),
-(2, 0, 4, 0, 1),
-(3, 0, 3, 1, 1),
-(4, 0, 2, 2, 2),
-(5, 1, 7, 0, 1),
-(6, 1, 8, 0, 1),
-(7, 1, 9, 0, 1),
-(8, 1, 6, 1, 3),
-(9, 1, 5, 2, 0),
-(10, 2, 12, 0, 1),
-(11, 2, 13, 1, 1),
-(12, 2, 11, 2, 3),
-(13, 3, 8, 0, 1),
-(14, 3, 4, 1, 1),
-(15, 3, 2, 2, 3),
-(16, 4, 2, 0, 1),
-(17, 4, 10, 0, 1),
-(18, 4, 9, 1, 2),
-(19, 4, 11, 2, 3),
-(20, 5, 12, 0, 1),
-(21, 5, 13, 0, 1),
-(22, 5, 14, 0, 1),
-(23, 5, 4, 1, 3),
-(24, 5, 5, 2, 1),
-(25, 6, 23, 1, 3),
-(26, 6, 24, 2, 3),
-(27, 7, 25, 0, 1),
-(28, 7, 21, 0, 1),
-(29, 7, 22, 0, 1),
-(30, 7, 12, 1, 1),
-(31, 7, 13, 2, 1),
-(32, 8, 14, 0, 1),
-(33, 8, 15, 0, 1),
-(34, 8, 16, 0, 1),
-(35, 8, 10, 0, 1),
-(36, 8, 11, 0, 3),
-(37, 8, 12, 1, 2),
-(38, 8, 13, 2, 0),
-(39, 9, 14, 0, 1),
-(40, 9, 15, 0, 1),
-(41, 9, 16, 0, 1),
-(42, 9, 17, 1, 1),
-(43, 9, 18, 2, 1);
+INSERT INTO `event_user_status` (`id`, `id_event`, `id_user`, `id_status`) VALUES
+(0, 0, 4, 0),
+(1, 0, 5, 0),
+(2, 0, 4, 0),
+(3, 0, 3, 1),
+(4, 0, 2, 2),
+(5, 1, 7, 0),
+(6, 1, 8, 0),
+(7, 1, 9, 0),
+(8, 1, 6, 1),
+(9, 1, 5, 2),
+(10, 2, 12, 0),
+(11, 2, 13, 1),
+(12, 2, 11, 2),
+(13, 3, 8, 0),
+(14, 3, 4, 1),
+(15, 3, 2, 2),
+(16, 4, 2, 0),
+(17, 4, 10, 0),
+(18, 4, 9, 1),
+(19, 4, 11, 2),
+(20, 5, 12, 0),
+(21, 5, 13, 0),
+(22, 5, 14, 0),
+(23, 5, 4, 1),
+(24, 5, 5, 2),
+(25, 6, 23, 1),
+(26, 6, 24, 2),
+(27, 7, 25, 0),
+(28, 7, 21, 0),
+(29, 7, 22, 0),
+(30, 7, 12, 1),
+(31, 7, 13, 2),
+(32, 8, 14, 0),
+(33, 8, 15, 0),
+(34, 8, 16, 0),
+(35, 8, 10, 0),
+(36, 8, 11, 0),
+(37, 8, 12, 1),
+(38, 8, 13, 2),
+(39, 9, 14, 0),
+(40, 9, 15, 0),
+(41, 9, 16, 0),
+(42, 9, 17, 1),
+(43, 9, 18, 2);
 
 -- --------------------------------------------------------
 
@@ -360,10 +355,9 @@ INSERT INTO `event_user_status_role` (`id`, `id_event`, `id_user`, `id_status`, 
 --
 
 CREATE TABLE IF NOT EXISTS `groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(256) NOT NULL,
-  `url` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `url` varchar(256) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
@@ -383,10 +377,9 @@ INSERT INTO `groups` (`id`, `uname`, `url`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `group_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_group` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
@@ -438,14 +431,13 @@ INSERT INTO `group_user` (`id`, `id_group`, `id_user`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `memo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(256) NOT NULL,
   `header` text NOT NULL,
   `title` varchar(256) NOT NULL,
   `content` text NOT NULL,
   `date` date NOT NULL,
-  `paraph` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `paraph` varchar(256) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
@@ -465,9 +457,8 @@ INSERT INTO `memo` (`id`, `uname`, `header`, `title`, `content`, `date`, `paraph
 --
 
 CREATE TABLE IF NOT EXISTS `status` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uname` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  `uname` varchar(256) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
@@ -479,30 +470,6 @@ INSERT INTO `status` (`id`, `uname`) VALUES
 (1, 'Регистратор'),
 (2, 'Координатор'),
 (3, 'Суперкоординатор');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `role`
---
-
-CREATE TABLE IF NOT EXISTS `role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uname` varchar(256) NOT NULL,
-  `mark` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `role`
---
-
-INSERT INTO `role` (`id`, `uname`, `mark`) VALUES
-(0, 'Не участник', 0),
-(1, 'Участник', 1),
-(2, 'Помощник организатора', 2),
-(3, 'Организатор', 4),
-(4, 'Главный организатор', 6);
 
 -- --------------------------------------------------------
 
@@ -536,7 +503,7 @@ INSERT INTO `unit` (`id`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(15) NOT NULL,
   `middlename` varchar(15) NOT NULL,
   `lastname` varchar(15) NOT NULL,
@@ -547,8 +514,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `login` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
   `activist` tinyint(1) NOT NULL,
-  `course` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `course` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
@@ -587,7 +553,124 @@ INSERT INTO `users` (`id`, `uname`, `middlename`, `lastname`, `id_department`, `
 (28, 'Анна', 'Киселева', 'Юрьевна', 3, '88002010600', '2000-08-31', 0, 'admin28', 'admin28', 1, 1),
 (29, 'Илья', 'Корляков', 'Дмитриевич', 1, '88002020600', '2000-09-01', 0, 'admin29', 'admin29', 1, 1);
 
+--
+-- Индексы сохранённых таблиц
+--
 
+--
+-- Индексы таблицы `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event_activity`
+--
+ALTER TABLE `event_activity`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event_eventtype`
+--
+ALTER TABLE `event_eventtype`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event_user_status`
+--
+ALTER TABLE `event_user_status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `group_user`
+--
+ALTER TABLE `group_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `memo`
+--
+ALTER TABLE `memo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `department`
+--
+ALTER TABLE `department`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=48;
+--
+-- AUTO_INCREMENT для таблицы `event`
+--
+ALTER TABLE `event`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT для таблицы `event_activity`
+--
+ALTER TABLE `event_activity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT для таблицы `event_eventtype`
+--
+ALTER TABLE `event_eventtype`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT для таблицы `event_user_status`
+--
+ALTER TABLE `event_user_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
+--
+-- AUTO_INCREMENT для таблицы `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `group_user`
+--
+ALTER TABLE `group_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
+--
+-- AUTO_INCREMENT для таблицы `memo`
+--
+ALTER TABLE `memo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

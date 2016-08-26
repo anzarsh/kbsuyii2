@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 25 2016 г., 12:43
+-- Время создания: Авг 26 2016 г., 16:40
 -- Версия сервера: 5.5.50
 -- Версия PHP: 5.4.45
 
@@ -48,10 +48,9 @@ INSERT INTO `activity` (`id`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `department` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_unit` int(11) NOT NULL,
-  `uname` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `uname` varchar(256) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 --
@@ -115,7 +114,7 @@ INSERT INTO `department` (`id`, `id_unit`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` text NOT NULL,
   `id_eventlevel` int(11) NOT NULL,
   `location` text NOT NULL,
@@ -125,8 +124,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `id_activity` int(11) NOT NULL,
   `id_eventtype` int(11) NOT NULL,
   `id_eventcomp` int(11) NOT NULL,
-  `comment` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `comment` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
@@ -135,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `event` (
 
 INSERT INTO `event` (`id`, `uname`, `id_eventlevel`, `location`, `extorg`, `startdate`, `finishdate`, `id_activity`, `id_eventtype`, `id_eventcomp`, `comment`) VALUES
 (0, 'Пресс-конференция "Умы России"', 1, 'Нальчик', '', '2016-08-01', '2016-08-03', 1, 1, 0, 'хорошее мероприятие'),
-(1, 'Пресс-конференция "Умы Таджикистана"', 2, 'Москва', '', '2016-08-03', '2016-08-04',1, 2, 0, 'очень хорошая конференция'),
+(1, 'Пресс-конференция "Умы Таджикистана"', 2, 'Москва', '', '2016-08-03', '2016-08-04', 1, 2, 0, 'очень хорошая конференция'),
 (2, 'Пресс-конференция "Умы Киргизии"', 3, 'Терек', 'Глава Терского района', '2016-08-03', '2016-08-11', 2, 3, 1, 'Проводится в Терском районе'),
 (3, 'Пресс-конференция "Умы Венгрии"', 4, 'Венгрия', 'Венгерское правительство', '2016-08-01', '2016-08-02', 3, 4, 1, 'Венгерский конкурс проводимый в рамках организации Объединенных Наций'),
 (4, 'Пресс-конференция "Умы Уфы"', 5, 'Нальчик', '', '2016-08-09', '2016-08-10', 2, 5, 0, ''),
@@ -221,10 +219,9 @@ INSERT INTO `eventtype` (`id`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event_activity` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_event` int(11) NOT NULL,
-  `id_activity` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_activity` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
@@ -254,10 +251,9 @@ INSERT INTO `event_activity` (`id`, `id_event`, `id_activity`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event_eventtype` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_event` int(11) NOT NULL,
-  `id_eventtype` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_eventtype` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
@@ -295,12 +291,11 @@ INSERT INTO `event_eventtype` (`id`, `id_event`, `id_eventtype`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event_user_status_role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_event` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_status` int(11) NOT NULL,
-  `id_role` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_role` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 --
@@ -360,10 +355,9 @@ INSERT INTO `event_user_status_role` (`id`, `id_event`, `id_user`, `id_status`, 
 --
 
 CREATE TABLE IF NOT EXISTS `groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(256) NOT NULL,
-  `url` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `url` varchar(256) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
@@ -383,10 +377,9 @@ INSERT INTO `groups` (`id`, `uname`, `url`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `group_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_group` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
@@ -438,14 +431,13 @@ INSERT INTO `group_user` (`id`, `id_group`, `id_user`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `memo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(256) NOT NULL,
   `header` text NOT NULL,
   `title` varchar(256) NOT NULL,
   `content` text NOT NULL,
   `date` date NOT NULL,
-  `paraph` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `paraph` varchar(256) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
@@ -461,36 +453,13 @@ INSERT INTO `memo` (`id`, `uname`, `header`, `title`, `content`, `date`, `paraph
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `status`
---
-
-CREATE TABLE IF NOT EXISTS `status` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uname` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `status`
---
-
-INSERT INTO `status` (`id`, `uname`) VALUES
-(0, 'Участник'),
-(1, 'Регистратор'),
-(2, 'Координатор'),
-(3, 'Суперкоординатор');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `role`
 --
 
 CREATE TABLE IF NOT EXISTS `role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(256) NOT NULL,
-  `mark` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `mark` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
@@ -503,6 +472,27 @@ INSERT INTO `role` (`id`, `uname`, `mark`) VALUES
 (2, 'Помощник организатора', 2),
 (3, 'Организатор', 4),
 (4, 'Главный организатор', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `status`
+--
+
+CREATE TABLE IF NOT EXISTS `status` (
+  `id` int(11) NOT NULL,
+  `uname` varchar(256) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `status`
+--
+
+INSERT INTO `status` (`id`, `uname`) VALUES
+(0, 'Участник'),
+(1, 'Регистратор'),
+(2, 'Координатор'),
+(3, 'Суперкоординатор');
 
 -- --------------------------------------------------------
 
@@ -536,7 +526,7 @@ INSERT INTO `unit` (`id`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(15) NOT NULL,
   `middlename` varchar(15) NOT NULL,
   `lastname` varchar(15) NOT NULL,
@@ -547,8 +537,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `login` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
   `activist` tinyint(1) NOT NULL,
-  `course` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `course` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
@@ -587,7 +576,135 @@ INSERT INTO `users` (`id`, `uname`, `middlename`, `lastname`, `id_department`, `
 (28, 'Анна', 'Киселева', 'Юрьевна', 3, '88002010600', '2000-08-31', 0, 'admin28', 'admin28', 1, 1),
 (29, 'Илья', 'Корляков', 'Дмитриевич', 1, '88002020600', '2000-09-01', 0, 'admin29', 'admin29', 1, 1);
 
+--
+-- Индексы сохранённых таблиц
+--
 
+--
+-- Индексы таблицы `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event_activity`
+--
+ALTER TABLE `event_activity`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event_eventtype`
+--
+ALTER TABLE `event_eventtype`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event_user_status_role`
+--
+ALTER TABLE `event_user_status_role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `group_user`
+--
+ALTER TABLE `group_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `memo`
+--
+ALTER TABLE `memo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `department`
+--
+ALTER TABLE `department`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=48;
+--
+-- AUTO_INCREMENT для таблицы `event`
+--
+ALTER TABLE `event`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT для таблицы `event_activity`
+--
+ALTER TABLE `event_activity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT для таблицы `event_eventtype`
+--
+ALTER TABLE `event_eventtype`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT для таблицы `event_user_status_role`
+--
+ALTER TABLE `event_user_status_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
+--
+-- AUTO_INCREMENT для таблицы `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `group_user`
+--
+ALTER TABLE `group_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
+--
+-- AUTO_INCREMENT для таблицы `memo`
+--
+ALTER TABLE `memo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT для таблицы `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

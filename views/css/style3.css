@@ -210,53 +210,62 @@ div.icons_style {
   display: inline-block;
   width: 20%;
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-20 {
   display: inline-block;
   width: 20%;
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-30 {
   display: inline-block;
   width: 30%;
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-40 {
   display: inline-block;
   width: 30%;
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-49 {
   display: inline-block;
   width: 49%;
   margin-right: 2%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-50 {
   display: inline-block;
   width: 49%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-58 {
   display: inline-block;
   width: 58%;
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-69 {
   display: inline-block;
   width: 69%;
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-100 {
   display: inline-block;
   width: 100%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-100-px {
   display: inline-block;
@@ -268,13 +277,15 @@ div.icons_style {
   display: inline-block;
   width: 150px;
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-200-px {
   display: inline-block;
   width: 200px;
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-99-100-px {
   display: inline-block;
@@ -292,37 +303,44 @@ div.icons_style {
   display: inline-block;
   width: calc(98% - 300px);
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-49-100-px {
   display: inline-block;
   width: calc(49% - 100px);
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-30-100-px {
   display: inline-block;
   width: calc(30% - 100px);
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-44-100-px {
   display: inline-block;
   width: calc(44% - 100px);
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-45-100-px {
   display: inline-block;
   width: calc(45% - 100px);
   margin-right: 1%;
-  font-size: 12px; }
+  font-size: 12px;
+  vertical-align: top; }
 
 .az-col-push-30 {
-  margin-right: 30%; }
+  margin-right: 30%;
+  vertical-align: top; }
 
 .az-col-push-10 {
-  margin-right: 10%; }
+  margin-right: 10%;
+  vertical-align: top; }
 
 [class*="az-col"]:last-child {
   margin-right: 0px; }
@@ -341,10 +359,12 @@ div.icons_style {
     display: inline-block;
     width: 49%;
     margin-right: 2%;
-    font-size: 12px; }
+    font-size: 12px;
+    vertical-align: top; }
 
   .az-col-xs-push-0 {
-    margin-right: 0px; } }
+    margin-right: 0px;
+    vertical-align: top; } }
 /*cols*/
 /*form filters*/
 .az-form {

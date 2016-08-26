@@ -23,10 +23,13 @@ class AjaxController extends Controller
         $id = $_GET['id'];
         if ($id == '#event'){
             $id_event = $_GET['id_event'];
-            $query = event::find($id_event)
+            $query = event::find()
+                ->where(['id' => $id_event])
                 ->with('eventlevel')
                 ->with('iCoordinator')
                 ->with('users')
+                ->with('roles')
+                ->with('registrator')
                 ->with('eventtype')
                 ->with('activity')
                 ->with('comp')
@@ -34,6 +37,7 @@ class AjaxController extends Controller
         
             Yii::$app->response->format = Response::FORMAT_JSON;
             return array("query" => $query); //array('the_event' => '$query', 'users' => '$users');
+            //return array("query" => $id_event);
         }
     }
 

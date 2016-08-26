@@ -295,16 +295,16 @@ AppAsset::register($this);
                 <th>фио</th>
                 <th>роль</th>
                 <th>курс</th>
-                <th>телефон</th>
+                <th>ИНСТИТУТ/ВШ</th>
             </tr>
         </thead>
-        <tbody class="table-content">
+        <tbody class="table-content" id="eventtable">
             <tr>
-                <td>1</td>
-                <td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-                <td>100</td>
-                <td>3</td>
-                <td>Эконом</td>
+                <td id="event10num"></td>
+                <td id="event10fio"><a href="#activist" rel="modal"></a></td>
+                <td id="event10role"></td>
+                <td id="event10course"></td>
+                <td id="event10institute"></td>
             </tr>
             <tr>
                 <td>2</td>
