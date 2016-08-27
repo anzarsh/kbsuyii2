@@ -73,7 +73,7 @@ class SiteController extends Controller
             'totalCount' => $query->count(),
         ]);
 
-        $users = $query->orderBy('middlename')
+        $users = $query->orderBy(['rate' => SORT_DESC, 'middlename' => SORT_ASC])//->orderBy('middlename')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();

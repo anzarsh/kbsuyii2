@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 25 2016 г., 12:43
+-- Время создания: Авг 27 2016 г., 11:43
 -- Версия сервера: 5.5.50
 -- Версия PHP: 5.4.45
 
@@ -48,10 +48,9 @@ INSERT INTO `activity` (`id`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `department` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_unit` int(11) NOT NULL,
-  `uname` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `uname` varchar(256) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 --
@@ -115,7 +114,7 @@ INSERT INTO `department` (`id`, `id_unit`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` text NOT NULL,
   `id_eventlevel` int(11) NOT NULL,
   `location` text NOT NULL,
@@ -125,8 +124,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `id_activity` int(11) NOT NULL,
   `id_eventtype` int(11) NOT NULL,
   `id_eventcomp` int(11) NOT NULL,
-  `comment` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `comment` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
@@ -135,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `event` (
 
 INSERT INTO `event` (`id`, `uname`, `id_eventlevel`, `location`, `extorg`, `startdate`, `finishdate`, `id_activity`, `id_eventtype`, `id_eventcomp`, `comment`) VALUES
 (0, 'Пресс-конференция "Умы России"', 1, 'Нальчик', '', '2016-08-01', '2016-08-03', 1, 1, 0, 'хорошее мероприятие'),
-(1, 'Пресс-конференция "Умы Таджикистана"', 2, 'Москва', '', '2016-08-03', '2016-08-04',1, 2, 0, 'очень хорошая конференция'),
+(1, 'Пресс-конференция "Умы Таджикистана"', 2, 'Москва', '', '2016-08-03', '2016-08-04', 1, 2, 0, 'очень хорошая конференция'),
 (2, 'Пресс-конференция "Умы Киргизии"', 3, 'Терек', 'Глава Терского района', '2016-08-03', '2016-08-11', 2, 3, 1, 'Проводится в Терском районе'),
 (3, 'Пресс-конференция "Умы Венгрии"', 4, 'Венгрия', 'Венгерское правительство', '2016-08-01', '2016-08-02', 3, 4, 1, 'Венгерский конкурс проводимый в рамках организации Объединенных Наций'),
 (4, 'Пресс-конференция "Умы Уфы"', 5, 'Нальчик', '', '2016-08-09', '2016-08-10', 2, 5, 0, ''),
@@ -221,10 +219,9 @@ INSERT INTO `eventtype` (`id`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event_activity` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_event` int(11) NOT NULL,
-  `id_activity` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_activity` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
@@ -254,10 +251,9 @@ INSERT INTO `event_activity` (`id`, `id_event`, `id_activity`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event_eventtype` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_event` int(11) NOT NULL,
-  `id_eventtype` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_eventtype` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
@@ -295,13 +291,12 @@ INSERT INTO `event_eventtype` (`id`, `id_event`, `id_eventtype`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `event_user_status_role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_event` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_status` int(11) NOT NULL,
-  `id_role` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+  `id_role` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `event_user_status_role`
@@ -345,20 +340,13 @@ INSERT INTO `event_user_status_role` (`id`, `id_event`, `id_user`, `id_status`, 
 (34, 8, 16, 0, 1),
 (35, 8, 10, 0, 1),
 (36, 8, 11, 0, 3),
-(37, 8, 12, 0, 2),
-(38, 8, 13, 0, 1),
-(39, 8, 25, 0, 1),
-(40, 8, 24, 0, 1),
-(41, 8, 26, 0, 1),
-(42, 8, 27, 0, 1),
-(43, 8, 28, 0, 3),
-(44, 8, 29, 1, 2),
-(45, 8, 3, 2, 1),
-(46, 9, 14, 0, 1),
-(47, 9, 15, 0, 1),
-(48, 9, 16, 0, 1),
-(49, 9, 17, 1, 1),
-(50, 9, 18, 2, 1);
+(37, 8, 12, 1, 2),
+(38, 8, 13, 2, 0),
+(39, 9, 14, 0, 1),
+(40, 9, 15, 0, 1),
+(41, 9, 16, 0, 1),
+(42, 9, 17, 1, 1),
+(43, 9, 18, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -367,10 +355,9 @@ INSERT INTO `event_user_status_role` (`id`, `id_event`, `id_user`, `id_status`, 
 --
 
 CREATE TABLE IF NOT EXISTS `groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(256) NOT NULL,
-  `url` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `url` varchar(256) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
@@ -390,10 +377,9 @@ INSERT INTO `groups` (`id`, `uname`, `url`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `group_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_group` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
@@ -445,14 +431,13 @@ INSERT INTO `group_user` (`id`, `id_group`, `id_user`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `memo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(256) NOT NULL,
   `header` text NOT NULL,
   `title` varchar(256) NOT NULL,
   `content` text NOT NULL,
   `date` date NOT NULL,
-  `paraph` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `paraph` varchar(256) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
@@ -468,36 +453,13 @@ INSERT INTO `memo` (`id`, `uname`, `header`, `title`, `content`, `date`, `paraph
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `status`
---
-
-CREATE TABLE IF NOT EXISTS `status` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uname` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `status`
---
-
-INSERT INTO `status` (`id`, `uname`) VALUES
-(0, 'Участник'),
-(1, 'Регистратор'),
-(2, 'Координатор'),
-(3, 'Суперкоординатор');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `role`
 --
 
 CREATE TABLE IF NOT EXISTS `role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(256) NOT NULL,
-  `mark` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `mark` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
@@ -510,6 +472,27 @@ INSERT INTO `role` (`id`, `uname`, `mark`) VALUES
 (2, 'Помощник организатора', 2),
 (3, 'Организатор', 4),
 (4, 'Главный организатор', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `status`
+--
+
+CREATE TABLE IF NOT EXISTS `status` (
+  `id` int(11) NOT NULL,
+  `uname` varchar(256) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `status`
+--
+
+INSERT INTO `status` (`id`, `uname`) VALUES
+(0, 'Участник'),
+(1, 'Регистратор'),
+(2, 'Координатор'),
+(3, 'Суперкоординатор');
 
 -- --------------------------------------------------------
 
@@ -543,7 +526,7 @@ INSERT INTO `unit` (`id`, `uname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `uname` varchar(15) NOT NULL,
   `middlename` varchar(15) NOT NULL,
   `lastname` varchar(15) NOT NULL,
@@ -554,48 +537,174 @@ CREATE TABLE IF NOT EXISTS `users` (
   `login` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
   `activist` tinyint(1) NOT NULL,
-  `course` int(11) NOT NULL,
-  `rate` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `course` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `uname`, `middlename`, `lastname`, `id_department`, `phonenum`, `birthday`, `id_status`, `login`, `password`, `activist`, `course`, `rate`) VALUES
-(0, 'Елизавета', 'Азина', 'Андреевна', 0, '8002000600', '2000-08-03', 0, 'admin', 'admin', 0, 1, 0),
-(1, 'Анна', 'Белик', 'Дмитриевна', 6, '8002000601', '2000-08-04', 0, 'admin1', 'admin1', 1, 1, 0),
-(2, 'Алексей', 'Волков', 'Олегович', 5, '8002000602', '2000-08-05', 0, 'admin2', 'admin2', 1, 2, 0),
-(3, 'Татьяна', 'Дубровская', 'Валерьевна', 4, '8002000603', '2000-08-06', 0, 'admin3', 'admin3', 1, 2, 0),
-(4, 'Анастасия', 'Иовчева', 'Дмитриевна', 3, '8002000604', '2000-08-07', 0, 'admin4', 'admin4', 1, 3, 0),
-(5, 'Елена', 'Кравченко', 'Игоревна', 2, '8002000605', '2000-08-08', 0, 'admin5', 'admin5', 1, 4, 0),
-(6, 'Александра', 'Лисова', 'Дмитриевна', 1, '8002000606', '2000-08-09', 0, 'admin6', 'admin6', 1, 5, 0),
-(7, 'Дарья', 'Михайлова', 'Владимировна', 9, '8002000607', '2000-08-10', 0, 'admin7', 'admin7', 1, 3, 0),
-(8, 'Вероника', 'Пискарева', 'Максимовна', 8, '8002000608', '2000-08-11', 0, 'admin8', 'admin8', 1, 2, 0),
-(9, 'Наталья', 'Рудик', 'Игоревна', 7, '8002000609', '2000-08-12', 0, 'admin9', 'admin9', 1, 3, 0),
-(10, 'Михаил', 'Узор', 'Алексеевич', 10, '8002000610', '2000-08-13', 0, 'admin10', 'admin10', 1, 4, 0),
-(11, 'Дарья', 'Фомичева', 'Владимировна', 11, '8002000620', '2000-08-14', 0, 'admin11', 'admin11', 1, 5, 0),
-(12, 'Леонид', 'Шмелев', 'Алексеевич', 13, '8002000630', '2000-08-15', 0, 'admin12', 'admin12', 1, 6, 0),
-(13, 'Лилия', 'Безбердая', 'Александровна', 15, '8002000640', '2000-08-16', 0, 'admin13', 'admin13', 1, 5, 0),
-(14, 'Артем', 'Волобаев', 'Александрович', 0, '8002000650', '2000-08-17', 0, 'admin14', 'admin14', 1, 3, 0),
-(15, 'Ирина', 'Капустина', 'Сергеевна', 0, '8002000660', '2000-08-18', 0, 'admin15', 'admin15', 1, 2, 0),
-(16, 'Мария', 'Козачук', 'Никитична', 0, '8002000670', '2000-08-19', 0, 'admin16', 'admin16', 1, 2, 0),
-(17, 'Полина', 'Мальцева', 'Игоревна', 0, '8002000680', '2000-08-20', 0, 'admin17', 'admin17', 1, 1, 0),
-(18, 'Алена', 'Папкина', 'Эдуардовна', 0, '8002000690', '2000-08-21', 0, 'admin18', 'admin18', 1, 1, 0),
-(19, 'Мария', 'Билык', 'Александровна', 0, '8002001600', '2000-08-22', 0, 'admin19', 'admin19', 1, 2, 0),
-(20, 'Анастасия', 'Васиуллина', 'Ильинична', 0, '8002002600', '2000-08-23', 0, 'admin20', 'admin20', 1, 3, 0),
-(21, 'Наталья', 'Кислякова', 'Юрьевна', 0, '8002003600', '2000-08-24', 0, 'admin21', 'admin21', 1, 4, 0),
-(22, 'Алексей', 'Лобанов', 'Александрович', 4, '8002004600', '2000-08-25', 0, 'admin22', 'admin22', 1, 5, 0),
-(23, 'Александр', 'Рыжов', 'Владимирович', 4, '8002005600', '2000-08-26', 0, 'admin23', 'admin23', 1, 4, 0),
-(24, 'Ксения', 'Сорокина', 'Игоревна', 4, '8002006600', '2000-08-27', 0, 'admin24', 'admin24', 1, 4, 0),
-(25, 'Ксения', 'Фоменкова', 'Витальевна', 5, '8002007600', '2000-08-28', 0, 'admin25', 'admin25', 1, 2, 0),
-(26, 'Джессика', 'Васильчук', 'Юрьевна', 8, '8002008600', '2000-08-29', 0, 'admin26', 'admin26', 1, 3, 0),
-(27, 'Валентина', 'Гаврилова', 'Игоревна', 2, '8002009600', '2000-08-30', 0, 'admin27', 'admin27', 1, 4, 0),
-(28, 'Анна', 'Киселева', 'Юрьевна', 3, '8002010600', '2000-08-31', 0, 'admin28', 'admin28', 1, 1, 0),
-(29, 'Илья', 'Корляков', 'Дмитриевич', 1, '8002020600', '2000-09-01', 0, 'admin29', 'admin29', 1, 1, 0);
+INSERT INTO `users` (`id`, `uname`, `middlename`, `lastname`, `id_department`, `phonenum`, `birthday`, `id_status`, `login`, `password`, `activist`, `course`) VALUES
+(0, 'Елизавета', 'Азина', 'Андреевна', 0, '88002000600', '2000-08-03', 0, 'admin', 'admin', 0, 1),
+(1, 'Анна', 'Белик', 'Дмитриевна', 6, '88002000601', '2000-08-04', 0, 'admin1', 'admin1', 1, 1),
+(2, 'Алексей', 'Волков', 'Олегович', 5, '88002000602', '2000-08-05', 0, 'admin2', 'admin2', 1, 2),
+(3, 'Татьяна', 'Дубровская', 'Валерьевна', 4, '88002000603', '2000-08-06', 0, 'admin3', 'admin3', 1, 2),
+(4, 'Анастасия', 'Иовчева', 'Дмитриевна', 3, '88002000604', '2000-08-07', 0, 'admin4', 'admin4', 1, 3),
+(5, 'Елена', 'Кравченко', 'Игоревна', 2, '88002000605', '2000-08-08', 0, 'admin5', 'admin5', 1, 4),
+(6, 'Александра', 'Лисова', 'Дмитриевна', 1, '88002000606', '2000-08-09', 0, 'admin6', 'admin6', 1, 5),
+(7, 'Дарья', 'Михайлова', 'Владимировна', 9, '88002000607', '2000-08-10', 0, 'admin7', 'admin7', 1, 3),
+(8, 'Вероника', 'Пискарева', 'Максимовна', 8, '88002000608', '2000-08-11', 0, 'admin8', 'admin8', 1, 2),
+(9, 'Наталья', 'Рудик', 'Игоревна', 7, '88002000609', '2000-08-12', 0, 'admin9', 'admin9', 1, 3),
+(10, 'Михаил', 'Узор', 'Алексеевич', 10, '88002000610', '2000-08-13', 0, 'admin10', 'admin10', 1, 4),
+(11, 'Дарья', 'Фомичева', 'Владимировна', 11, '88002000620', '2000-08-14', 0, 'admin11', 'admin11', 1, 5),
+(12, 'Леонид', 'Шмелев', 'Алексеевич', 13, '88002000630', '2000-08-15', 0, 'admin12', 'admin12', 1, 6),
+(13, 'Лилия', 'Безбердая', 'Александровна', 15, '88002000640', '2000-08-16', 0, 'admin13', 'admin13', 1, 5),
+(14, 'Артем', 'Волобаев', 'Александрович', 0, '88002000650', '2000-08-17', 0, 'admin14', 'admin14', 1, 3),
+(15, 'Ирина', 'Капустина', 'Сергеевна', 0, '88002000660', '2000-08-18', 0, 'admin15', 'admin15', 1, 2),
+(16, 'Мария', 'Козачук', 'Никитична', 0, '88002000670', '2000-08-19', 0, 'admin16', 'admin16', 1, 2),
+(17, 'Полина', 'Мальцева', 'Игоревна', 0, '88002000680', '2000-08-20', 0, 'admin17', 'admin17', 1, 1),
+(18, 'Алена', 'Папкина', 'Эдуардовна', 0, '88002000690', '2000-08-21', 0, 'admin18', 'admin18', 1, 1),
+(19, 'Мария', 'Билык', 'Александровна', 0, '88002001600', '2000-08-22', 0, 'admin19', 'admin19', 1, 2),
+(20, 'Анастасия', 'Васиуллина', 'Ильинична', 0, '88002002600', '2000-08-23', 0, 'admin20', 'admin20', 1, 3),
+(21, 'Наталья', 'Кислякова', 'Юрьевна', 0, '88002003600', '2000-08-24', 0, 'admin21', 'admin21', 1, 4),
+(22, 'Алексей', 'Лобанов', 'Александрович', 4, '88002004600', '2000-08-25', 0, 'admin22', 'admin22', 1, 5),
+(23, 'Александр', 'Рыжов', 'Владимирович', 4, '88002005600', '2000-08-26', 0, 'admin23', 'admin23', 1, 4),
+(24, 'Ксения', 'Сорокина', 'Игоревна', 4, '88002006600', '2000-08-27', 0, 'admin24', 'admin24', 1, 4),
+(25, 'Ксения', 'Фоменкова', 'Витальевна', 5, '88002007600', '2000-08-28', 0, 'admin25', 'admin25', 1, 2),
+(26, 'Джессика', 'Васильчук', 'Юрьевна', 8, '88002008600', '2000-08-29', 0, 'admin26', 'admin26', 1, 3),
+(27, 'Валентина', 'Гаврилова', 'Игоревна', 2, '88002009600', '2000-08-30', 0, 'admin27', 'admin27', 1, 4),
+(28, 'Анна', 'Киселева', 'Юрьевна', 3, '88002010600', '2000-08-31', 0, 'admin28', 'admin28', 1, 1),
+(29, 'Илья', 'Корляков', 'Дмитриевич', 1, '88002020600', '2000-09-01', 0, 'admin29', 'admin29', 1, 1);
 
+--
+-- Индексы сохранённых таблиц
+--
 
+--
+-- Индексы таблицы `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event_activity`
+--
+ALTER TABLE `event_activity`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event_eventtype`
+--
+ALTER TABLE `event_eventtype`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `event_user_status_role`
+--
+ALTER TABLE `event_user_status_role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `group_user`
+--
+ALTER TABLE `group_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `memo`
+--
+ALTER TABLE `memo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `department`
+--
+ALTER TABLE `department`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=48;
+--
+-- AUTO_INCREMENT для таблицы `event`
+--
+ALTER TABLE `event`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT для таблицы `event_activity`
+--
+ALTER TABLE `event_activity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT для таблицы `event_eventtype`
+--
+ALTER TABLE `event_eventtype`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT для таблицы `event_user_status_role`
+--
+ALTER TABLE `event_user_status_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
+--
+-- AUTO_INCREMENT для таблицы `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `group_user`
+--
+ALTER TABLE `group_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
+--
+-- AUTO_INCREMENT для таблицы `memo`
+--
+ALTER TABLE `memo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT для таблицы `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -44,20 +44,26 @@ $(document).ready(function(){
     var az_posTop = -1;
     var temp;
 
-    function event_table(z, temp){
-        var begin = z*5;
-        var end = begin+5;
+    function event_table(temp){
+        
+    }
+
+    function event_table(temp){
+        //var begin = z*5;
+        //var end = begin+5;
         var k;
         //temp.forE
         var strtemp = '';
-        for (i=begin; i<end&&i<temp.length; i++){
+        for (i=0; i<temp.length; i++){
+            if(temp[i].id_role != 0){
             strtemp += '<tr><td>' + (i+1) + 
-                '</td><td><a href="#activist" rel="modal">' + temp[i].middlename + ' ' +
-                temp[i].uname + ' ' + temp[i].lastname +
-                '</a></td><td>' + temp[i].uname +
-                '</td><td>' + temp[i].course +
-                '</td><td>' + temp[i].id_department +
+                '</td><td><a href="#activist" rel="modal">' + temp[i].user.middlename + ' ' +
+                temp[i].user.uname + ' ' + temp[i].user.lastname +
+                '</a></td><td>' + temp[i].role.uname +
+                '</td><td>' + temp[i].user.course +
+                '</td><td>' + temp[i].user.id_department +
                 '</td></tr>';
+            }
         }
         $('#eventtable').html(strtemp);
     }
@@ -99,15 +105,87 @@ $(document).ready(function(){
         });
         $('#event8').text(strtemp);
         $('#event9').text(temp.comment);
-        event_table(0, temp.users);
+        var k;
+        var strtemp = '';
+        for (i=0; i<temp.roles.length; i++){
+            if(temp.roles[i].id_role != 0){
+            strtemp += '<tr dataId="' + temp.roles[i].user.id + '"><td>' + (i+1) + 
+                '</td><td><a href="#activist" rel="modal">' + temp.roles[i].user.middlename + ' ' +
+                temp.roles[i].user.uname + ' ' + temp.roles[i].user.lastname +
+                '</a></td><td>' + temp.roles[i].role.uname +
+                '</td><td>' + temp.roles[i].user.course +
+                '</td><td>' + temp.roles[i].user.id_department +
+                '</td></tr>';
+            }
+        }
+        $('#eventtable').html(strtemp);
+    }
 
-        //alert(temp.temp.event.uname);
+    function f_user(temp){
+        //alert(temp.startdate);
+        $('#user1').text(temp.middlename + ' ' + temp.uname + ' ' + temp.lastname);
+        $('#user2').text('('+temp.birthday+')');
+        $('#user3').text(temp.department.uname + ', ' + temp.department.unit.uname);
+        $('#user4').text(' +7(' + temp.phonenum.slice(0,3)
+                    + ')' + temp.phonenum.slice(2,5)
+                    + '-' + temp.phonenum.slice(5,7)
+                    + '-' + temp.phonenum.slice(7,9));
+        var strtemp = '<span id="user5">';
+        temp.groups.forEach(function(item, j){
+            strtemp +=  (j==(temp.groups.length-1))?(
+                '<span class="az-style1"><a href="#group" rel="modal">'
+                + item.uname + '</a></span>'
+                        ):(
+                '<span class="az-style1"><a href="#group" rel="modal">'
+                + item.uname + '</a>, </span>'
+                        );
+        });
+        strtemp += '</span>'
+        $('#user5').html(strtemp);
+        //alert(1);
+        var k;
+        strtemp = '';
+        for (i=0; i<temp.events.length; i++){
+            //alert(temp.events[i].event.id);
+            if(temp.events[i].id_role != 0){
+            strtemp += '<tr dataId="' + temp.events[i].event.id + '"><td>' + (i+1) + 
+                '</td><td>' + temp.events[i].event.finishdate + '<br/>' + temp.events[i].event.startdate +
+                '</td><td><a href="#event" rel="modal">' + temp.events[i].event.uname +
+                '</a></td><td>' + temp.events[i].role.uname +
+                '</td><td>' + temp.events[i].role.mark +
+                '</td></tr>';
+            }
+            //alert(strtemp);
+            
+        }
+        $('#usertable').html(strtemp);
+    }
+
+    function f_group(temp){
+        //alert(1);
+        //alert(temp.startdate);
+        $('#group1').text(temp.users.length);
+        
+        // var k;
+        // strtemp = '';
+        // for (i=0; i<temp.events.length; i++){
+        //     //alert(temp.events[i].event.id);
+        //     if(temp.events[i].id_role != 0){
+        //     strtemp += '<tr dataId="' + temp.events[i].event.id + '"><td>' + (i+1) + 
+        //         '</td><td>' + temp.events[i].event.finishdate + '<br/>' + temp.events[i].event.startdate +
+        //         '</td><td><a href="#event" rel="modal">' + temp.events[i].event.uname +
+        //         '</a></td><td>' + temp.events[i].role.uname +
+        //         '</td><td>' + temp.events[i].role.mark +
+        //         '</td></tr>';
+        //     }
+        //     //alert(strtemp);
+            
+        // }
+        // $('#usertable').html(strtemp);
     }
 
 
-
-
-    $('a[rel=modal]').click(function(e) {
+    $('body').on('click', 'a[rel=modal]', function(e) {
         //alert(1);
 
         if ($('.az-fixed').hasClass('az-fixed2')){
@@ -118,24 +196,27 @@ $(document).ready(function(){
         e.preventDefault();
         var id = $(this).attr('href');
         
-        var id_event = Number($(this).parents('tr').attr('dataId'));
+        var id_event = Number($(this).parents('tr').attr('dataid'));
         //alert(id_event);
         //alert(id_event);
         //var id2 = id.splice(1);
+
         $.ajax({
-            url: "/ajax/event",
+            url: "/ajax/" + id.slice(1),
             type: 'get',
             //datatype: 'json',
             data: {
-                id : id,
-                id_event: id_event
+                id : id_event,
+                //id_event: id_event
             },
             success: function (data) {
                 data = '('+data+')';
-                //temp = eval(data);
-                //if(id == '#event'){f_event(temp.query);}
+                temp = eval(data);
+                if(id == '#event'){f_event(temp.query);}
+                else if(id == '#activist'){f_user(temp.query);}
+                else if(id == '#group'){f_group(temp.query);}
                 //alert(1);
-                $('#event9').text(data);
+                //$('#event9').text(data);
                 //alert(data);
             }
         });

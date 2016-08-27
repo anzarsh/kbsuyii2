@@ -33,7 +33,7 @@ AppAsset::register($this);
 <body>
     <script src="../../views/libs/jquery/jquery-1.11.1.min.js"></script>
     <script src="../../views/js/jquery.maskedinput.min.js"></script>
-    <script src="../../views/js/common.js"></script>
+    
 <?php $this->beginBody() ?>
 
 <div class="az-fixed">
@@ -107,7 +107,7 @@ AppAsset::register($this);
             <div class="az-form az-row">
                 <div>
                     <span class="az-style2 az-col-150-px">Кол-во студентов:</span>
-                    <span class="az-style1 az-col-99-150-px">100</span>
+                    <span class="az-style1 az-col-99-150-px" id="group1">100</span>
                 </div>
             </div>
             
@@ -157,13 +157,12 @@ AppAsset::register($this);
                         <td>1</td>
                         <td>Эконом</td>
                     </tr>
-
                 </tbody>
             </table>
-            <ul class="next-prev">
+            <!-- <ul class="next-prev">
                 <li class="az-disabled"><a href="#">Предыдущая</a></li>
                 <li><a href="#">Следующая</a></li>
-            </ul>
+            </ul> -->
         <!-- </div> -->
     </div>
 </div>
@@ -173,23 +172,25 @@ AppAsset::register($this);
             <div class="an-exit">
                 <span class="an-exit__krest an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></span>
             </div>
-        <!-- <div class="container-fluid"> -->
+            <!-- <div class="container-fluid"> -->
             <h2>карта активиста</h2>
             <div class="az-form az-row">
-                <span class="az-style2">Щумахуа Анзар Уащислаулович</span>
-                <span class="az-style1">(01.01.1990)</span>
+                <span class="az-style2" id="user1">Щумахуа Анзар Уащислаулович</span>
+                <span class="az-style1" id="user2">(01.01.1990)</span>
             </div>
             <div class="az-form az-row">
-                <span class="az-style1">Экономический институт</span>
+                <span class="az-style1" id="user3">Экономический институт</span>
             </div>
             <div class="az-form az-row">
-                <span class="az-style2">тел.:</span><a class="az-style1" href="tel:+79888888888">+7(988)888-88-88</a>
+                <span class="az-style2">тел.:</span><span class="az-style4" href="tel:+79888888888" id="user4">+7(988)888-88-88</span>
             </div>
             <div class="az-form az-row">
                 <span class="az-style2">группы: </span>
-                <span class="az-style1"><a href="#group" rel="modal">Послы русского языка</a>,</span>
-                <span class="az-style1"><a href="#group" rel="modal">Студенческий совет</a>,</span>
-                <span class="az-style1"><a href="#group" rel="modal">Кодеры</a></span>
+                <span id="user5">
+                    <span class="az-style1"><a href="#group" rel="modal">Послы русского языка</a>,</span>
+                    <span class="az-style1"><a href="#group" rel="modal">Студенческий совет</a>,</span>
+                    <span class="az-style1"><a href="#group" rel="modal">Кодеры</a></span>
+                </span>
             </div>
             <table class="az-table">
                 <thead class="table-head">
@@ -201,48 +202,13 @@ AppAsset::register($this);
                         <th>баллы</th>
                     </tr>
                 </thead>
-                <tbody class="table-content">
-                    <tr>
-                        <td>1</td>
-                        <td>02.07.2016<br>01.07.2016</td>
-                        <td><a href="#event" rel="modal">Пресс-конференция "Умы России"</a></td>
-                        <td>помощь</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>02.06.2016<br>01.06.2016</td>
-                        <td><a href="#event" rel="modal">Пресс-конференция "Умы Таджикистана"</a></td>
-                        <td>организ.</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>02.05.2016<br>01.05.2016</td>
-                        <td><a href="#event" rel="modal">Пресс-конференция "Умы Киргизии"</a></td>
-                        <td>участие</td>
-                        <td>21</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>02.04.2016<br>01.04.2016</td>
-                        <td><a href="#event" rel="modal">Пресс-конференция "Умы Венгрии"</a></td>
-                        <td>гл.организ.</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>02.03.2016<br>01.03.2016</td>
-                        <td><a href="#event" rel="modal">Пресс-конференция "Умы России"</a></td>
-                        <td>помощь</td>
-                        <td>18</td>
-                    </tr>
+                <tbody class="table-content" id="usertable">
                 </tbody>
             </table>
-            <ul class="next-prev">
+            <!-- <ul class="next-prev">
                 <li class="az-disabled"><a href="#">Предыдущая</a></li>
                 <li><a href="#">Следующая</a></li>
-            </ul>
+            </ul> -->
         <!-- </div> -->
     </div>
 </div>
@@ -255,7 +221,7 @@ AppAsset::register($this);
                 <span class="an-exit__krest an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></span>
             </div>
         <!-- <div class="container-fluid"> -->
-            <h2 id="event0">Пресс-конференция "Умы России"</h2>
+            <h2 id="event0"></h2>
             <div class="az-form az-row">
                 <div>
                     <span class="az-style2 az-col-100-px">Уровень:</span>
@@ -299,48 +265,12 @@ AppAsset::register($this);
             </tr>
         </thead>
         <tbody class="table-content" id="eventtable">
-            <tr>
-                <td id="event10num"></td>
-                <td id="event10fio"><a href="#activist" rel="modal"></a></td>
-                <td id="event10role"></td>
-                <td id="event10course"></td>
-                <td id="event10institute"></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-                <td>99</td>
-                <td>4</td>
-                <td>Эконом</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-                <td>88</td>
-                <td>5</td>
-                <td>Эконом</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-                <td>77</td>
-                <td>2</td>
-                <td>Эконом</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Щумахуа Анзар Уащислаулович</td>
-                <td>66</td>
-                <td>1</td>
-                <td>Эконом</td>
-            </tr>
-
         </tbody>
     </table>
-    <ul class="next-prev">
+    <!-- <ul class="next-prev">
         <li class="az-disabled"><a href="#">Предыдущая</a></li>
         <li><a href="#">Следующая</a></li>
-    </ul>
+    </ul> -->
         <!-- </div> -->
     </div>
 </div>
@@ -555,7 +485,7 @@ AppAsset::register($this);
     </section>
 </div>
 <?php //$this->endBody() ?>
-
+<script src="../../views/js/common.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>

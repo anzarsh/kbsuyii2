@@ -25,9 +25,9 @@ use yii\widgets\LinkPager;
 		<?php $i=1; ?>
 		<?php $num = ($pagination->page)*($pagination->defaultPageSize); ?>
 		<?php foreach ($users as $tempuser): ?>
-			<tr>
+			<tr dataId="<?= Html::encode("{$tempuser->id}") ?>">
 				<td><?php echo $num+$i++; ?></td>
-				<td>100</td>
+				<td><?= Html::encode("{$tempuser->rate}") ?></td>
 				<td><a href="#activist" rel="modal"><?= Html::encode("{$tempuser->middlename} {$tempuser->uname} {$tempuser->lastname}") ?></a></td>
 				<td><?= Html::encode("{$tempuser->course}") ?></td>
 				<td>Эконом</td>

@@ -6,6 +6,8 @@ use yii\db\ActiveRecord;
 use app\models\eventlevel;
 use app\models\eventtype;
 use app\models\users;
+use app\models\role;
+use app\models\status;
 use app\models\event_user_status_role;
 use app\models\event_eventtype;
 
@@ -38,10 +40,8 @@ class event extends ActiveRecord
     }
     public function getRoles()
     {
-        return $this->hasMany(users::className(), ['id' => 'id_user'])
-            ->viaTable('event_user_status_role', ['id_event' => 'id'], function ($query) {
-                    $query->with('roles');
-                });
+        return $this->hasMany(event_user_status_role::className(), ['id_event' => 'id'])
+                        ->with('role')->with('user')->orderBy('id_role desc');
     }
     public function getEventtype()
     {
