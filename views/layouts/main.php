@@ -103,7 +103,7 @@ AppAsset::register($this);
                 <span class="an-exit__krest an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></span>
             </div>
         <!-- <div class="container-fluid"> -->
-            <h2>Послы русского языка</h2>
+            <h2 id="group0">Послы русского языка</h2>
             <div class="az-form az-row">
                 <div>
                     <span class="az-style2 az-col-150-px">Кол-во студентов:</span>
@@ -121,7 +121,7 @@ AppAsset::register($this);
                         <th>телефон</th>
                     </tr>
                 </thead>
-                <tbody class="table-content">
+                <tbody class="table-content" id="grouptable">
                     <tr>
                         <td>1</td>
                         <td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>

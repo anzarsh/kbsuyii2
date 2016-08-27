@@ -14,7 +14,7 @@ class groups extends ActiveRecord
     }
     public function getUsers()
     {
-        return $this->hasMany(users::className(), ['id' => 'id_group'])
-	        ->viaTable('group_user', ['id_user' => 'id']);
+        return $this->hasMany(users::className(), ['id' => 'id_user'])
+	        ->viaTable('group_user', ['id_group' => 'id']);
     }
 }

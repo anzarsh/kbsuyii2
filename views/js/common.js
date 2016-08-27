@@ -164,24 +164,23 @@ $(document).ready(function(){
     function f_group(temp){
         //alert(1);
         //alert(temp.startdate);
+        $('#group0').text(temp.uname);
         $('#group1').text(temp.users.length);
         
-        // var k;
-        // strtemp = '';
-        // for (i=0; i<temp.events.length; i++){
-        //     //alert(temp.events[i].event.id);
-        //     if(temp.events[i].id_role != 0){
-        //     strtemp += '<tr dataId="' + temp.events[i].event.id + '"><td>' + (i+1) + 
-        //         '</td><td>' + temp.events[i].event.finishdate + '<br/>' + temp.events[i].event.startdate +
-        //         '</td><td><a href="#event" rel="modal">' + temp.events[i].event.uname +
-        //         '</a></td><td>' + temp.events[i].role.uname +
-        //         '</td><td>' + temp.events[i].role.mark +
-        //         '</td></tr>';
-        //     }
-        //     //alert(strtemp);
-            
-        // }
-        // $('#usertable').html(strtemp);
+        var k;
+        var strtemp = '';
+        for (i=0; i<temp.users.length; i++){
+            if(temp.users[i].id_role != 0){
+            strtemp += '<tr dataId="' + temp.users[i].user.id + '"><td>' + (i+1) + 
+                '</td><td><a href="#activist" rel="modal">' + temp.users[i].user.middlename + ' ' +
+                temp.users[i].user.uname + ' ' + temp.users[i].user.lastname +
+                '</a></td><td>' + temp.users[i].role.uname +
+                '</td><td>' + temp.users[i].user.course +
+                '</td><td>' + temp.users[i].user.id_department +
+                '</td></tr>';
+            }
+        }
+        $('#grouptable').html(strtemp);
     }
 
 
