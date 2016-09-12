@@ -92,9 +92,9 @@ use yii\widgets\LinkPager;
 		</thead>
 		<tbody class="table-content">
 			<?php foreach ($events as $event): ?>
-			<tr dataId="<?= Html::encode("{$event->id}") ?>">
+			<tr>
 				<td><?= Html::encode("{$event->finishdate}") ?><br><?= Html::encode("{$event->startdate}") ?></td>
-				<td><a href="#event" rel="modal"><?= Html::encode("{$event->uname}") ?></a></td>
+				<td><a dataId="<?= Html::encode("{$event->id}") ?>" href="#event" rel="modal"><?= Html::encode("{$event->uname}") ?></a></td>
 				<td><?= Html::encode("{$event->eventlevel->uname}") ?></td>
 				<td><?= mb_substr($event->iCoordinator->uname, 0, 1, 'UTF-8') ?>.<?= mb_substr($event->iCoordinator->lastname, 0, 1, 'UTF-8') ?>.<?= Html::encode("{$event->iCoordinator->middlename}") ?></td>
 				<td><?= count($event->users); ?></td>

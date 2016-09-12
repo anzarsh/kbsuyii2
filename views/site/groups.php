@@ -18,8 +18,8 @@ use yii\widgets\LinkPager;
 		</thead>
 		<tbody class="table-content">
 			<?php foreach ($groups as $group): ?>
-			<tr dataId="<?= Html::encode("{$group->id}") ?>">
-				<td><a href="#group" rel="modal"><?= Html::encode("{$group->uname}") ?></a></td>
+			<tr>
+				<td><a dataId="<?= Html::encode("{$group->id}") ?>" href="#group" rel="modal"><?= Html::encode("{$group->uname}") ?></a></td>
 				<td><?= count($group->number); ?></td>
 			</tr>
 			<?php endforeach; ?>

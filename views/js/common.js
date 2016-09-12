@@ -109,8 +109,8 @@ $(document).ready(function(){
         var strtemp = '';
         for (i=0; i<temp.roles.length; i++){
             if(temp.roles[i].id_role != 0){
-            strtemp += '<tr dataId="' + temp.roles[i].user.id + '"><td>' + (i+1) + 
-                '</td><td><a href="#activist" rel="modal">' + temp.roles[i].user.middlename + ' ' +
+            strtemp += '<tr><td>' + (i+1) + 
+                '</td><td><a dataId="' + temp.roles[i].user.id + '" href="#activist" rel="modal">' + temp.roles[i].user.middlename + ' ' +
                 temp.roles[i].user.uname + ' ' + temp.roles[i].user.lastname +
                 '</a></td><td>' + temp.roles[i].role.uname +
                 '</td><td>' + temp.roles[i].user.course +
@@ -122,7 +122,7 @@ $(document).ready(function(){
     }
 
     function f_user(temp){
-        //alert(temp.startdate);
+        //alert(1);
         $('#user1').text(temp.middlename + ' ' + temp.uname + ' ' + temp.lastname);
         $('#user2').text('('+temp.birthday+')');
         $('#user3').text(temp.department.uname + ', ' + temp.department.unit.uname);
@@ -133,10 +133,10 @@ $(document).ready(function(){
         var strtemp = '<span id="user5">';
         temp.groups.forEach(function(item, j){
             strtemp +=  (j==(temp.groups.length-1))?(
-                '<span class="az-style1"><a href="#group" rel="modal">'
+                '<span class="az-style1"><a dataId="' + item.id + '" href="#group" rel="modal">'
                 + item.uname + '</a></span>'
                         ):(
-                '<span class="az-style1"><a href="#group" rel="modal">'
+                '<span class="az-style1"><a dataId="' + item.id + '"  href="#group" rel="modal">'
                 + item.uname + '</a>, </span>'
                         );
         });
@@ -148,9 +148,9 @@ $(document).ready(function(){
         for (i=0; i<temp.events.length; i++){
             //alert(temp.events[i].event.id);
             if(temp.events[i].id_role != 0){
-            strtemp += '<tr dataId="' + temp.events[i].event.id + '"><td>' + (i+1) + 
+            strtemp += '<tr><td>' + (i+1) + 
                 '</td><td>' + temp.events[i].event.finishdate + '<br/>' + temp.events[i].event.startdate +
-                '</td><td><a href="#event" rel="modal">' + temp.events[i].event.uname +
+                '</td><td><a dataId="' + temp.events[i].event.id + '" href="#event" rel="modal">' + temp.events[i].event.uname +
                 '</a></td><td>' + temp.events[i].role.uname +
                 '</td><td>' + temp.events[i].role.mark +
                 '</td></tr>';
@@ -162,7 +162,7 @@ $(document).ready(function(){
     }
 
     function f_group(temp){
-        //alert(1);
+        //alert(temp.uname);
         //alert(temp.startdate);
         $('#group0').text(temp.uname);
         $('#group1').text(temp.users.length);
@@ -170,16 +170,17 @@ $(document).ready(function(){
         var k;
         var strtemp = '';
         for (i=0; i<temp.users.length; i++){
-            if(temp.users[i].id_role != 0){
-            strtemp += '<tr dataId="' + temp.users[i].user.id + '"><td>' + (i+1) + 
-                '</td><td><a href="#activist" rel="modal">' + temp.users[i].user.middlename + ' ' +
-                temp.users[i].user.uname + ' ' + temp.users[i].user.lastname +
-                '</a></td><td>' + temp.users[i].role.uname +
-                '</td><td>' + temp.users[i].user.course +
-                '</td><td>' + temp.users[i].user.id_department +
+            //alert(temp.users[i].id_role);
+            //if(temp.users[i].id_role != 0){
+            strtemp += '<tr><td>' + (i+1) + 
+                '</td><td><a dataId="' + temp.users[i].id + '" href="#activist" rel="modal">' + temp.users[i].middlename + ' ' +
+                temp.users[i].uname + ' ' + temp.users[i].lastname +
+                '</a></td><td>' + temp.users[i].course +
+                '</td><td>' + temp.users[i].id_department +
                 '</td></tr>';
-            }
+            //}
         }
+        //alert(strtemp);
         $('#grouptable').html(strtemp);
     }
 
@@ -194,8 +195,8 @@ $(document).ready(function(){
         }
         e.preventDefault();
         var id = $(this).attr('href');
-        
-        var id_event = Number($(this).parents('tr').attr('dataid'));
+        //alert(id);
+        var id_event = Number($(this).attr('dataid'));
         //alert(id_event);
         //alert(id_event);
         //var id2 = id.splice(1);
@@ -265,6 +266,12 @@ $(document).ready(function(){
     $('input[type="text"]').mousedown(function() { 
         $('input[type="text"]').removeClass("error-input");
     });
+
+
+$('.az-form1').submit(function(){
+    var form_data = $(this).serialize();
+});
+
 
 // ********************************** fotoludi3 *******************************
      $(".ah-requestform").submit(function() {

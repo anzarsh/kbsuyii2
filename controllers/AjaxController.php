@@ -42,6 +42,7 @@ class AjaxController extends Controller
     public function actionActivist()
     {
             $id_user = $_GET['id'];
+            //print_r('dfg dfgg dfg dfg dsfg dfg dfg dsfg id_user');
             $query = users::find()
                 ->where(['id' => $id_user])
                 ->with('department')
@@ -64,4 +65,15 @@ class AjaxController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             return array("query" => $query);
     }
+    // public function actionGroup()
+    // {
+    //         $id_group = $_GET['id'];
+    //         $query = groups::find()
+    //             ->where(['id' => $id_group])
+    //             ->with('users')
+    //             ->asArray()->one();
+        
+    //         Yii::$app->response->format = Response::FORMAT_JSON;
+    //         return array("query" => $query);
+    // }
 }

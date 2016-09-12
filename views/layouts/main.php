@@ -103,11 +103,11 @@ AppAsset::register($this);
                 <span class="an-exit__krest an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></span>
             </div>
         <!-- <div class="container-fluid"> -->
-            <h2 id="group0">Послы русского языка</h2>
+            <h2 id="group0"></h2>
             <div class="az-form az-row">
                 <div>
                     <span class="az-style2 az-col-150-px">Кол-во студентов:</span>
-                    <span class="az-style1 az-col-99-150-px" id="group1">100</span>
+                    <span class="az-style1 az-col-99-150-px" id="group1"></span>
                 </div>
             </div>
             
@@ -116,47 +116,11 @@ AppAsset::register($this);
                     <tr>
                         <th>№</th>
                         <th>фио</th>
-                        <th>роль</th>
                         <th>курс</th>
-                        <th>телефон</th>
+                        <th>ИНСТИТУТ/ВШ</th>
                     </tr>
                 </thead>
                 <tbody class="table-content" id="grouptable">
-                    <tr>
-                        <td>1</td>
-                        <td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-                        <td>100</td>
-                        <td>3</td>
-                        <td>Эконом</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-                        <td>99</td>
-                        <td>4</td>
-                        <td>Эконом</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-                        <td>88</td>
-                        <td>5</td>
-                        <td>Эконом</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><a href="#activist" rel="modal">Щумахуа Анзар Уащислаулович</a></td>
-                        <td>77</td>
-                        <td>2</td>
-                        <td>Эконом</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Щумахуа Анзар Уащислаулович</td>
-                        <td>66</td>
-                        <td>1</td>
-                        <td>Эконом</td>
-                    </tr>
                 </tbody>
             </table>
             <!-- <ul class="next-prev">
@@ -175,11 +139,11 @@ AppAsset::register($this);
             <!-- <div class="container-fluid"> -->
             <h2>карта активиста</h2>
             <div class="az-form az-row">
-                <span class="az-style2" id="user1">Щумахуа Анзар Уащислаулович</span>
-                <span class="az-style1" id="user2">(01.01.1990)</span>
+                <span class="az-style2" id="user1"></span>
+                <span class="az-style1" id="user2"></span>
             </div>
             <div class="az-form az-row">
-                <span class="az-style1" id="user3">Экономический институт</span>
+                <span class="az-style1" id="user3"></span>
             </div>
             <div class="az-form az-row">
                 <span class="az-style2">тел.:</span><span class="az-style4" href="tel:+79888888888" id="user4">+7(988)888-88-88</span>
@@ -187,9 +151,9 @@ AppAsset::register($this);
             <div class="az-form az-row">
                 <span class="az-style2">группы: </span>
                 <span id="user5">
-                    <span class="az-style1"><a href="#group" rel="modal">Послы русского языка</a>,</span>
+                    <!-- <span class="az-style1"><a href="#group" rel="modal">Послы русского языка</a>,</span>
                     <span class="az-style1"><a href="#group" rel="modal">Студенческий совет</a>,</span>
-                    <span class="az-style1"><a href="#group" rel="modal">Кодеры</a></span>
+                    <span class="az-style1"><a href="#group" rel="modal">Кодеры</a></span> -->
                 </span>
             </div>
             <table class="az-table">

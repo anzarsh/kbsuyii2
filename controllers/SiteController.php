@@ -13,12 +13,16 @@ use app\models\entryForm;
 use app\models\users;
 use app\models\event;
 use app\models\groups;
+use app\models\SearchUser;
 
 class SiteController extends Controller
 {
     /**
      * @inheritdoc
      */
+
+    public $enableCsrfValidation = false;
+
     public function behaviors()
     {
         return [
@@ -66,6 +70,8 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
+        $model = new SearchUser();
+
         $query = users::find();
         
         $pagination = new Pagination([
@@ -73,18 +79,37 @@ class SiteController extends Controller
             'totalCount' => $query->count(),
         ]);
 
-        $users = $query->orderBy(['rate' => SORT_DESC, 'middlename' => SORT_ASC])//->orderBy('middlename')
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            //print_r($model->uname);
+            $users = $query
+            ->where(['and',
+                        ['like', 'course', $model->course],
+                        ['or',
+                            ['like', 'uname', $model->uname], 
+                            ['like', 'middlename', $model->uname],
+                            ['like', 'lastname', $model->uname]
+                        ]
+                        
+                    ])
+            ->orderBy(['rate' => SORT_DESC, 'middlename' => SORT_DESC])
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-
+        } else {
+        $users = $query->orderBy(['rate' => SORT_DESC, 'middlename' => SORT_ASC])
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+        }
         return $this->render('rating', [
             'users' => $users,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'model' => $model
         ]);
         
     }
 
+    
     /**
      * Login action.
      *
