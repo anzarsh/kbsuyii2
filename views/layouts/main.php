@@ -60,11 +60,11 @@ AppAsset::register($this);
             <div class="menu-list-pressed">
                 <ul class="main-menu">
                     <li><h2>Карта активиста</h2></li>
-                    <li><a href="/">рейтинг</a></li>
-                    <li><a href="/site/event">мероприятия</a></li>
-                    <li><a href="/site/groups">группы</a></li>
-                    <li><a href="/site/memo">печать с/з</a></li>
-                    <li><a href="/site/settings">настройки</a></li>
+                    <li><a href="/" id="menu-rating">рейтинг</a></li>
+                    <li><a href="/site/event" id="menu-event">мероприятия</a></li>
+                    <li><a href="/site/groups" id="menu-groups">группы</a></li>
+                    <li><a href="/site/memo" id="menu-memo">печать с/з</a></li>
+                    <li><a href="/site/settings" id="menu-settings">настройки</a></li>
                 </ul>
             </div>
         </div>

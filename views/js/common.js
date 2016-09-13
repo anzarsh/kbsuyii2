@@ -2,19 +2,7 @@
 $(document).ready(function(){
     //RESPONSIVEUI.responsiveTabs();
     //alert(1);
-    $('.main-menu a').each(function(){
-        var link1 = $(this).attr('href');
-        var link2 = location.href;
-        var ll = link2.indexOf(link1);
-        //alert(link2.lastIndexOf(link1)+link1.length);
-        //alert(link2.length);
-        //var patern = '/.*?'+$(this).attr('href')+'$/';
-        if (ll >= 0){
-            if (ll + link1.length == link2.length){
-                $(this).addClass('current-link');
-            }
-        }
-    });
+    
 
     $('.az-activity, .az-eventtype').click(function(){
         $(this).next('.az-open').slideToggle('slow');

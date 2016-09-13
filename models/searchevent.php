@@ -15,12 +15,10 @@ class SearchUser extends Model
 	    return [
 	        ['uname', 'string'],
 	        ['course', 'integer'],
-	        ['department', 'string'],
-	        [['uname', 'course', 'department'], 'required', 'when' => function () {
-                    if (!$this->uname && !$this->course && !$this->department) {
+	        [['uname', 'course'], 'required', 'when' => function () {
+                    if (!$this->uname && !$this->course) {
                         $this->addError('uname', 'Необходимо указать либо телефон, либо email.');
                         $this->addError('course', 'Необходимо указать либо телефон, либо email.');
-                        $this->addError('department', 'Необходимо указать либо телефон, либо email.');
                     }
                 }]
 	    ];

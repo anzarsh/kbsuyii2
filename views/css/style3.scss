@@ -435,6 +435,7 @@ div.icons_style{
 /*form filters*/
 .az-form{
    margin: 10px 0px;
+   position: relative;
    font-family: "OpenSans-Regular";
     input{
         height: 25px;
@@ -455,6 +456,19 @@ div.icons_style{
 .az-separate{
     margin: 10px 0px;
 }
+.az-search{
+    position: absolute;
+    top: 2px;
+    left: calc(58% - 22px);
+    background: transparent;
+    border: none;
+    outline: none;
+    //width: 12px;
+    //height: 12px;
+    color: #ccc;
+    font-size: 12px;
+}
+
 /*form*/
 
 /*table-buttons*/

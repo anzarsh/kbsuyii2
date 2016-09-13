@@ -57,8 +57,4 @@ class event extends ActiveRecord
     {
         return $this->hasOne(eventcomp::className(), ['id' => 'id_eventcomp']);
     }
-    // public function getStatus()
-    // {
-    //     return $this->hasOne(eventcomp::className(), ['id' => 'id_eventcomp']);
-    // }
 }

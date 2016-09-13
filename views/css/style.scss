@@ -89,7 +89,9 @@ strong{
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px) {
-
+  .window {
+    width: 100%;
+  }
 }
 
 /* Custom, iPhone Retina */

@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace app\controllers;
 
 use yii\data\Pagination;
@@ -14,6 +16,8 @@ use app\models\users;
 use app\models\event;
 use app\models\groups;
 use app\models\SearchUser;
+
+
 
 class SiteController extends Controller
 {
@@ -62,6 +66,7 @@ class SiteController extends Controller
         ];
     }
 
+
     /**
      * Displays homepage.
      *
@@ -69,44 +74,62 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
         $model = new SearchUser();
 
-        $query = users::find();
-        
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $query = users::find()
+            ->select('users.*')
+            ->rightJoin('department', '`users`.`id_department` = `department`.`id`')
+            ->where(['and',
+                        ['like', 'department.uname', $model->department],
+                        ['like', 'course', $model->course],
+                        ['or',
+                            ['like', 'users.uname', $model->uname], 
+                            ['like', 'middlename', $model->uname],
+                            ['like', 'lastname', $model->uname]
+                        ]
+                    ]
+                );
+            // ->with('department')
+            // ->where(['and',
+            //     ['like', 'course', $model->course],
+            //     ['or',
+            //         ['like', 'uname', $model->uname], 
+            //         ['like', 'middlename', $model->uname],
+            //         ['like', 'lastname', $model->uname]
+            //     ]//,
+            //     //['or',
+            //     //    ['like', 'department.uname', $model->department], 
+            //     //    ['like', 'middlename', $model->uname],
+            //     //    ['like', 'lastname', $model->uname]
+            //     //]
+            //     //$model->department
+            // ])
+            // ->innerJoinWith([
+            //     'department' => function ($query1) {
+            //         $query1->where(['like', 'department.uname', $model->department]);
+            //     }
+            // ]);
+        } else {
+            $query = users::find();
+            //->with('');
+        }
         $pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),
         ]);
 
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
-            //print_r($model->uname);
-            $users = $query
-            ->where(['and',
-                        ['like', 'course', $model->course],
-                        ['or',
-                            ['like', 'uname', $model->uname], 
-                            ['like', 'middlename', $model->uname],
-                            ['like', 'lastname', $model->uname]
-                        ]
-                        
-                    ])
-            ->orderBy(['rate' => SORT_DESC, 'middlename' => SORT_DESC])
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-        } else {
         $users = $query->orderBy(['rate' => SORT_DESC, 'middlename' => SORT_ASC])
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-        }
+       
         return $this->render('rating', [
             'users' => $users,
             'pagination' => $pagination,
-            'model' => $model
+            'model' => $model,
+            'href' => '#menu-rating'
         ]);
-        
     }
 
     

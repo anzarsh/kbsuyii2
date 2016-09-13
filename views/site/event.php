@@ -6,6 +6,24 @@ use yii\widgets\LinkPager;
 
 <section class="az-sec-table">
 	<h2>Мероприятия</h2>
+	<?php $form = ActiveForm::begin(['id' => 'contact-form',
+	'options' => [ 'class' => 'az-form'],
+    'fieldConfig' => [
+        'options' => [
+            'tag' => false,
+        ],
+    ],]); ?>
+		<div class="az-separate az-row">
+			<?php $inputt = $form->field($model,'uname')->textInput(['maxlength' => 18, 'class' => 'az-col-98-200-px az-col-xs-99-100-px', 'placeholder' => "Наименование"])->label(false); ?>
+			<?php $inputt->template = "{input}"; ?>
+			<?= $inputt; ?>
+			<?php $inputt = $form->field($model,'uname')->textInput(['maxlength' => 18, 'class' => 'az-col-100-px az-col-xs-hidden', 'placeholder' => "Уровень"])->label(false); ?>
+			<?php $inputt->template = "{input}"; ?>
+			<?= $inputt; ?>
+			<a href="#ah-myup" rel="modal" class="az-button-add az-col-100-px">Добавить</a>
+		</div>
+
+    <?php ActiveForm::end(); ?>
 	<form action="" class="az-form">
 		<div class="az-separate az-row">
 			<input type="text" placeholder="Наименование" class="az-col-98-200-px az-col-xs-99-100-px">
