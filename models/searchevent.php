@@ -20,7 +20,7 @@ class SearchEvent extends Model
 	        ['startdate', 'default', 'value' => date("Y-m-d")],
 	        ['finishdate', 'default', 'value' => date("Y-m-d")],
 	        [['uname', 'level'], 'required', 'when' => function () {
-                    if (!$this->uname && !$this->course) {
+                    if (!$this->uname && !$this->level) {
                         $this->addError('uname', 'Необходимо указать либо телефон, либо email.');
                         $this->addError('level', 'Необходимо указать либо телефон, либо email.');
                     }

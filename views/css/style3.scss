@@ -482,7 +482,18 @@ div.icons_style{
     color: #ccc;
     font-size: 12px;
 }
-
+.az-search2{
+    position: absolute;
+    top: 7px;
+    left: calc(98% - 222px);
+    background: transparent;
+    border: none;
+    outline: none;
+    //width: 12px;
+    //height: 12px;
+    color: #ccc;
+    font-size: 12px;
+}
 /*form*/
 
 /*table-buttons*/
@@ -705,6 +716,11 @@ div.icons_style{
 }
 /*file*/
 
+
+.datepicker{
+    font-family: "OpenSans-Regular";
+    font-size: 13px;
+}
 
 
 /*==========  Desktop First Method  ==========*/
@@ -975,6 +991,9 @@ div.icons_style{
 
     }
     /*table*/
+    .az-search2{
+        left: calc(99% - 122px);
+    }
 }
 
 

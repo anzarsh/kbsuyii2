@@ -182,27 +182,27 @@ class SiteController extends Controller
          $model = new SearchEvent();
 
         if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $query = event::find();
-            // ->select('users.*')
-            // ->rightJoin('department', '`users`.`id_department` = `department`.`id`')
+            $query = event::find()
+            ->select('event.*')
+            ->rightJoin('eventlevel', '`event`.`id_eventlevel` = `eventlevel`.`id`')
             // ->rightJoin('unit', '`department`.`id_unit` = `unit`.`id`')
-            // ->where(['and',
-            //             ['or',
-            //                 ['like', 'department.uname', $model->department],
-            //                 ['like', 'department.shortname', $model->department],
-            //                 ['like', 'unit.uname', $model->department],
-            //                 ['like', 'unit.shortname', $model->department],
-            //             ],
-            //             ['like', 'course', $model->course],
-            //             ['or',
-            //                 ['like', 'users.uname', $model->uname], 
-            //                 ['like', 'middlename', $model->uname],
-            //                 ['like', 'lastname', $model->uname]
-            //             ]
-            //         ]
-            //     );
+            ->where(['and',
+                        // ['or',
+                            ['like', 'eventlevel.uname', $model->level],
+                        //     ['like', 'department.shortname', $model->department],
+                        //     ['like', 'unit.uname', $model->department],
+                        //     ['like', 'unit.shortname', $model->department],
+                        // ],
+                        // ['like', 'course', $model->course],
+                        // ['or',
+                            ['like', 'event.uname', $model->uname], 
+                        //     ['like', 'middlename', $model->uname],
+                        //     ['like', 'lastname', $model->uname]
+                        // ]
+                    ]
+                );
         } else {
-             $query = event::find();
+            $query = event::find();
         }
         $pagination = new Pagination([
             'defaultPageSize' => 5,

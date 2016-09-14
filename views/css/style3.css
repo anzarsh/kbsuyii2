@@ -415,6 +415,16 @@ div.icons_style {
   color: #ccc;
   font-size: 12px; }
 
+.az-search2 {
+  position: absolute;
+  top: 7px;
+  left: calc(98% - 222px);
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ccc;
+  font-size: 12px; }
+
 /*form*/
 /*table-buttons*/
 .next-prev {
@@ -594,6 +604,10 @@ div.icons_style {
   display: none; }
 
 /*file*/
+.datepicker {
+  font-family: "OpenSans-Regular";
+  font-size: 13px; }
+
 /*==========  Desktop First Method  ==========*/
 /* Large Devices, Wide Screens */
 /* Medium Devices, Desktops */
@@ -755,7 +769,9 @@ div.icons_style {
     .table-content td:nth-child(4), .table-content td:nth-child(5) {
       display: none; }
 
-  /*table*/ }
+  /*table*/
+  .az-search2 {
+    left: calc(99% - 122px); } }
 /* Custom, iPhone Retina */
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 320px) {

@@ -16,7 +16,7 @@ use yii\jui\DatePicker;
             'tag' => false,
         ],
     ],]); ?>
-    	<?= Html::submitButton('<i class="fa fa-search" aria-hidden="true"></i>', ['class' => 'az-search']) ?>
+    	<?= Html::submitButton('<i class="fa fa-search" aria-hidden="true"></i>', ['class' => 'az-search2']) ?>
 		<div class="az-separate az-row">
 			<?php $inputt = $form->field($model,'uname')->textInput(['maxlength' => 18, 'class' => 'az-col-98-200-px az-col-xs-99-100-px', 'placeholder' => "Наименование"])->label(false); ?>
 			<?php $inputt->template = "{input}"; ?>
