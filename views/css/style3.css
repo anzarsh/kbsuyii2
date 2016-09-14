@@ -376,7 +376,20 @@ div.icons_style {
   font-family: "OpenSans-Regular"; }
   .az-form input {
     height: 25px;
-    padding: 0px 10px; }
+    padding: 0px 10px;
+    border-radius: unset;
+    font-size: 12px;
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #ccc; }
+  .az-form input:focus {
+    height: 25px;
+    padding: 0px 10px;
+    border-radius: unset;
+    font-size: 12px;
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #ccc; }
 
 .az-form_style {
   width: 250px;

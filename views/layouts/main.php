@@ -21,18 +21,26 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <link rel="stylesheet" href="../../views/libs/bootstrap/bootstrap.min.css" />
+    
+    <!-- <link rel="stylesheet" href="../../views/libs/bootstrap/bootstrap.min.css" /> -->
     <link rel="stylesheet" href="../../views/libs/font-awesome-4.6.3/css/font-awesome.min.css" />
     <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../views/css/bootstrap-datepicker.css">
+    <!-- <link rel="stylesheet" href="../../views/css/bootstrap-datepicker.standalone.css"> -->
+    <!-- <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="../../views/libs/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="../../views/css/build.css">
     <link rel="stylesheet" href="../../views/css/style.css">
     <link rel="stylesheet" href="../../views/css/style2.css">
     <link rel="stylesheet" href="../../views/css/style3.css">
     <link rel="stylesheet" href="../../views/css/fonts.css">
+    
 </head>
 <body>
     <script src="../../views/libs/jquery/jquery-1.11.1.min.js"></script>
-    <script src="../../views/js/jquery.maskedinput.min.js"></script>
+    <!-- <script src="../../views/js/jquery.maskedinput.min.js"></script> -->
+    <script src="../../views/js/bootstrap-datepicker.min.js"></script>
+    <script src="../../views/locales/bootstrap-datepicker.ru.min.js"></script>
     
 <?php $this->beginBody() ?>
 

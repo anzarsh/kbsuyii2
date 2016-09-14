@@ -4,21 +4,25 @@ namespace app\models;
 
 use yii\base\Model;
 
-class SearchUser extends Model
+class SearchEvent extends Model
 {
     public $uname;
-    public $course;
-    public $department;
-
+    public $level;
+    public $coordinator;
+    public $startdate;
+    public $finishdate;
 	public function rules()
 	{
 	    return [
 	        ['uname', 'string'],
-	        ['course', 'integer'],
-	        [['uname', 'course'], 'required', 'when' => function () {
+	        ['level', 'string'],
+	        ['coordinator', 'string'],
+	        ['startdate', 'default', 'value' => date("Y-m-d")],
+	        ['finishdate', 'default', 'value' => date("Y-m-d")],
+	        [['uname', 'level'], 'required', 'when' => function () {
                     if (!$this->uname && !$this->course) {
                         $this->addError('uname', 'Необходимо указать либо телефон, либо email.');
-                        $this->addError('course', 'Необходимо указать либо телефон, либо email.');
+                        $this->addError('level', 'Необходимо указать либо телефон, либо email.');
                     }
                 }]
 	    ];

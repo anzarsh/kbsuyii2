@@ -440,6 +440,20 @@ div.icons_style{
     input{
         height: 25px;
         padding: 0px 10px;
+        border-radius: unset;
+        font-size: 12px;
+        outline: none;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    input:focus{
+        height: 25px;
+        padding: 0px 10px;
+        border-radius: unset;
+        font-size: 12px;
+        outline: none;
+        box-shadow: none;
+        border: 1px solid #ccc;
     }
 }
 .az-form_style{

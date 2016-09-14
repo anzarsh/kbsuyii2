@@ -3,6 +3,7 @@ $(document).ready(function(){
     //RESPONSIVEUI.responsiveTabs();
     //alert(1);
     
+    $('#datepicker, #datepicker2').datepicker();
 
     $('.az-activity, .az-eventtype').click(function(){
         $(this).next('.az-open').slideToggle('slow');

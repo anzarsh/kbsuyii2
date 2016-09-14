@@ -16,6 +16,7 @@ use app\models\users;
 use app\models\event;
 use app\models\groups;
 use app\models\SearchUser;
+use app\models\SearchEvent;
 
 
 
@@ -80,8 +81,14 @@ class SiteController extends Controller
             $query = users::find()
             ->select('users.*')
             ->rightJoin('department', '`users`.`id_department` = `department`.`id`')
+            ->rightJoin('unit', '`department`.`id_unit` = `unit`.`id`')
             ->where(['and',
-                        ['like', 'department.uname', $model->department],
+                        ['or',
+                            ['like', 'department.uname', $model->department],
+                            ['like', 'department.shortname', $model->department],
+                            ['like', 'unit.uname', $model->department],
+                            ['like', 'unit.shortname', $model->department],
+                        ],
                         ['like', 'course', $model->course],
                         ['or',
                             ['like', 'users.uname', $model->uname], 
@@ -90,29 +97,8 @@ class SiteController extends Controller
                         ]
                     ]
                 );
-            // ->with('department')
-            // ->where(['and',
-            //     ['like', 'course', $model->course],
-            //     ['or',
-            //         ['like', 'uname', $model->uname], 
-            //         ['like', 'middlename', $model->uname],
-            //         ['like', 'lastname', $model->uname]
-            //     ]//,
-            //     //['or',
-            //     //    ['like', 'department.uname', $model->department], 
-            //     //    ['like', 'middlename', $model->uname],
-            //     //    ['like', 'lastname', $model->uname]
-            //     //]
-            //     //$model->department
-            // ])
-            // ->innerJoinWith([
-            //     'department' => function ($query1) {
-            //         $query1->where(['like', 'department.uname', $model->department]);
-            //     }
-            // ]);
         } else {
             $query = users::find();
-            //->with('');
         }
         $pagination = new Pagination([
             'defaultPageSize' => 5,
@@ -191,8 +177,33 @@ class SiteController extends Controller
 
     public function actionEvent()
     {
-        $query = event::find();
+       
         
+         $model = new SearchEvent();
+
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $query = event::find();
+            // ->select('users.*')
+            // ->rightJoin('department', '`users`.`id_department` = `department`.`id`')
+            // ->rightJoin('unit', '`department`.`id_unit` = `unit`.`id`')
+            // ->where(['and',
+            //             ['or',
+            //                 ['like', 'department.uname', $model->department],
+            //                 ['like', 'department.shortname', $model->department],
+            //                 ['like', 'unit.uname', $model->department],
+            //                 ['like', 'unit.shortname', $model->department],
+            //             ],
+            //             ['like', 'course', $model->course],
+            //             ['or',
+            //                 ['like', 'users.uname', $model->uname], 
+            //                 ['like', 'middlename', $model->uname],
+            //                 ['like', 'lastname', $model->uname]
+            //             ]
+            //         ]
+            //     );
+        } else {
+             $query = event::find();
+        }
         $pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),
@@ -205,7 +216,9 @@ class SiteController extends Controller
 
         return $this->render('event', [
             'events' => $events,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'model' => $model,
+            'href' => '#menu-event'
         ]);
         
     }

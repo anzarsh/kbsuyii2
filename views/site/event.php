@@ -1,6 +1,9 @@
 <?php 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
+use yii\widgets\ActiveForm;
+use yii\widgets\MaskedInput;
+use yii\jui\DatePicker;
 ?>
 
 
@@ -13,19 +16,40 @@ use yii\widgets\LinkPager;
             'tag' => false,
         ],
     ],]); ?>
+    	<?= Html::submitButton('<i class="fa fa-search" aria-hidden="true"></i>', ['class' => 'az-search']) ?>
 		<div class="az-separate az-row">
 			<?php $inputt = $form->field($model,'uname')->textInput(['maxlength' => 18, 'class' => 'az-col-98-200-px az-col-xs-99-100-px', 'placeholder' => "Наименование"])->label(false); ?>
 			<?php $inputt->template = "{input}"; ?>
 			<?= $inputt; ?>
-			<?php $inputt = $form->field($model,'uname')->textInput(['maxlength' => 18, 'class' => 'az-col-100-px az-col-xs-hidden', 'placeholder' => "Уровень"])->label(false); ?>
+			<?php $inputt = $form->field($model,'level')->textInput(['maxlength' => 18, 'class' => 'az-col-100-px az-col-xs-hidden', 'placeholder' => "Уровень"])->label(false); ?>
 			<?php $inputt->template = "{input}"; ?>
 			<?= $inputt; ?>
 			<a href="#ah-myup" rel="modal" class="az-button-add az-col-100-px">Добавить</a>
 		</div>
-
+		<div class="az-separate az-row">
+			<?php $inputt = $form->field($model,'coordinator')->textInput(['maxlength' => 18, 'class' => 'az-col-98-300-px az-col-xs-hidden', 'placeholder' => "Координатор"])->label(false); ?>
+			<?php $inputt->template = "{input}"; ?>
+			<?= $inputt; ?>
+			
+			<div class="input-append date az-col-150-px az-col-xs-49" id="datepicker" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd-mm-yyyy">
+				<?php $inputt = $form->field($model,'startdate')->textInput(['maxlength' => 18, 'class' => 'span2', 'placeholder' => 'с', 'size' => '16'])->label(false); ?>
+				<?php $inputt->template = "{input}"; ?>
+				<?= $inputt; ?>
+			    <!-- <input class="span2" size="16" type="text" readonly="readonly"/> -->
+			    <span class="add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+			</div>
+			<div class="input-append date az-col-150-px az-col-xs-49" id="datepicker2" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd-mm-yyyy">
+				<?php $inputt = $form->field($model,'finishdate')->textInput(['maxlength' => 18, 'class' => 'span2', 'placeholder' => 'по', 'size' => '16'])->label(false); ?>
+				<?php $inputt->template = "{input}"; ?>
+				<?= $inputt; ?>
+			    <!-- <input class="span2" size="16" type="text" readonly="readonly"/> -->
+			    <span class="add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+			</div>
+			<!-- <input type="date" placeholder="по" class="az-col-150-px az-col-xs-49"> -->
+		</div>
     <?php ActiveForm::end(); ?>
 	<form action="" class="az-form">
-		<div class="az-separate az-row">
+		<!-- <div class="az-separate az-row">
 			<input type="text" placeholder="Наименование" class="az-col-98-200-px az-col-xs-99-100-px">
 			<input type="text" placeholder="Уровень" class="az-col-100-px az-col-xs-hidden">
 			<a href="#ah-myup" rel="modal" class="az-button-add az-col-100-px">Добавить</a>
@@ -34,7 +58,7 @@ use yii\widgets\LinkPager;
 			<input type="text" placeholder="Координатор" class="az-col-98-300-px az-col-xs-hidden">
 			<input type="date" placeholder="с" class="az-col-150-px az-col-xs-49">
 			<input type="date" placeholder="по" class="az-col-150-px az-col-xs-49">
-		</div>
+		</div> -->
 		<div class="az-separate az-row">
 			<span class="ah-span padd az-activity">Вид деятельности: <i class="fa fa-angle-double-down anz-mobile-768" aria-hidden="true"></i><i class="fa fa-angle-double-up az-disp-none" aria-hidden="true"></i></span>
 			<div class="az-open anz-desktop-768">
