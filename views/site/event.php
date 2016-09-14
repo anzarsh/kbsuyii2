@@ -10,7 +10,7 @@ use yii\jui\DatePicker;
 <section class="az-sec-table">
 	<h2>Мероприятия</h2>
 	<?php $form = ActiveForm::begin(['id' => 'contact-form',
-	'options' => [ 'class' => 'az-form'],
+	'options' => [ 'class' => 'az-form az-form2'],
     'fieldConfig' => [
         'options' => [
             'tag' => false,
@@ -147,9 +147,23 @@ use yii\jui\DatePicker;
 	<ul class="next-prev">
 		<li class="
 		<?php if(!$pagination->links['prev']){echo 'az-disabled';} ?>
-		"><a href="<?php echo $pagination->links['prev'] ?>">Предыдущая</a></li>
+		"><a href="<?php echo $pagination->links['prev'] ?>" class="az-pag">Предыдущая</a></li>
 		<li class="
 		<?php if(!$pagination->links['next']){echo 'az-disabled';} ?>
-		"><a href="<?php echo $pagination->links['next']; ?>">Следующая</a></li>
+		"><a href="<?php echo $pagination->links['next']; ?>" class="az-pag">Следующая</a></li>
 	</ul>
 </section>
+
+
+<script>
+$(document).ready(function(){
+	$('<?= $href; ?>').addClass('current-link');
+	$('.az-pag').click(function(){
+		$('.az-form2').attr('action', $(this).attr('href'));
+		$('.az-form2').trigger('submit');
+		return false;
+	});
+});
+	
+	
+</script>

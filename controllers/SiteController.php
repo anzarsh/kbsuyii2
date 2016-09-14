@@ -185,20 +185,18 @@ class SiteController extends Controller
             $query = event::find()
             ->select('event.*')
             ->rightJoin('eventlevel', '`event`.`id_eventlevel` = `eventlevel`.`id`')
-            // ->rightJoin('unit', '`department`.`id_unit` = `unit`.`id`')
-            ->where(['and',
-                        // ['or',
-                            ['like', 'eventlevel.uname', $model->level],
-                        //     ['like', 'department.shortname', $model->department],
-                        //     ['like', 'unit.uname', $model->department],
-                        //     ['like', 'unit.shortname', $model->department],
-                        // ],
-                        // ['like', 'course', $model->course],
-                        // ['or',
-                            ['like', 'event.uname', $model->uname], 
-                        //     ['like', 'middlename', $model->uname],
-                        //     ['like', 'lastname', $model->uname]
-                        // ]
+            ->rightJoin('event_user_status_role', '`event`.`id` = `event_user_status_role`.`id_event`')
+            ->rightJoin('users', '`event_user_status_role`.`id_user` = `users`.`id`')
+            ->where(
+                ['and',
+                        ['or',
+                            ['like', 'users.middlename', $model->coordinator],
+                            ['like', 'users.uname', $model->coordinator],
+                            ['like', 'users.lastname', $model->coordinator],
+                        ],
+                        ['like', 'eventlevel.uname', $model->level],
+                        ['like', 'event.uname', $model->uname], 
+                        ['event_user_status_role.id_status' => 2],
                     ]
                 );
         } else {
