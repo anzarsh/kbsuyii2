@@ -182,13 +182,18 @@ class SiteController extends Controller
          $model = new SearchEvent();
 
         if($model->load(Yii::$app->request->post()) && $model->validate()){
+            // echo date('Y-m-d', strtotime($model->startdate));
+            // echo date('Y-m-d', $model->finishdate);
+            // echo $model->startdate;
+            // echo $model->finishdate;
+
             $query = event::find()
             ->select('event.*')
             ->rightJoin('eventlevel', '`event`.`id_eventlevel` = `eventlevel`.`id`')
             ->rightJoin('event_user_status_role', '`event`.`id` = `event_user_status_role`.`id_event`')
             ->rightJoin('users', '`event_user_status_role`.`id_user` = `users`.`id`')
             ->where(
-                ['and',
+                    ['and',
                         ['or',
                             ['like', 'users.middlename', $model->coordinator],
                             ['like', 'users.uname', $model->coordinator],
@@ -197,6 +202,18 @@ class SiteController extends Controller
                         ['like', 'eventlevel.uname', $model->level],
                         ['like', 'event.uname', $model->uname], 
                         ['event_user_status_role.id_status' => 2],
+                        ['and',
+                            ['>=', 'event.finishdate',
+                                ($model->startdate == '')?
+                                date('1981-01-01'):
+                                date('Y-m-d', strtotime($model->startdate))
+                            ],
+                            ['<=', 'event.startdate',
+                                ($model->finishdate == '')?
+                                date('Y-m-d', strtotime('+1year +1month')):
+                                date('Y-m-d', strtotime($model->finishdate))
+                            ],
+                        ],
                     ]
                 );
         } else {
@@ -211,7 +228,7 @@ class SiteController extends Controller
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-
+        //echo $events[0]->startdate;
         return $this->render('event', [
             'events' => $events,
             'pagination' => $pagination,

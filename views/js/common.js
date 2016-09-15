@@ -3,8 +3,25 @@ $(document).ready(function(){
     //RESPONSIVEUI.responsiveTabs();
     //alert(1);
     
-    $('#datepicker, #datepicker2').datepicker();
+    $('#datepicker, #datepicker2').datepicker({
+        pickTime: false, language: 'ru'
+    });
 
+    $(".startdate").change(function (e) {
+        var time1 = new Date($(this).val().split(".").reverse().join("-"));
+        var time2 = new Date($(".finishdate").val().split(".").reverse().join("-"));
+        //alert(time1.getTime());
+        if(time1.getTime()>time2.getTime() && $(".finishdate").val()!=''){
+            $(".finishdate").val($(this).val());
+        }
+    });
+    $(".finishdate").change(function (e) {
+        var time1 = new Date($(this).val().split(".").reverse().join("-"));
+        var time2 = new Date($(".startdate").val().split(".").reverse().join("-"));
+        if(time2.getTime()>time1.getTime() && $(".startdate").val()!=''){
+            $(".startdate").val($(this).val());
+        }
+    });
     $('.az-activity, .az-eventtype').click(function(){
         $(this).next('.az-open').slideToggle('slow');
         $(this).find('.fa-angle-double-down').toggleClass('az-disp-none');
@@ -66,7 +83,9 @@ $(document).ready(function(){
             temp.iCoordinator.lastname.slice(0,1)+'.'+
             temp.iCoordinator.middlename
             );
-        $('#event3').text(temp.startdate);
+        var datetemp = new Date(temp.startdate);//.format("dd.mm.yyyy");
+        // alert(asdfd.toLocaleDateString());
+        $('#event3').text(datetemp.toLocaleDateString());
         var strtemp = '';
         temp.registrator.forEach(function(item, j){
             strtemp +=  (j==0)?(
@@ -81,7 +100,8 @@ $(document).ready(function(){
                         );
         });
         $('#event4').text(strtemp);
-        $('#event5').text(temp.finishdate);
+        var datetemp = new Date(temp.finishdate);
+        $('#event5').text(datetemp.toLocaleDateString());
         strtemp = '';
             temp.activity.forEach(function(item, j){
                 strtemp +=  (j==0)?(item.uname):(', ' + item.uname);
@@ -103,7 +123,8 @@ $(document).ready(function(){
                 temp.roles[i].user.uname + ' ' + temp.roles[i].user.lastname +
                 '</a></td><td>' + temp.roles[i].role.uname +
                 '</td><td>' + temp.roles[i].user.course +
-                '</td><td>' + temp.roles[i].user.id_department +
+                '</td><td>' + temp.roles[i].user.department.shortname + ':'
+                + temp.roles[i].user.department.unit.shortname +
                 '</td></tr>';
             }
         }

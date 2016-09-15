@@ -16,7 +16,8 @@ class event_user_status_role extends ActiveRecord
     }
     public function getUser()
     {
-        return $this->hasOne(users::className(), ['id' => 'id_user']);
+        return $this->hasOne(users::className(), ['id' => 'id_user'])
+                        ->with('department');
     }
     public function getEvent()
     {

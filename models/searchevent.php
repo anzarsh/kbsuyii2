@@ -17,8 +17,8 @@ class SearchEvent extends Model
 	        ['uname', 'string'],
 	        ['level', 'string'],
 	        ['coordinator', 'string'],
-	        ['startdate', 'default', 'value' => date("Y-m-d")],
-	        ['finishdate', 'default', 'value' => date("Y-m-d")],
+	        ['startdate', 'default'],
+	        ['finishdate', 'default'],
 	        [['uname', 'level', 'coordinator', 'startdate', 'finishdate'], 'required', 'when' => function () {
                     if (!$this->uname && !$this->level && !$this->coordinator && !$this->startdate && !$this->finishdate) {
                         $this->addError('uname', 'Необходимо указать либо телефон, либо email.');

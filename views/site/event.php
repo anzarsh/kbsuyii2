@@ -31,15 +31,15 @@ use yii\jui\DatePicker;
 			<?php $inputt->template = "{input}"; ?>
 			<?= $inputt; ?>
 			
-			<div class="input-append date az-col-150-px az-col-xs-49" id="datepicker" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd-mm-yyyy">
-				<?php $inputt = $form->field($model,'startdate')->textInput(['maxlength' => 18, 'class' => 'span2', 'placeholder' => 'с', 'size' => '16'])->label(false); ?>
+			<div class="input-append date az-col-150-px az-col-xs-49" id="datepicker" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd.mm.yyyy">
+				<?php $inputt = $form->field($model,'startdate')->textInput(['maxlength' => 18, 'class' => 'span2 startdate', 'placeholder' => 'с', 'size' => '16'])->label(false); ?>
 				<?php $inputt->template = "{input}"; ?>
 				<?= $inputt; ?>
 			    <!-- <input class="span2" size="16" type="text" readonly="readonly"/> -->
 			    <span class="add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
 			</div>
-			<div class="input-append date az-col-150-px az-col-xs-49" id="datepicker2" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd-mm-yyyy">
-				<?php $inputt = $form->field($model,'finishdate')->textInput(['maxlength' => 18, 'class' => 'span2', 'placeholder' => 'по', 'size' => '16'])->label(false); ?>
+			<div class="input-append date az-col-150-px az-col-xs-49" id="datepicker2" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd.mm.yyyy">
+				<?php $inputt = $form->field($model,'finishdate')->textInput(['maxlength' => 18, 'class' => 'span2 finishdate', 'placeholder' => 'по', 'size' => '16'])->label(false); ?>
 				<?php $inputt->template = "{input}"; ?>
 				<?= $inputt; ?>
 			    <!-- <input class="span2" size="16" type="text" readonly="readonly"/> -->
@@ -135,7 +135,7 @@ use yii\jui\DatePicker;
 		<tbody class="table-content">
 			<?php foreach ($events as $event): ?>
 			<tr>
-				<td><?= Html::encode("{$event->finishdate}") ?><br><?= Html::encode("{$event->startdate}") ?></td>
+				<td><?= date('d.m.y', strtotime(Html::encode("{$event->finishdate}"))); ?><br><?= date('d.m.y', strtotime(Html::encode("{$event->startdate}"))); ?></td>
 				<td><a dataId="<?= Html::encode("{$event->id}") ?>" href="#event" rel="modal"><?= Html::encode("{$event->uname}") ?></a></td>
 				<td><?= Html::encode("{$event->eventlevel->uname}") ?></td>
 				<td><?= mb_substr($event->iCoordinator->uname, 0, 1, 'UTF-8') ?>.<?= mb_substr($event->iCoordinator->lastname, 0, 1, 'UTF-8') ?>.<?= Html::encode("{$event->iCoordinator->middlename}") ?></td>
@@ -160,7 +160,10 @@ $(document).ready(function(){
 	$('<?= $href; ?>').addClass('current-link');
 	$('.az-pag').click(function(){
 		$('.az-form2').attr('action', $(this).attr('href'));
+		
 		$('.az-form2').trigger('submit');
+		//alert($('.startdate').val());
+
 		return false;
 	});
 });
