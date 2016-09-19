@@ -11,6 +11,8 @@ class SearchEvent extends Model
     public $coordinator;
     public $startdate;
     public $finishdate;
+    public $id_activity;
+    public $check2;
 	public function rules()
 	{
 	    return [

@@ -176,17 +176,19 @@ class SiteController extends Controller
      */
 
     public function actionEvent()
-    {
-       
+    {   
+        //$asdfg = $_POST['id_activity'];
+
         
-         $model = new SearchEvent();
+        
+        $model = new SearchEvent();
 
         if($model->load(Yii::$app->request->post()) && $model->validate()){
             // echo date('Y-m-d', strtotime($model->startdate));
             // echo date('Y-m-d', $model->finishdate);
             // echo $model->startdate;
             // echo $model->finishdate;
-
+            print_r($model->id_activity);
             $query = event::find()
             ->select('event.*')
             ->rightJoin('eventlevel', '`event`.`id_eventlevel` = `eventlevel`.`id`')
@@ -214,6 +216,7 @@ class SiteController extends Controller
                                 date('Y-m-d', strtotime($model->finishdate))
                             ],
                         ],
+                        ['id_activity' => $model->id_activity ]
                     ]
                 );
         } else {

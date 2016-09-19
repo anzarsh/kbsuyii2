@@ -47,6 +47,30 @@ use yii\jui\DatePicker;
 			</div>
 			<!-- <input type="date" placeholder="по" class="az-col-150-px az-col-xs-49"> -->
 		</div>
+		<div class="az-separate az-row">
+
+		
+			<span class="ah-span padd az-activity">Вид деятельности: <i class="fa fa-angle-double-down anz-mobile-768" aria-hidden="true"></i><i class="fa fa-angle-double-up az-disp-none" aria-hidden="true"></i></span>
+			<div class="az-open anz-desktop-768">
+				<div class="formwrapper5box checkbox checkbox-warning">
+	                <input type="checkbox" name="id_activity[]" value="0" class="ah-activ1 styled" id="ah-activ11" checked>
+	                <label for="ah-activ11" class="ah-activ1_style">Общественное</label>
+	            </div>
+	            <div class="formwrapper5box checkbox checkbox-primary">
+	                <?php echo $form->field($model, 'id_activity[]')
+	    ->checkbox(['class' => 'ah-activ1 styled']); ?>
+	                <label for="ah-activ21" class="ah-activ1_style">Научно-исследовательское</label>
+	            </div>
+	            <div class="formwrapper5box checkbox checkbox-info">
+		            <input type="checkbox" name="id_activity[]" value="2" class="ah-activ3" id="ah-activ31">
+		            <label for="ah-activ31" class="ah-activ1_style">Творческое</label>
+		        </div>
+		        <div class="formwrapper5box checkbox checkbox-success">
+		            <input type="checkbox" name="id_activity[]" value="3" class="ah-activ4" id="ah-activ41">
+		            <label for="ah-activ41" class="ah-activ1_style">Спортивное</label>
+		        </div>
+	        </div>
+		</div>
     <?php ActiveForm::end(); ?>
 	<form action="" class="az-form">
 		<!-- <div class="az-separate az-row">
@@ -59,7 +83,7 @@ use yii\jui\DatePicker;
 			<input type="date" placeholder="с" class="az-col-150-px az-col-xs-49">
 			<input type="date" placeholder="по" class="az-col-150-px az-col-xs-49">
 		</div> -->
-		<div class="az-separate az-row">
+		<!-- <div class="az-separate az-row">
 			<span class="ah-span padd az-activity">Вид деятельности: <i class="fa fa-angle-double-down anz-mobile-768" aria-hidden="true"></i><i class="fa fa-angle-double-up az-disp-none" aria-hidden="true"></i></span>
 			<div class="az-open anz-desktop-768">
 				<div class="formwrapper5box checkbox checkbox-warning">
@@ -79,7 +103,7 @@ use yii\jui\DatePicker;
 		            <label for="ah-activ41" class="ah-activ1_style">Спортивное</label>
 		        </div>
 	        </div>
-		</div>
+		</div> -->
 		<div class="az-separate az-row">
 			<span class="ah-span padd az-eventtype">Тип мероприятия: <i class="fa fa-angle-double-down anz-mobile-768" aria-hidden="true"></i><i class="fa fa-angle-double-up az-disp-none" aria-hidden="true"></i></span>
 			<div class="az-open anz-desktop-768">
