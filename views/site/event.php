@@ -1,7 +1,7 @@
 <?php 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\widgets\MaskedInput;
 use yii\jui\DatePicker;
 ?>
@@ -53,20 +53,33 @@ use yii\jui\DatePicker;
 			<span class="ah-span padd az-activity">Вид деятельности: <i class="fa fa-angle-double-down anz-mobile-768" aria-hidden="true"></i><i class="fa fa-angle-double-up az-disp-none" aria-hidden="true"></i></span>
 			<div class="az-open anz-desktop-768">
 				<div class="formwrapper5box checkbox checkbox-warning">
-	                <input type="checkbox" name="id_activity[]" value="0" class="ah-activ1 styled" id="ah-activ11" checked>
+					
+	                <?php $inputt = $form->field($model, 'id_activity[]')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ11', 'value' => 0, 'uncheck' => -1, 'checked' => true])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
 	                <label for="ah-activ11" class="ah-activ1_style">Общественное</label>
 	            </div>
 	            <div class="formwrapper5box checkbox checkbox-primary">
-	                <?php echo $form->field($model, 'id_activity[]')
-	    ->checkbox(['class' => 'ah-activ1 styled']); ?>
+
+	                <?php $inputt = $form->field($model, 'id_activity[]')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ21', 'value' => 1, 'uncheck' => -1])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+				<?= $inputt; ?>
 	                <label for="ah-activ21" class="ah-activ1_style">Научно-исследовательское</label>
 	            </div>
 	            <div class="formwrapper5box checkbox checkbox-info">
-		            <input type="checkbox" name="id_activity[]" value="2" class="ah-activ3" id="ah-activ31">
+		            <?php $inputt = $form->field($model, 'id_activity[]')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ31', 'value' => 2, 'uncheck' => -1])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
 		            <label for="ah-activ31" class="ah-activ1_style">Творческое</label>
 		        </div>
 		        <div class="formwrapper5box checkbox checkbox-success">
-		            <input type="checkbox" name="id_activity[]" value="3" class="ah-activ4" id="ah-activ41">
+		            <?php $inputt = $form->field($model, 'id_activity[]')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ41', 'value' => 3, 'uncheck' => -1])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
 		            <label for="ah-activ41" class="ah-activ1_style">Спортивное</label>
 		        </div>
 	        </div>

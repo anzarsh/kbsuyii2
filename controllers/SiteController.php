@@ -78,6 +78,7 @@ class SiteController extends Controller
         $model = new SearchUser();
 
         if($model->load(Yii::$app->request->post()) && $model->validate()){
+
             $query = users::find()
             ->select('users.*')
             ->rightJoin('department', '`users`.`id_department` = `department`.`id`')
@@ -182,13 +183,14 @@ class SiteController extends Controller
         
         
         $model = new SearchEvent();
-
+        //print_r('expression');
         if($model->load(Yii::$app->request->post()) && $model->validate()){
+            //print_r($model->id_activity);
             // echo date('Y-m-d', strtotime($model->startdate));
             // echo date('Y-m-d', $model->finishdate);
             // echo $model->startdate;
             // echo $model->finishdate;
-            print_r($model->id_activity);
+            //print_r($model->id_activity);
             $query = event::find()
             ->select('event.*')
             ->rightJoin('eventlevel', '`event`.`id_eventlevel` = `eventlevel`.`id`')
