@@ -178,24 +178,15 @@ class SiteController extends Controller
 
     public function actionEvent()
     {   
-        //$asdfg = $_POST['id_activity'];
-
-        
-        
         $model = new SearchEvent();
-        //print_r('expression');
         if($model->load(Yii::$app->request->post()) && $model->validate()){
-            //print_r($model->id_activity);
-            // echo date('Y-m-d', strtotime($model->startdate));
-            // echo date('Y-m-d', $model->finishdate);
-            // echo $model->startdate;
-            // echo $model->finishdate;
-            //print_r($model->id_activity);
             $query = event::find()
             ->select('event.*')
             ->rightJoin('eventlevel', '`event`.`id_eventlevel` = `eventlevel`.`id`')
             ->rightJoin('event_user_status_role', '`event`.`id` = `event_user_status_role`.`id_event`')
             ->rightJoin('users', '`event_user_status_role`.`id_user` = `users`.`id`')
+            ->rightJoin('event_activity', '`event`.`id` = `event_activity`.`id_event`')
+            ->rightJoin('event_eventtype', '`event`.`id` = `event_eventtype`.`id_event`')
             ->where(
                     ['and',
                         ['or',
@@ -218,9 +209,16 @@ class SiteController extends Controller
                                 date('Y-m-d', strtotime($model->finishdate))
                             ],
                         ],
-                        ['id_activity' => $model->id_activity ]
+                        ['event_activity.id_activity' => 
+                        (!$model->id_activity0 && !$model->id_activity1 && !$model->id_activity2 && !$model->id_activity3)?
+                        [0,1,2,3]:
+                        [$model->id_activity0, $model->id_activity1, $model->id_activity2, $model->id_activity3]],
+                        ['event_eventtype.id_eventtype' => 
+                        (!$model->id_eventtype0 && !$model->id_eventtype1 && !$model->id_eventtype2 && !$model->id_eventtype3 && !$model->id_eventtype4 && !$model->id_eventtype5 && !$model->id_eventtype6 && !$model->id_eventtype7 && !$model->id_eventtype8)?
+                        [0,1,2,3,4,5,6,7,8]:
+                        [$model->id_eventtype0, $model->id_eventtype1, $model->id_eventtype2, $model->id_eventtype3, $model->id_eventtype4, $model->id_eventtype5, $model->id_eventtype6, $model->id_eventtype7, $model->id_eventtype8]]
                     ]
-                );
+                )->groupBy('id');
         } else {
             $query = event::find();
         }
@@ -229,7 +227,7 @@ class SiteController extends Controller
             'totalCount' => $query->count(),
         ]);
 
-        $events = $query->orderBy('startdate desc')
+        $events = $query->orderBy(['startdate' => SORT_DESC, 'finishdate' => SORT_DESC])
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();

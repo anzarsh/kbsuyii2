@@ -53,39 +53,107 @@ use yii\jui\DatePicker;
 			<span class="ah-span padd az-activity">Вид деятельности: <i class="fa fa-angle-double-down anz-mobile-768" aria-hidden="true"></i><i class="fa fa-angle-double-up az-disp-none" aria-hidden="true"></i></span>
 			<div class="az-open anz-desktop-768">
 				<div class="formwrapper5box checkbox checkbox-warning">
-					
-	                <?php $inputt = $form->field($model, 'id_activity[]')
-				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ11', 'value' => 0, 'uncheck' => -1, 'checked' => true])->label(false); ?>
+					<?php //$model->id_activity0 = 0; ?>
+	                <?php $inputt = $form->field($model, 'id_activity0')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ11', 'value' => 0, 'uncheck' => ''])->label(false); ?>
 				    <?php $inputt->template = "{input}"; ?>
 					<?= $inputt; ?>
 	                <label for="ah-activ11" class="ah-activ1_style">Общественное</label>
 	            </div>
 	            <div class="formwrapper5box checkbox checkbox-primary">
 
-	                <?php $inputt = $form->field($model, 'id_activity[]')
-				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ21', 'value' => 1, 'uncheck' => -1])->label(false); ?>
+	                <?php $inputt = $form->field($model, 'id_activity1')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ21', 'value' => 1, 'uncheck' => ''])->label(false); ?>
 				    <?php $inputt->template = "{input}"; ?>
 				<?= $inputt; ?>
 	                <label for="ah-activ21" class="ah-activ1_style">Научно-исследовательское</label>
 	            </div>
 	            <div class="formwrapper5box checkbox checkbox-info">
-		            <?php $inputt = $form->field($model, 'id_activity[]')
-				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ31', 'value' => 2, 'uncheck' => -1])->label(false); ?>
+		            <?php $inputt = $form->field($model, 'id_activity2')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ31', 'value' => 2, 'uncheck' => ''])->label(false); ?>
 				    <?php $inputt->template = "{input}"; ?>
 					<?= $inputt; ?>
 		            <label for="ah-activ31" class="ah-activ1_style">Творческое</label>
 		        </div>
 		        <div class="formwrapper5box checkbox checkbox-success">
-		            <?php $inputt = $form->field($model, 'id_activity[]')
-				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ41', 'value' => 3, 'uncheck' => -1])->label(false); ?>
+		            <?php $inputt = $form->field($model, 'id_activity3')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-activ41', 'value' => 3, 'uncheck' => ''])->label(false); ?>
 				    <?php $inputt->template = "{input}"; ?>
 					<?= $inputt; ?>
 		            <label for="ah-activ41" class="ah-activ1_style">Спортивное</label>
 		        </div>
 	        </div>
 		</div>
+		<div class="az-separate az-row">
+			<span class="ah-span padd az-eventtype">Тип мероприятия: <i class="fa fa-angle-double-down anz-mobile-768" aria-hidden="true"></i><i class="fa fa-angle-double-up az-disp-none" aria-hidden="true"></i></span>
+			<div class="az-open anz-desktop-768">
+				<div class="formwrapper5box checkbox checkbox-danger">
+					<?php $inputt = $form->field($model, 'id_eventtype0')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-eventtype11', 'value' => 0, 'uncheck' => ''])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
+	                <label for="ah-eventtype11" class="ah-activ1_style">Организационное</label>
+	            </div>
+	            <div class="formwrapper5box checkbox checkbox-warning">
+		            <?php $inputt = $form->field($model, 'id_eventtype1')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-eventtype21', 'value' => 1, 'uncheck' => ''])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
+	                <label for="ah-eventtype21" class="ah-activ1_style">Воспитательное/<br>Патриотическое</label>
+	            </div>  
+	            <div class="formwrapper5box checkbox checkbox-primary">
+	                <?php $inputt = $form->field($model, 'id_eventtype2')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-eventtype31', 'value' => 2, 'uncheck' => ''])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
+	                <label for="ah-eventtype31" class="ah-activ1_style">Благотворительное</label>
+	            </div>  
+	            <div class="formwrapper5box checkbox checkbox-info">    
+	                <?php $inputt = $form->field($model, 'id_eventtype3')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-eventtype41', 'value' => 3, 'uncheck' => ''])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
+	                <label for="ah-eventtype41" class="ah-activ1_style">Конкурс/Соревнование</label>
+	            </div>  
+	            <div class="formwrapper5box checkbox checkbox-success"> 
+	                <?php $inputt = $form->field($model, 'id_eventtype4')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-eventtype51', 'value' => 4, 'uncheck' => ''])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
+	                <label for="ah-eventtype51" class="ah-activ1_style">Концертная программа</label>
+	            </div>
+	            <div class="formwrapper5box checkbox checkbox-danger">
+	                <?php $inputt = $form->field($model, 'id_eventtype5')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-eventtype61', 'value' => 5, 'uncheck' => ''])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
+	                <label for="ah-eventtype61" class="ah-activ1_style">Приуроченная акция<br>(не благотворительная)</label>
+	            </div>
+	            <div class="formwrapper5box checkbox checkbox-warning">
+	                <?php $inputt = $form->field($model, 'id_eventtype6')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-eventtype71', 'value' => 6, 'uncheck' => ''])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
+	                <label for="ah-eventtype71" class="ah-activ1_style">Выпуск периодического<br>продукта</label>
+	            </div>
+	            <div class="formwrapper5box checkbox checkbox-primary">
+	                <?php $inputt = $form->field($model, 'id_eventtype7')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-eventtype81', 'value' => 7, 'uncheck' => ''])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
+	                <label for="ah-eventtype81" class="ah-activ1_style">Форум/Конференция</label>
+	            </div>
+	            <div class="formwrapper5box checkbox checkbox-info">
+	                <?php $inputt = $form->field($model, 'id_eventtype8')
+				    ->checkbox(['class' => 'ah-activ1 styled', 'id' => 'ah-eventtype91', 'value' => 8, 'uncheck' => ''])->label(false); ?>
+				    <?php $inputt->template = "{input}"; ?>
+					<?= $inputt; ?>
+	                <label for="ah-eventtype91" class="ah-activ1_style">Прием/Почетная встреча</label>
+	            </div>
+            </div>
+        </div>
     <?php ActiveForm::end(); ?>
-	<form action="" class="az-form">
+	<!-- <form action="" class="az-form"> -->
 		<!-- <div class="az-separate az-row">
 			<input type="text" placeholder="Наименование" class="az-col-98-200-px az-col-xs-99-100-px">
 			<input type="text" placeholder="Уровень" class="az-col-100-px az-col-xs-hidden">
@@ -117,7 +185,7 @@ use yii\jui\DatePicker;
 		        </div>
 	        </div>
 		</div> -->
-		<div class="az-separate az-row">
+		<!-- <div class="az-separate az-row">
 			<span class="ah-span padd az-eventtype">Тип мероприятия: <i class="fa fa-angle-double-down anz-mobile-768" aria-hidden="true"></i><i class="fa fa-angle-double-up az-disp-none" aria-hidden="true"></i></span>
 			<div class="az-open anz-desktop-768">
 				<div class="formwrapper5box checkbox checkbox-danger">
@@ -157,8 +225,8 @@ use yii\jui\DatePicker;
 	                <label for="ah-eventtype91" class="ah-activ1_style">Прием/Почетная встреча</label>
 	            </div>
             </div>
-        </div>
-	</form>
+        </div> -->
+	<!-- </form> -->
 	<table id="example" class="az-table table table-striped table-hover dt-responsive">
 		<thead class="table-head">
 			<tr>
