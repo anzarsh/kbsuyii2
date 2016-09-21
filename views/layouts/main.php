@@ -33,6 +33,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="../../views/css/style.css">
     <link rel="stylesheet" href="../../views/css/style2.css">
     <link rel="stylesheet" href="../../views/css/style3.css">
+    <link rel="stylesheet" href="../../views/css/style4.css">
     <link rel="stylesheet" href="../../views/css/fonts.css">
     
 </head>
@@ -185,8 +186,6 @@ AppAsset::register($this);
     </div>
 </div>
 
-
-
 <div id="event" class="window">
     <div class="az-popup">
             <div class="an-exit">
@@ -247,7 +246,7 @@ AppAsset::register($this);
     </div>
 </div>
 
-<div id="ah-myup" class="window">
+<div id="addEvent" class="window">
     <section class="regevent az-form">
         <!-- <div class="container"> -->
             <!-- <div class="row"> -->
@@ -455,6 +454,45 @@ AppAsset::register($this);
             <!-- </div> -->
         <!-- </div> -->
     </section>
+</div>
+
+<div id="addGroup" class="window">
+    <div class="registr">
+            <div class="an-exit">
+                <span class="an-exit__krest"><i class="fa fa-times" aria-hidden="true"></i></span>
+            </div>
+            <div class="titregbox ah_titregbox">
+                <span class="titreg">Добавить группу</span>
+            </div>
+            <form action="" class="common-form ah_form form5">
+                <div class="row">
+                    <div class="formwrapper ah_formwrapper">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label for="ah_upinput" class="ah_uplabel">Название группы</label>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            
+                            <input type="text" name="uname" id="ah_upinput" class="az-evname" value="ab">
+                        </div>
+
+                        <div class="clearfix"></div>
+                        
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <!-- <input type="file" id="f1" class="az-none az-file" accept="image/*"> -->
+                            <!-- <label for="f1" class="az-file2">Прикрепить фото</label> -->
+                        </div>
+
+                        <div class="clearfix"></div>
+                        
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" class="ah_btn">ОК</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 </div>
 <?php //$this->endBody() ?>
 <script src="../../views/js/common.js"></script>

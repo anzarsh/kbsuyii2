@@ -1,4 +1,4 @@
- .ah_formwrapper{
+.ah_formwrapper{
     input[type="file"] {
         display: none;
     }
@@ -12,6 +12,20 @@
     border-radius: 2px;
     font-family: "OpenSans-Regular";
     font-size: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    display: inline-block;
+}
+.az-evname {
+    position: relative;
+    width: 80% !important;
+    height: 35px;
+    line-height: 35px !important;
+    padding-left: 10px;
+    border-radius: 2px;
+    font-family: "OpenSans-Regular";
+    font-size: 13px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     outline: none;
@@ -132,6 +146,7 @@
     //padding: 20px 30px;
     padding: 30px;
     margin: 0 auto;
+    background-color: #fff;
 }
 .titregbox{
     border-bottom: 1px solid #50D0FF;

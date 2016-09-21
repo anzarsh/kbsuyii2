@@ -14,6 +14,7 @@ use app\models\entryForm;
 use app\models\users;
 use app\models\event;
 use app\models\groups;
+use app\models\AddGroup;
 
 class AjaxController extends Controller
 {
@@ -65,15 +66,36 @@ class AjaxController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             return array("query" => $query);
     }
-    // public function actionGroup()
-    // {
-    //         $id_group = $_GET['id'];
-    //         $query = groups::find()
-    //             ->where(['id' => $id_group])
-    //             ->with('users')
-    //             ->asArray()->one();
+    public function actionGroupsadd()
+    {
+            // $uname = $_GET['uname'];
+            // $user = new groups();
+            // $user->uname = $uname;
+            // $user->save();
+            // print_r($_POST);
+            // $model = new AddGroup();
+
+            // if($model->load(Yii::$app->request->post()) && $model->validate()){
+            //     $user = new groups();
+            //     $user->uname = $model->uname;
+            //     $user->save();
+            //     print_r($model);
+            // }
+            
+            // // $query = groups::find()
+            //     // ->where(['id' => $id_group])
+            //     // ->with('users')
+            //     // ->asArray()->one();
         
-    //         Yii::$app->response->format = Response::FORMAT_JSON;
-    //         return array("query" => $query);
-    // }
+            // Yii::$app->response->format = Response::FORMAT_JSON;
+            return 'SDFDSF';//array("query" => '$temp');
+        // $id_group = $_GET['id'];
+        //     $query = groups::find()
+        //         ->where(['id' => $id_group])
+        //         ->with('users')
+        //         ->asArray()->one();
+        
+        //     Yii::$app->response->format = Response::FORMAT_JSON;
+        //     return array("query" => $query);
+    }
 }

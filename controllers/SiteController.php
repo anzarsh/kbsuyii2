@@ -17,6 +17,7 @@ use app\models\event;
 use app\models\groups;
 use app\models\SearchUser;
 use app\models\SearchEvent;
+use app\models\SearchGroup;
 
 
 
@@ -75,8 +76,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        print_r($_POST);
         $model = new SearchUser();
-
+        print_r($model);
         if($model->load(Yii::$app->request->post()) && $model->validate()){
 
             $query = users::find()
@@ -242,7 +244,15 @@ class SiteController extends Controller
     }
     public function actionGroups()
     {
-        $query = groups::find();
+        // print_r(Yii::$app->request->csrfToken);
+        $model = new SearchGroup();
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $query = groups::find()
+            ->where(['like', 'uname', $model->uname]);
+        } else {
+            $query = groups::find();
+        }
+            
         
         $pagination = new Pagination([
             'defaultPageSize' => 5,
@@ -256,7 +266,9 @@ class SiteController extends Controller
 
         return $this->render('groups', [
             'groups' => $groups,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'model' => $model,
+            'href' => '#menu-groups'
         ]);
 
     }

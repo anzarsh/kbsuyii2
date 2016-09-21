@@ -1,0 +1,443 @@
+.ah_formwrapper{
+    input[type="file"] {
+        display: none;
+    }
+}
+.az-file2 {
+    position: relative;
+    width: 80%;
+    height: 35px;
+    line-height: 35px !important;
+    padding-left: 10px;
+    border-radius: 2px;
+    font-family: "OpenSans-Regular";
+    font-size: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    display: inline-block;
+}
+.az-file2:before {
+    position: absolute;
+    content: '';
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    width: 35px;
+    border-left: 1px solid #ccc;
+    background: url(../img/input-file.png) no-repeat center center;
+}   
+.ah_form{
+    text-align: center;
+}
+.ah_titregbox, .ah_formwrapper{
+    text-align: center;
+}
+.ah_formwrapper{
+    padding-top: 20px;
+}
+.ah_form{
+    input[type=text]{
+    width: 100%;
+    cursor: pointer;
+    font-size: 13px;
+    }
+}
+.ah_uplabel{
+    display: block;
+    margin-bottom: 10px; 
+}
+.ah_uplist{
+    display: block;
+    margin-top: 20px;
+    li{
+        font-family: "OpenSans-Regular";
+        font-size: 14px;
+        line-height: 17px;
+        color: #000;
+        .ah_uplist-span{
+            color: #1e8449;
+            font-size: 16px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .ah_uplist-span:hover{
+            color: red;
+            font-size: 18px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .ah_uplist-span1{
+            color: #1e8449;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    }
+}
+.form-control{
+    width: 80%;
+    height: 150px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.form-control1{
+    width: 100%;
+    cursor: pointer;
+}
+.ah_btn{
+    width: 30%;
+    height: 35px;
+    // width: 150px;
+    font-family: "OpenSans-Bold";
+    font-size: 14px;
+    line-height: 35px;
+    color: #FFF;
+    background-color: #50D0FF;
+    border: none;
+    box-sizing: border-box;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.ah_btn:hover{
+    background-color: #50AFFF;
+}
+
+// ******************************************************************
+.an-exit{
+    position: relative;
+}
+.an-exit__krest{
+    display: inline-block;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+}
+.an-exit__krest_style2{
+    top: 0px;
+    right: 0px;
+
+}
+// ***************************** up ***************************************************
+.regevent{
+    background-color: #fff;
+    width: 600px;
+}
+.registr{
+    width: 565px;
+    height: auto;
+    //padding: 20px 30px;
+    padding: 30px;
+    margin: 0 auto;
+}
+.titregbox{
+    border-bottom: 1px solid #50D0FF;
+}
+.titreg{
+    display: block;
+    font-family: "OpenSans-Regular";
+    font-size: 20px;
+    line-height: 21px;
+    text-transform: uppercase;
+    color: #50D0FF;
+    padding-bottom: 10px;
+}
+.formwrapper{
+    label{
+        font-family: "OpenSans-Regular";
+        font-size: 14px;
+        line-height: 17px;
+        cursor: pointer;
+        color: #000;
+    }
+}
+.formwrapper1{
+    width: 100%;
+    padding: 20px 0;
+    input[type=text]{
+        width: 83%;
+        margin-top: 5px;
+        cursor: pointer;
+        padding: 0 5px;
+    }
+}
+.formwrapper2{
+    width: 100%;
+    padding-bottom: 20px;
+    input[type=text]{
+        width: 83%;
+        margin-top: 5px;
+        cursor: pointer;
+        padding: 0 5px;
+    }
+}
+.formwrapper3{
+    width: 100%;
+    padding-bottom: 20px;
+    input[type=month]{
+        width: 70%;
+        margin-top: 5px;
+        cursor: pointer;
+        padding: 0 5px;
+    }
+}
+.formwrapper4{
+    border-top: 1px solid #50D0FF;
+    padding-top: 10px;
+}
+.ah-span{
+    font-family: "OpenSans-Bold";
+    font-size: 14px;
+    line-height: 16px;
+    color: #000;
+}
+.ah-span2{
+    font-family: "OpenSans-Regular";
+    font-size: 14px;
+    line-height: 16px;
+    color: #000;
+}
+.formwrapper4_1{
+    margin-bottom: 15px;
+    input[type=checkbox]{
+        margin-left: 15px;
+        cursor: pointer;
+    }
+    label{
+        margin-left: 10px;
+        cursor: pointer;
+    }
+}
+.formwrapper4_2{
+    margin-bottom: 10px;
+    input[type=text]{
+        width: 80%;
+        cursor: pointer;
+        //padding: 0 5px;
+        font-size: 13px;
+    }
+    .ah-reseptionist1{
+        margin-top: 5px;
+        margin-left: 99px;
+    }
+}
+.formwrapper4_3{
+    border-bottom: 1px solid #50D0FF; 
+    padding-bottom: 10px;
+    input[type=checkbox]{
+        margin-left: 19px;
+        cursor: pointer;
+    }
+    label{
+        margin-left: 11px;
+        cursor: pointer;
+    }
+}
+.formwrapper5{
+
+}
+.padd{
+    display: block;
+    padding: 10px 0;
+}
+.formwrapper5box{
+    margin-bottom: 5px;
+    label{
+        margin-right: 20px;
+    }
+}
+.formwrapper6box{
+    margin-bottom: 5px;
+}
+.ah-border{
+    border-top: 1px solid #50D0FF; 
+    margin-top: 10px;
+}
+.ah-border1{
+    border-top: 1px solid #50D0FF;
+    margin: 20px 15px 15px 15px;
+    display: block;
+    //margin-bottom: 10px;
+
+}
+.textbox{
+    padding: 20px 50px;
+    background-color: #50D0FF;
+    margin-bottom: 10px;
+}
+.ah-color{
+    color: #fff;
+}
+.formwrapper7{
+    input[type=text]{
+        width: 80%;
+        cursor: pointer;
+        //padding: 0 5px;
+        font-size: 13px;
+    }
+    textarea{
+        width: 100%;
+        height: 100px;
+        resize: none;
+    }
+}
+.checkbox{
+    display: inline-block;
+}
+.ah-formsubmit{
+    margin-top: 10px;
+    width: 150px;
+    height: 35px !important;
+    font-family: "OpenSans-Bold";
+    font-size: 14px;
+    line-height: 36px;
+    color: #FFFFFF;
+    background-color: #50D0FF;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border: none;
+    box-sizing: border-box;
+    text-align: center;
+    text-transform: uppercase;
+}
+.ah-formsubmit:hover{
+    background-color: #50AFFF;
+}
+// ************************************* up ********************************************
+
+
+
+
+/*==========  Desktop First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+  
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+    // .az-form{
+    //     input[type="file"] {
+    //         display: none;
+    //     }
+    // }
+    #ah-myup{
+        width: 90%;
+    }
+    .regevent{
+        width: 100%;
+    //    margin-left: 7.5%
+    }
+    .registr{
+        width: 100%;
+    }
+    .ah-mspan{
+        display: block;
+    }
+    .formwrapper4_2{
+        input[type=text]{
+            margin-top: 10px;
+        }
+    }
+    .formwrapper4_2{
+        .ah-reseptionist1{
+            margin-left: 0;
+        }
+    }
+    .textbox {
+        padding: 15px 20px;
+    }
+    .formwrapper7{
+        textarea{
+            margin-top: 10px;
+        }
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    .formwrapper3{
+        input[type=month]{
+            width: 30%;
+        }
+    }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+    .az-file2 {
+        position: relative !important;
+    }
+    .formwrapper5box{
+        label {
+            margin-right: 63px;
+        }
+    }
+    .formwrapper3{
+        input[type=month]{
+            width: 70%;
+        }
+    }
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+
+    .formwrapper3{
+        input[type=month]{
+            width: 70%;
+        }
+    }
+
+}
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+	
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+	
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+   
+}
+ /* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+	
+}
+/***************/
+.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+    //padding: 0px;
+    //margin: 0px;
+	// outline: 1px solid red;
+    //outline: none !important;
+}
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+    //padding: 0px;
+    //margin: 0px;
+    // outline: 1px solid red;
+}
+.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+    //padding: 0px;
+    //margin: 0px;
+    // outline: 1px solid red;    
+}
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+    //padding: 0px;
+    //margin: 0px;
+    // outline: 1px solid red;
+}

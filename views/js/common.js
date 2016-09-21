@@ -284,56 +284,123 @@ $('.az-form1').submit(function(){
 
 
 // ********************************** fotoludi3 *******************************
-     $(".ah-requestform").submit(function() {
+     // $(".ah-requestform").submit(function() {
 
-            var tel = $(this).find('input[name="tel"]');
-            var empty = false;
-            if (tel.val() == ""){
-                empty = true;
-            }
-            if (empty == true){
-                tel.addClass("error-input");
-                tel.focus();
-            }else{
-                var form_data = $(this).serialize(); 
-                $.ajax({
-                    type: "POST", 
-                    url: "/sendmessage.php", 
-                    data: form_data,
-                    success: function() {
-                        cleanTnakns(this);
-                    }
-                });
-            }
-            return false;
-        });
+     //        var tel = $(this).find('input[name="tel"]');
+     //        var empty = false;
+     //        if (tel.val() == ""){
+     //            empty = true;
+     //        }
+     //        if (empty == true){
+     //            tel.addClass("error-input");
+     //            tel.focus();
+     //        }else{
+     //            var form_data = $(this).serialize(); 
+     //            $.ajax({
+     //                type: "POST", 
+     //                url: "/sendmessage.php", 
+     //                data: form_data,
+     //                success: function() {
+     //                    cleanTnakns(this);
+     //                }
+     //            });
+     //        }
+     //        return false;
+     //    });
 
 // ***********************************************************************************
+function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
 
-    $(".form1").submit(function() { 
-        var tel = $(this).find('input[name="tel"]');
-        var empty = false;
-        if (tel.val() == ""){
-            empty = true;
-        }
-        if (empty == true){
-            tel.addClass("error-input");
-            tel.focus();
-        }else{
-            var form_data = $(this).serialize(); 
-            $.ajax({
-                type: "POST", 
-                url: "/sendmessage.php", 
-                data: form_data,
-                success: function() {
-                    cleanTnakns(this);
-                }
-            });
-        }
-        return false;
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
     });
 
-    $(".form2").submit(function() { 
+    return indexed_array;
+}
+    $(".form5").submit(function(e) { 
+
+        // alert(JSON.stringify($(this).serializeArray()));
+        //  if ($('.az-fixed').hasClass('az-fixed2')){
+        //     $('#mask, .window').hide();
+        //     $('.window').hide();
+        //     $('.az-fixed').removeClass('az-fixed2');
+        // }
+        //alert(1);
+        //e.preventDefault();
+        //var $form = $(this);
+        // var form_data = getFormData($form);
+        // var form_data = JSON.stringify($(this).serializeArray());
+        // form_data = JSON.parse(form_data);
+        //$.toJSON(form_data);[{"name":"uname","value":"ab"}]
+        // document.write(form_data);
+        $.ajax({
+            url: "/ajax/groupsadd/",
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            //datatype: 'json',
+            //var form_data = $(this).serialize(); 
+            data: '{"form_data"}' ,
+            success: function (data) {
+                alert(data);
+                //data = '('+data+')';
+                //temp = eval(data);
+                //if(id == '#event'){f_event(temp.query);}
+                //else if(id == '#activist'){f_user(temp.query);}
+                //else if(id == '#group'){f_group(temp.query);}
+                //alert(1);
+                //$('#event9').text(data);
+                //alert(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+              }
+        });
+        e.preventDefault();
+        //alert(1);
+
+        // var maskHeight = $(document).height();
+        // var maskWidth = $(window).width() + 30;
+        // $('#mask').css({'width':maskWidth,'height':maskHeight});
+        // $('#mask').fadeTo("slow",0.8); 
+        // var winH = $(window).height();
+        // var winW = $(window).width();
+        // if (az_posTop == -1){
+        //     az_posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+        // }
+        // $(id).css('top', 30);
+        // $(id).css('left', winW/2-$(id).width()/2);
+        // $(id).fadeIn(500);
+        // $('.az-fixed').addClass('az-fixed2');
+        // $('.az-fixed2').css('top',  -az_posTop);
+    });
+
+    $(".form255").submit(function() { 
+        var tel = $(this).find('input[name="tel"]');
+        var empty = false;
+        if (tel.val() == ""){
+            empty = true;
+        }
+        if (empty == true){
+            tel.addClass("error-input");
+            tel.focus();
+        }else{
+            var form_data = $(this).serialize();
+            $.ajax({
+                type: "POST", 
+                url: "/sendmessage.php", 
+                data: form_data,
+                success: function() {
+                    cleanTnakns(this);
+                }
+            });
+        }
+        return false;
+    });
+    $(".form355").submit(function() { 
         var tel = $(this).find('input[name="tel"]');
         var empty = false;
         if (tel.val() == ""){
@@ -355,29 +422,7 @@ $('.az-form1').submit(function(){
         }
         return false;
     });
-    $(".form3").submit(function() { 
-        var tel = $(this).find('input[name="tel"]');
-        var empty = false;
-        if (tel.val() == ""){
-            empty = true;
-        }
-        if (empty == true){
-            tel.addClass("error-input");
-            tel.focus();
-        }else{
-            var form_data = $(this).serialize(); 
-            $.ajax({
-                type: "POST", 
-                url: "/sendmessage.php", 
-                data: form_data,
-                success: function() {
-                    cleanTnakns(this);
-                }
-            });
-        }
-        return false;
-    });
-    $(".form4").submit(function() { 
+    $(".form455").submit(function() { 
         var tel = $(this).find('input[name="email"]');
         var empty = false;
         if (tel.val() == ""){
@@ -402,3 +447,35 @@ $('.az-form1').submit(function(){
 
 
 });
+
+
+(function() {
+ function toJSONString( form ) {
+  var obj = {};
+  var elements = form.querySelectorAll( "input, select, textarea" );
+  for( var i = 0; i < elements.length; ++i ) {
+   var element = elements[i];
+   var name = element.name;
+   var value = element.value;
+
+   if( name ) {
+    obj[ name ] = value;
+   }
+  }
+
+  return JSON.stringify( obj );
+ }
+
+ document.addEventListener( "DOMContentLoaded", function() {
+  var form = document.getElementById( "test" );
+  var output = document.getElementById( "output" );
+  form.addEventListener( "submit", function( e ) {
+   e.preventDefault();
+   var json = toJSONString( this );
+   output.innerHTML = json;
+
+  }, false);
+
+ });
+
+})();
