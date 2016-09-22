@@ -119,7 +119,9 @@ AppAsset::register($this);
                     <span class="az-style1 az-col-99-150-px" id="group1"></span>
                 </div>
             </div>
-            
+            <div class="az-form az-row">
+                <a href="#addUsers" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить активиста</a>
+            </div>
             <table class="az-table">
                 <thead class="table-head">
                     <tr>
@@ -464,7 +466,7 @@ AppAsset::register($this);
             <div class="titregbox ah_titregbox">
                 <span class="titreg">Добавить группу</span>
             </div>
-            <form action="" class="common-form ah_form form5">
+            <form action="/site/groups" class="common-form ah_form form5" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="formwrapper ah_formwrapper">
                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -473,15 +475,16 @@ AppAsset::register($this);
 
                         <div class="clearfix"></div>
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            
-                            <input type="text" name="uname" id="ah_upinput" class="az-evname" value="ab">
+                            <?= Html::hiddenInput(\Yii::$app->getRequest()->csrfParam, \Yii::$app->getRequest()->getCsrfToken(), []); ?>
+                            <input type="text"  name="AddGroup[uname]" id="ah_upinput" class="az-evname" value="ab">
                         </div>
 
                         <div class="clearfix"></div>
                         
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <!-- <input type="file" id="f1" class="az-none az-file" accept="image/*"> -->
-                            <!-- <label for="f1" class="az-file2">Прикрепить фото</label> -->
+                            <input type="hidden" name="AddGroup[imageFile]" >
+                            <input type="file" id="f1" class="az-none az-file" accept="image/*" name="AddGroup[imageFile]" value="">
+                            <label for="f1" class="az-file2">Прикрепить фото</label>
                         </div>
 
                         <div class="clearfix"></div>
@@ -493,6 +496,97 @@ AppAsset::register($this);
                 </div>
             </form>
         </div>
+</div>
+
+<div id="addUsers" class="window">
+    <div class="registr">
+        <div class="an-exit">
+            <span class="an-exit__krest"><i class="fa fa-times " aria-hidden="true"></i></span>
+        </div>
+        <div class="titregbox ah_titregbox">
+            <span class="titreg">Добавить список студентов</span>
+        </div>
+        <form action="" class="common-form ah_form form1">
+            <div class="row">
+                <div class="formwrapper ah_formwrapper">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <!-- <label for="ah_upinput" class="ah_uplabel">Текст для заголовка input-a</label> -->
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <input type="text" name="uname" class="az-evname2" id="finduser" value="">
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <p id="finduser2"></p>
+                    </div>
+                    <!-- <div class="col-md-4 col-sm-4 col-xs-12">
+                        <select class="form-control1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div> -->
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <select multiple class="ah-form-control" id="selectuser">
+                            <option title="Текст для выбора 1">Текст для выбора 1</option>
+                            <option title="Текст для выбора 2">Текст для выбора 2</option>
+                            <option title="Текст для выбора 3">Текст для выбора 3</option>
+                            <option title="Текст для выбора 4">Текст для выбора 4</option>
+                            <option title="Текст для выбора 5">Текст для выбора 5</option>
+                            <option title="Текст для выбора 1">Текст для выбора 1</option>
+                            <option title="Текст для выбора 2">Текст для выбора 2</option>
+                            <option title="Текст для выбора 3">Текст для выбора 3</option>
+                            <option title="Текст для выбора 4">Текст для выбора 4</option>
+                            <option title="Текст для выбора 5">Текст для выбора 5</option>
+                        </select>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button type="submit" class="ah_btn">Выбрать</button>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <ul class="ah_uplist">
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 1 <span class="ah_uplist-span1">Роль 1</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 2 <span class="ah_uplist-span1">Роль 2</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 3 <span class="ah_uplist-span1">Роль 3</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 4 <span class="ah_uplist-span1">Роль 4</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 5 <span class="ah_uplist-span1">Роль 5</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 6 <span class="ah_uplist-span1">Роль 6</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 7 <span class="ah_uplist-span1">Роль 7</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 8 <span class="ah_uplist-span1">Роль 8</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <ul class="ah_uplist">
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 1 <span class="ah_uplist-span1">Роль 1</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 2 <span class="ah_uplist-span1">Роль 2</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 3 <span class="ah_uplist-span1">Роль 3</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 4 <span class="ah_uplist-span1">Роль 4</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 5 <span class="ah_uplist-span1">Роль 5</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 6 <span class="ah_uplist-span1">Роль 6</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 7 <span class="ah_uplist-span1">Роль 7</span></li>
+                            <li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>Текст для выбора 8 <span class="ah_uplist-span1">Роль 8</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button type="submit" class="ah_btn">Добавить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 <?php //$this->endBody() ?>
 <script src="../../views/js/common.js"></script>

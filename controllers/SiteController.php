@@ -18,8 +18,9 @@ use app\models\groups;
 use app\models\SearchUser;
 use app\models\SearchEvent;
 use app\models\SearchGroup;
-
-
+use app\models\addGroup;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
 
 class SiteController extends Controller
 {
@@ -76,9 +77,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        print_r($_POST);
+        // print_r($_POST);
         $model = new SearchUser();
-        print_r($model);
+        // print_r($model);
         if($model->load(Yii::$app->request->post()) && $model->validate()){
 
             $query = users::find()
@@ -244,15 +245,28 @@ class SiteController extends Controller
     }
     public function actionGroups()
     {
-        // print_r(Yii::$app->request->csrfToken);
-        $model = new SearchGroup();
-        if($model->load(Yii::$app->request->post()) && $model->validate()){
+        $model1 = new SearchGroup();
+        $model2 = new AddGroup();
+        if($model1->load(Yii::$app->request->post()) && $model1->validate()){
             $query = groups::find()
-            ->where(['like', 'uname', $model->uname]);
+            ->where(['like', 'uname', $model1->uname]);
         } else {
             $query = groups::find();
         }
-            
+        if($model2->load(Yii::$app->request->post())){
+            $model2->imageFile = UploadedFile::getInstance($model2, 'imageFile');
+            if ($model2->validate()) {
+                $user = new groups();
+                $user->uname = $model2->uname;
+                $user->save();
+                if($model2->imageFile){
+                    $urltemp = 'views/grouplogo/' . $user->id . '.' . $model2->imageFile->extension;
+                    $model2->imageFile->saveAs($urltemp);
+                    $user->url = $urltemp;
+                }
+                $user->save();
+            }
+        }
         
         $pagination = new Pagination([
             'defaultPageSize' => 5,
@@ -267,11 +281,13 @@ class SiteController extends Controller
         return $this->render('groups', [
             'groups' => $groups,
             'pagination' => $pagination,
-            'model' => $model,
+            'model' => $model1,
             'href' => '#menu-groups'
         ]);
 
     }
+    
+
     public function actionMemo()
     {
         return $this->render('memo');

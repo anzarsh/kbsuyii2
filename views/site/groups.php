@@ -59,6 +59,7 @@ $(document).ready(function(){
 	});
 	$('.az-file').change(function(){
 	  $(this).next('label').text($(this).val().substring($(this).val().lastIndexOf('\\')+1,$(this).val().length));
+	  $(this).siblings('input[type="hidden"]').attr('value', $(this).val().substring($(this).val().lastIndexOf('\\')+1,$(this).val().length));
 	});
 });
 	

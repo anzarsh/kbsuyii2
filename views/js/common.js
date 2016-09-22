@@ -205,9 +205,9 @@ $(document).ready(function(){
         }
         e.preventDefault();
         var id = $(this).attr('href');
-        //alert(id);
+        // alert(id);
         var id_event = Number($(this).attr('dataid'));
-        //alert(id_event);
+        // alert(id_event);
         //alert(id_event);
         //var id2 = id.splice(1);
 
@@ -220,8 +220,10 @@ $(document).ready(function(){
                 //id_event: id_event
             },
             success: function (data) {
-                data = '('+data+')';
+                // data = '('+data+')';
+                // alert(data);
                 temp = eval(data);
+                // alert(temp);
                 if(id == '#event'){f_event(temp.query);}
                 else if(id == '#activist'){f_user(temp.query);}
                 else if(id == '#group'){f_group(temp.query);}
@@ -278,9 +280,43 @@ $(document).ready(function(){
     });
 
 
-$('.az-form1').submit(function(){
-    var form_data = $(this).serialize();
-});
+    function f_finduser(temp){
+        var strtemp = '';
+        for (i=0; i<temp.length; i++){
+            strtemp += '<option value="' + 
+            temp[i].id + '">' +
+            temp[i].middlename + ' ' +
+            temp[i].uname + ' ' +
+            temp[i].lastname + ' ' + 
+            '</option>';
+            //}
+        }
+        $('#selectuser').html(strtemp);
+    }
+
+    $('#finduser').keyup(function(e) {
+        var val = $('#finduser').val();
+        $.ajax({
+            url: "/ajax/finduser",
+            type: 'get',
+            data: {
+                uname : val
+            },
+            success: function (data) {
+                temp = eval(data);
+                f_finduser(temp.query);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+              }
+        });
+    });
+
+// $('.az-form1').submit(function(){
+//     var form_data = $(this).serialize();
+// });
 
 
 // ********************************** fotoludi3 *******************************
@@ -309,74 +345,74 @@ $('.az-form1').submit(function(){
      //    });
 
 // ***********************************************************************************
-function getFormData($form){
-    var unindexed_array = $form.serializeArray();
-    var indexed_array = {};
+// function getFormData($form){
+//     var unindexed_array = $form.serializeArray();
+//     var indexed_array = {};
 
-    $.map(unindexed_array, function(n, i){
-        indexed_array[n['name']] = n['value'];
-    });
+//     $.map(unindexed_array, function(n, i){
+//         indexed_array[n['name']] = n['value'];
+//     });
 
-    return indexed_array;
-}
-    $(".form5").submit(function(e) { 
+//     return indexed_array;
+// }
+    // $(".form5").submit(function(e) { 
 
-        // alert(JSON.stringify($(this).serializeArray()));
-        //  if ($('.az-fixed').hasClass('az-fixed2')){
-        //     $('#mask, .window').hide();
-        //     $('.window').hide();
-        //     $('.az-fixed').removeClass('az-fixed2');
-        // }
-        //alert(1);
-        //e.preventDefault();
-        //var $form = $(this);
-        // var form_data = getFormData($form);
-        // var form_data = JSON.stringify($(this).serializeArray());
-        // form_data = JSON.parse(form_data);
-        //$.toJSON(form_data);[{"name":"uname","value":"ab"}]
-        // document.write(form_data);
-        $.ajax({
-            url: "/ajax/groupsadd/",
-            type: "POST",
-            contentType: "application/json",
-            dataType: "json",
-            //datatype: 'json',
-            //var form_data = $(this).serialize(); 
-            data: '{"form_data"}' ,
-            success: function (data) {
-                alert(data);
-                //data = '('+data+')';
-                //temp = eval(data);
-                //if(id == '#event'){f_event(temp.query);}
-                //else if(id == '#activist'){f_user(temp.query);}
-                //else if(id == '#group'){f_group(temp.query);}
-                //alert(1);
-                //$('#event9').text(data);
-                //alert(data);
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(xhr.status);
-                alert(thrownError);
-              }
-        });
-        e.preventDefault();
-        //alert(1);
+    //     // alert(JSON.stringify($(this).serializeArray()));
+    //     //  if ($('.az-fixed').hasClass('az-fixed2')){
+    //     //     $('#mask, .window').hide();
+    //     //     $('.window').hide();
+    //     //     $('.az-fixed').removeClass('az-fixed2');
+    //     // }
+    //     //alert(1);
+    //     //e.preventDefault();
+    //     //var $form = $(this);
+    //     // var form_data = getFormData($form);
+    //     // var form_data = JSON.stringify($(this).serializeArray());
+    //     // form_data = JSON.parse(form_data);
+    //     //$.toJSON(form_data);[{"name":"uname","value":"ab"}]
+    //     // document.write(form_data);
+    //     $.ajax({
+    //         url: "/ajax/groupsadd/",
+    //         type: "POST",
+    //         contentType: "application/json",
+    //         dataType: "json",
+    //         //datatype: 'json',
+    //         //var form_data = $(this).serialize(); 
+    //         data: '{"form_data"}' ,
+    //         success: function (data) {
+    //             alert(data);
+    //             //data = '('+data+')';
+    //             //temp = eval(data);
+    //             //if(id == '#event'){f_event(temp.query);}
+    //             //else if(id == '#activist'){f_user(temp.query);}
+    //             //else if(id == '#group'){f_group(temp.query);}
+    //             //alert(1);
+    //             //$('#event9').text(data);
+    //             //alert(data);
+    //         },
+    //         error: function (xhr, ajaxOptions, thrownError) {
+    //             alert(xhr.status);
+    //             alert(thrownError);
+    //           }
+    //     });
+    //     e.preventDefault();
+    //     //alert(1);
 
-        // var maskHeight = $(document).height();
-        // var maskWidth = $(window).width() + 30;
-        // $('#mask').css({'width':maskWidth,'height':maskHeight});
-        // $('#mask').fadeTo("slow",0.8); 
-        // var winH = $(window).height();
-        // var winW = $(window).width();
-        // if (az_posTop == -1){
-        //     az_posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-        // }
-        // $(id).css('top', 30);
-        // $(id).css('left', winW/2-$(id).width()/2);
-        // $(id).fadeIn(500);
-        // $('.az-fixed').addClass('az-fixed2');
-        // $('.az-fixed2').css('top',  -az_posTop);
-    });
+    //     // var maskHeight = $(document).height();
+    //     // var maskWidth = $(window).width() + 30;
+    //     // $('#mask').css({'width':maskWidth,'height':maskHeight});
+    //     // $('#mask').fadeTo("slow",0.8); 
+    //     // var winH = $(window).height();
+    //     // var winW = $(window).width();
+    //     // if (az_posTop == -1){
+    //     //     az_posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    //     // }
+    //     // $(id).css('top', 30);
+    //     // $(id).css('left', winW/2-$(id).width()/2);
+    //     // $(id).fadeIn(500);
+    //     // $('.az-fixed').addClass('az-fixed2');
+    //     // $('.az-fixed2').css('top',  -az_posTop);
+    // });
 
     $(".form255").submit(function() { 
         var tel = $(this).find('input[name="tel"]');
@@ -449,33 +485,33 @@ function getFormData($form){
 });
 
 
-(function() {
- function toJSONString( form ) {
-  var obj = {};
-  var elements = form.querySelectorAll( "input, select, textarea" );
-  for( var i = 0; i < elements.length; ++i ) {
-   var element = elements[i];
-   var name = element.name;
-   var value = element.value;
+// (function() {
+//  function toJSONString( form ) {
+//   var obj = {};
+//   var elements = form.querySelectorAll( "input, select, textarea" );
+//   for( var i = 0; i < elements.length; ++i ) {
+//    var element = elements[i];
+//    var name = element.name;
+//    var value = element.value;
 
-   if( name ) {
-    obj[ name ] = value;
-   }
-  }
+//    if( name ) {
+//     obj[ name ] = value;
+//    }
+//   }
 
-  return JSON.stringify( obj );
- }
+//   return JSON.stringify( obj );
+//  }
 
- document.addEventListener( "DOMContentLoaded", function() {
-  var form = document.getElementById( "test" );
-  var output = document.getElementById( "output" );
-  form.addEventListener( "submit", function( e ) {
-   e.preventDefault();
-   var json = toJSONString( this );
-   output.innerHTML = json;
+//  document.addEventListener( "DOMContentLoaded", function() {
+//   var form = document.getElementById( "test" );
+//   var output = document.getElementById( "output" );
+//   form.addEventListener( "submit", function( e ) {
+//    e.preventDefault();
+//    var json = toJSONString( this );
+//    output.innerHTML = json;
 
-  }, false);
+//   }, false);
 
- });
+//  });
 
-})();
+// })();

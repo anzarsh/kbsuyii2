@@ -15,19 +15,13 @@ class AddGroup extends Model
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['imageFile'], 'file', 'extensions' => 'png, jpg'],
         	['uname', 'string'],
-        	[['uname'], 'required']
+        	[['uname', 'imageFile'], 'required', 'when' => function () {
+                    if (!$this->uname && !$this->imageFile) {
+
+                    }
+                }]
         ];
-    }
-    
-    public function upload()
-    {
-        if ($this->validate()) {
-            $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            return true;
-        } else {
-            return false;
-        }
     }
 }

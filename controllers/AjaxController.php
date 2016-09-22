@@ -66,36 +66,21 @@ class AjaxController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             return array("query" => $query);
     }
-    public function actionGroupsadd()
+    public function actionFinduser()
     {
-            // $uname = $_GET['uname'];
-            // $user = new groups();
-            // $user->uname = $uname;
-            // $user->save();
-            // print_r($_POST);
-            // $model = new AddGroup();
-
-            // if($model->load(Yii::$app->request->post()) && $model->validate()){
-            //     $user = new groups();
-            //     $user->uname = $model->uname;
-            //     $user->save();
-            //     print_r($model);
-            // }
-            
-            // // $query = groups::find()
-            //     // ->where(['id' => $id_group])
-            //     // ->with('users')
-            //     // ->asArray()->one();
+            // print_r($_GET);
+            $uname = $_GET['uname'];
+            $query = users::find()
+                 ->where(['or',
+                            ['like', 'middlename', $uname],
+                            ['like', 'uname', $uname],
+                            ['like', 'lastname', $uname],
+                        ])
+                ->limit(10)
+                ->orderBy(['middlename' => SORT_ASC, 'uname' => SORT_ASC, 'lastname' => SORT_ASC])
+                ->asArray()->all();
         
-            // Yii::$app->response->format = Response::FORMAT_JSON;
-            return 'SDFDSF';//array("query" => '$temp');
-        // $id_group = $_GET['id'];
-        //     $query = groups::find()
-        //         ->where(['id' => $id_group])
-        //         ->with('users')
-        //         ->asArray()->one();
-        
-        //     Yii::$app->response->format = Response::FORMAT_JSON;
-        //     return array("query" => $query);
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return array("query" => $query);
     }
 }
