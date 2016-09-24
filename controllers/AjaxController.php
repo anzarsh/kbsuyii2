@@ -23,7 +23,7 @@ class AjaxController extends Controller
     {
         //$id = $_GET['id'];
         //if ($id == '#event'){
-            $id_event = $_GET['id'];
+            $id_event = $_GET['data'];
             $query = event::find()
                 ->where(['id' => $id_event])
                 ->with('eventlevel')
@@ -42,7 +42,7 @@ class AjaxController extends Controller
     }
     public function actionActivist()
     {
-            $id_user = $_GET['id'];
+            $id_user = $_GET['data'];
             //print_r('dfg dfgg dfg dfg dsfg dfg dfg dsfg id_user');
             $query = users::find()
                 ->where(['id' => $id_user])
@@ -57,7 +57,7 @@ class AjaxController extends Controller
     }
     public function actionGroup()
     {
-            $id_group = $_GET['id'];
+            $id_group = $_GET['data'];
             $query = groups::find()
                 ->where(['id' => $id_group])
                 ->with('users')
@@ -69,7 +69,7 @@ class AjaxController extends Controller
     public function actionFinduser()
     {
             // print_r($_GET);
-            $uname = $_GET['uname'];
+            $uname = $_GET['data'];
             $query = users::find()
                  ->where(['or',
                             ['like', 'middlename', $uname],
@@ -82,5 +82,31 @@ class AjaxController extends Controller
         
             Yii::$app->response->format = Response::FORMAT_JSON;
             return array("query" => $query);
+    }
+    public function actionUsersadd()
+    {
+            // print_r($_GET);
+            // $uname = $_GET['data'];
+            $query = users::find()
+                 // ->where(['or',
+                 //            ['like', 'middlename', $uname],
+                 //            ['like', 'uname', $uname],
+                 //            ['like', 'lastname', $uname],
+                 //        ])
+                ->limit(10)
+                ->orderBy(['middlename' => SORT_ASC, 'uname' => SORT_ASC, 'lastname' => SORT_ASC])
+                ->asArray()->all();
+        
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return array("query" => $query);
+    }
+    public function actionUsersadd2()
+    {
+        $users = $_GET['data'];
+        $group_id = $_GET['id'];
+        
+        $user = new groups();
+        $user->uname = $model2->uname;
+        $user->save();
     }
 }

@@ -1,8 +1,9 @@
 
 $(document).ready(function(){
     //RESPONSIVEUI.responsiveTabs();
-    //alert(1);
-    
+    // alert(1);
+
+/*dates*/
     $('#datepicker, #datepicker2').datepicker({
         pickTime: false, language: 'ru'
     });
@@ -22,37 +23,19 @@ $(document).ready(function(){
             $(".startdate").val($(this).val());
         }
     });
+/*dates*/
+
+/*pagination with filter*/
     $('.az-activity, .az-eventtype').click(function(){
         $(this).next('.az-open').slideToggle('slow');
         $(this).find('.fa-angle-double-down').toggleClass('az-disp-none');
         $(this).find('.fa-angle-double-up').toggleClass('az-disp-none');
     });
+/*pagination with filter*/
 
-    // $('#azfile').on("change", function(){ 
-    //     alert($(this).val().match(/(\\.+?\\).+?/));
-        
-    // });
-
-
-
-    // if($('.current-link').text() == 'мероприятия'){
-    //     $('.main-menu2').css('display', 'block');
-    // } 
-
-    //funcun = function(){$('.menu-list-pressed').css({'animation-duration': '1s'});}
-    //setTimeout(funcun,1000);
-
-
-
-
-    // ****************************************** ah ****************************************************
-
+/*functions*/
     var az_posTop = -1;
     var temp;
-
-    function event_table(temp){
-        
-    }
 
     function event_table(temp){
         //var begin = z*5;
@@ -176,12 +159,14 @@ $(document).ready(function(){
         //alert(temp.startdate);
         $('#group0').text(temp.uname);
         $('#group1').text(temp.users.length);
+        id_group2 = temp.id;
         
         var k;
         var strtemp = '';
         for (i=0; i<temp.users.length; i++){
             //alert(temp.users[i].id_role);
             //if(temp.users[i].id_role != 0){
+            searchingusers.push(temp.users[i].id);
             strtemp += '<tr><td>' + (i+1) + 
                 '</td><td><a dataId="' + temp.users[i].id + '" href="#activist" rel="modal">' + temp.users[i].middlename + ' ' +
                 temp.users[i].uname + ' ' + temp.users[i].lastname +
@@ -192,11 +177,37 @@ $(document).ready(function(){
         }
         //alert(strtemp);
         $('#grouptable').html(strtemp);
+
+        var strtemp = '';
+
+        for(var i=0; i<temp.users.length; i++){
+                strtemp2 = temp.users[i].middlename + ' ' + temp.users[i].uname + ' ' + temp.users[i].lastname;
+                strtemp2 = strtemp2.length > 25 ? strtemp2.slice(0, 25) + '...' : strtemp2;
+                strtemp += ' <div class="col-md-6 col-sm-6 col-xs-12"><ul class="ah_uplist"><li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>' + 
+                        strtemp2 + '</li></ul></div>';
+        }
+
+        $('#usersadded').html(strtemp);
     }
 
+    function f_finduser(temp){
+        var strtemp = '';
+        for (i=0; i<temp.length; i++){
+            strtemp += '<option value="' + 
+            temp[i].id + '">' +
+            temp[i].middlename + ' ' +
+            temp[i].uname + ' ' +
+            temp[i].lastname + ' ' + 
+            '</option>';
+        }
+        // alert(strtemp);
+        $('#selectuser').html(strtemp);
+    }
+/*functions*/
 
+/*popups*/
     $('body').on('click', 'a[rel=modal]', function(e) {
-        //alert(1);
+        // alert(1);
 
         if ($('.az-fixed').hasClass('az-fixed2')){
             $('#mask, .window').hide();
@@ -206,33 +217,38 @@ $(document).ready(function(){
         e.preventDefault();
         var id = $(this).attr('href');
         // alert(id);
-        var id_event = Number($(this).attr('dataid'));
-        // alert(id_event);
-        //alert(id_event);
-        //var id2 = id.splice(1);
-
-        $.ajax({
-            url: "/ajax/" + id.slice(1),
-            type: 'get',
-            //datatype: 'json',
-            data: {
-                id : id_event,
-                //id_event: id_event
-            },
-            success: function (data) {
-                // data = '('+data+')';
-                // alert(data);
-                temp = eval(data);
-                // alert(temp);
-                if(id == '#event'){f_event(temp.query);}
-                else if(id == '#activist'){f_user(temp.query);}
-                else if(id == '#group'){f_group(temp.query);}
-                //alert(1);
-                //$('#event9').text(data);
-                //alert(data);
-            }
-        });
-        
+        var tempdata = -1;
+        if (id == '#event' || id == '#activist' || id == '#group'){
+            tempdata = Number($(this).attr('dataid'));
+        //alert(tempdata);
+        } else if(id == '#usersadd'){
+            // tempdata = $('#finduser').val();
+        }
+        // alert(tempdata);
+        if (id == '#event' || id == '#activist' || id == '#group' || id == '#usersadd'){
+            // alert(1);
+            $.ajax({
+                url: "/ajax/" + id.slice(1),
+                type: 'get',
+                data: {
+                    data : tempdata,
+                },
+                success: function (data) {
+                    // data = '('+data+')';
+                    // alert(data);
+                    temp = eval(data);
+                    // alert(temp);
+                    if(id == '#event'){f_event(temp.query);}
+                    else if(id == '#activist'){f_user(temp.query);}
+                    else if(id == '#group'){f_group(temp.query);}
+                    else if(id == '#usersadd'){f_finduser(temp.query);}
+                    //alert(1);
+                    //$('#event9').text(data);
+                    //alert(data);
+                    // alert(2);
+                }
+            });
+        }
 
         var maskHeight = $(document).height();
         var maskWidth = $(window).width() + 30;
@@ -252,18 +268,13 @@ $(document).ready(function(){
 
 
     $('#mask, .an-exit__krest').click(function () {
-        //e.preventDefault();
-        //alert(az_posTop);
         $('#mask').hide();
         $('.window').hide();
         $('.az-fixed').attr('style', '');
         $('.az-fixed').removeClass('az-fixed2');
         $(document).scrollTop(az_posTop);
         az_posTop = -1;
-   }); 
-
-
-
+    }); 
 
 
    function cleanTnakns(form){
@@ -274,33 +285,68 @@ $(document).ready(function(){
         
     }
 
+/*popups*/
 
-    $('input[type="text"]').mousedown(function() { 
-        $('input[type="text"]').removeClass("error-input");
-    });
+/*online activist searching*/
+    var id_group2;
+    var searchingusers = new Array();
+    var usersadding = new Array();
+    var delnum = new Array();
 
-
-    function f_finduser(temp){
-        var strtemp = '';
-        for (i=0; i<temp.length; i++){
-            strtemp += '<option value="' + 
-            temp[i].id + '">' +
-            temp[i].middlename + ' ' +
-            temp[i].uname + ' ' +
-            temp[i].lastname + ' ' + 
-            '</option>';
-            //}
-        }
-        $('#selectuser').html(strtemp);
+    function sortNumber(a,b) {
+        return a - b;
     }
 
+    function union_arr(arr1, arr2) {
+        // var arr = new Array();
+        // есть ли элементы из arr1 в arr2
+        var delnum = new Array();
+        for(var i=0; i<arr1.length; i++){
+            var comp = true;
+            for(var j=0; j<arr2.length; j++){
+                if (arr1[i] == arr2[j]){
+                    comp = false;
+                }
+            }
+            if(comp){
+                arr2.push(arr1[i]);
+            } else{
+                delnum.push(arr1[i]);
+            }
+        }
+        // var arr4 = new Array();
+        // for (var i = 0; i < arr2.length; i++) {
+        //     arr4.push(Number(arr2[i], 10));
+        // }
+        // var arr3 = arr1.concat(arr4);
+        // arr3.sort(sortNumber);
+        // var arr = [arr3[0]];
+        // delnum = new Array();
+        // for (var i = 1; i < arr3.length; i++) {
+        //     if (arr3[i] != arr3[i-1]) {
+        //         arr.push(arr3[i]);
+        //         usersadding.push(arr3[i]);
+        //     } else {
+        //         delnum.push(arr3[i]);
+        //     }
+        // }
+        return arr2;
+    }
+
+    function inArray(num, arr){
+        for(var i=0; i<arr.length; i++){
+            if(arr[i] == num){return true;}
+        }
+        return false;
+    }
+    
     $('#finduser').keyup(function(e) {
         var val = $('#finduser').val();
         $.ajax({
             url: "/ajax/finduser",
             type: 'get',
             data: {
-                uname : val
+                data : val
             },
             success: function (data) {
                 temp = eval(data);
@@ -313,13 +359,83 @@ $(document).ready(function(){
               }
         });
     });
+    $('#selectuserbtn').click(function(e) {
+        var val = $('#selectuser :selected').attr('value');
+        var str = '';
+
+        // usersadding = union_arr(usersadding, val);
+        searchingusers = union_arr(searchingusers, val);
+        // alert(searchingusers);
+        alert(delnum);
+        alert(val);
+        str = '';
+        for(var i=0; i<val.length; i++){
+            if(!inArray(val[i], delnum)){
+                strtemp = $('#selectuser option[value="' + val[i] + '"]').text();
+                strtemp = strtemp.length > 25 ? strtemp.slice(0, 25) + '...' : strtemp;
+                str += ' <div class="col-md-6 col-sm-6 col-xs-12"><ul class="ah_uplist"><li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>' + 
+                        strtemp + '</li></ul></div>';
+            }
+        }
+        
+        $('#usersadded').html($('#usersadded').html() + str);
+
+        return false;
+    });
+    $('#selectuseraddbtn').click(function(){
+        // alert(id_group2);
+        $.ajax({
+            url: "/ajax/Usersadd2",
+            type: 'get',
+            data: {
+                data : searchingusers,
+                id : id_group2
+            },
+            success: function (data) {
+                temp = eval(data);
+                f_finduser(temp.query);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+              }
+        });
+    });
+/*online activist searching*/
+
+// /**/
+
+
+
+});
+
+
+// *****************************************************************
+    // $('input[type="text"]').mousedown(function() { 
+    //     $('input[type="text"]').removeClass("error-input");
+    // });
+
+
+    // $('#azfile').on("change", function(){ 
+    //     alert($(this).val().match(/(\\.+?\\).+?/));
+        
+    // });
+
+
+
+    // if($('.current-link').text() == 'мероприятия'){
+    //     $('.main-menu2').css('display', 'block');
+    // } 
+
+    //funcun = function(){$('.menu-list-pressed').css({'animation-duration': '1s'});}
+    //setTimeout(funcun,1000);
 
 // $('.az-form1').submit(function(){
 //     var form_data = $(this).serialize();
 // });
 
 
-// ********************************** fotoludi3 *******************************
      // $(".ah-requestform").submit(function() {
 
      //        var tel = $(this).find('input[name="tel"]');
@@ -414,75 +530,75 @@ $(document).ready(function(){
     //     // $('.az-fixed2').css('top',  -az_posTop);
     // });
 
-    $(".form255").submit(function() { 
-        var tel = $(this).find('input[name="tel"]');
-        var empty = false;
-        if (tel.val() == ""){
-            empty = true;
-        }
-        if (empty == true){
-            tel.addClass("error-input");
-            tel.focus();
-        }else{
-            var form_data = $(this).serialize();
-            $.ajax({
-                type: "POST", 
-                url: "/sendmessage.php", 
-                data: form_data,
-                success: function() {
-                    cleanTnakns(this);
-                }
-            });
-        }
-        return false;
-    });
-    $(".form355").submit(function() { 
-        var tel = $(this).find('input[name="tel"]');
-        var empty = false;
-        if (tel.val() == ""){
-            empty = true;
-        }
-        if (empty == true){
-            tel.addClass("error-input");
-            tel.focus();
-        }else{
-            var form_data = $(this).serialize(); 
-            $.ajax({
-                type: "POST", 
-                url: "/sendmessage.php", 
-                data: form_data,
-                success: function() {
-                    cleanTnakns(this);
-                }
-            });
-        }
-        return false;
-    });
-    $(".form455").submit(function() { 
-        var tel = $(this).find('input[name="email"]');
-        var empty = false;
-        if (tel.val() == ""){
-            empty = true;
-        }
-        if (empty == true){
-            tel.addClass("error-input");
-            tel.focus();
-        }else{
-            var form_data = $(this).serialize(); 
-            $.ajax({
-                type: "POST", 
-                url: "/sendmessage.php", 
-                data: form_data,
-                success: function() {
-                    cleanTnakns(this);
-                }
-            });
-        }
-        return false;
-    });
+    // $(".form255").submit(function() { 
+    //     var tel = $(this).find('input[name="tel"]');
+    //     var empty = false;
+    //     if (tel.val() == ""){
+    //         empty = true;
+    //     }
+    //     if (empty == true){
+    //         tel.addClass("error-input");
+    //         tel.focus();
+    //     }else{
+    //         var form_data = $(this).serialize();
+    //         $.ajax({
+    //             type: "POST", 
+    //             url: "/sendmessage.php", 
+    //             data: form_data,
+    //             success: function() {
+    //                 cleanTnakns(this);
+    //             }
+    //         });
+    //     }
+    //     return false;
+    // });
+    // $(".form355").submit(function() { 
+    //     var tel = $(this).find('input[name="tel"]');
+    //     var empty = false;
+    //     if (tel.val() == ""){
+    //         empty = true;
+    //     }
+    //     if (empty == true){
+    //         tel.addClass("error-input");
+    //         tel.focus();
+    //     }else{
+    //         var form_data = $(this).serialize(); 
+    //         $.ajax({
+    //             type: "POST", 
+    //             url: "/sendmessage.php", 
+    //             data: form_data,
+    //             success: function() {
+    //                 cleanTnakns(this);
+    //             }
+    //         });
+    //     }
+    //     return false;
+    // });
+    // $(".form455").submit(function() { 
+    //     var tel = $(this).find('input[name="email"]');
+    //     var empty = false;
+    //     if (tel.val() == ""){
+    //         empty = true;
+    //     }
+    //     if (empty == true){
+    //         tel.addClass("error-input");
+    //         tel.focus();
+    //     }else{
+    //         var form_data = $(this).serialize(); 
+    //         $.ajax({
+    //             type: "POST", 
+    //             url: "/sendmessage.php", 
+    //             data: form_data,
+    //             success: function() {
+    //                 cleanTnakns(this);
+    //             }
+    //         });
+    //     }
+    //     return false;
+    // });
 
 
-});
+
 
 
 // (function() {
