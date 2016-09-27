@@ -121,6 +121,8 @@ AppAsset::register($this);
             </div>
             <div class="az-form az-row">
                 <a id="group2" href="#usersadd" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить активиста</a>
+                <a id="group3" href="#changeGroup" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Изменить группу</a>
+                <a id="group4" href="#" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Удалить группу</a>
             </div>
             <table class="az-table">
                 <thead class="table-head">
@@ -476,7 +478,50 @@ AppAsset::register($this);
                         <div class="clearfix"></div>
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <?= Html::hiddenInput(\Yii::$app->getRequest()->csrfParam, \Yii::$app->getRequest()->getCsrfToken(), []); ?>
-                            <input type="text"  name="AddGroup[uname]" id="ah_upinput" class="az-evname" value="ab">
+                            <input type="text"  name="AddGroup[uname]" id="ah_upinput" class="az-evname" value="">
+                            <input type="hidden"  name="AddGroup[id]" id="ah_upinput" class="az-evname" value="-1">
+                        </div>
+
+                        <div class="clearfix"></div>
+                        
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input type="hidden" name="AddGroup[imageFile]" >
+                            <input type="file" id="f1" class="az-none az-file" accept="image/*" name="AddGroup[imageFile]" value="">
+                            <label for="f1" class="az-file2">Прикрепить фото</label>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" class="ah_btn">ОК</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>
+
+<div id="changeGroup" class="window">
+    <div class="registr">
+            <div class="an-exit">
+                <a href="#group" rel="modal" class="an-exit__krest"><i class="fa fa-times" aria-hidden="true"></i></a>
+            </div>
+            <div class="titregbox ah_titregbox">
+                <span class="titreg">Изменить группу</span>
+            </div>
+            <form action="/site/groups" class="common-form ah_form form5" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="formwrapper ah_formwrapper">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label for="ah_upinput" class="ah_uplabel">Название группы</label>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <?= Html::hiddenInput(\Yii::$app->getRequest()->csrfParam, \Yii::$app->getRequest()->getCsrfToken(), []); ?>
+                            <input type="text"  name="AddGroup[uname]" id="ah_upinput" class="az-evname" value="">
+                            <input type="hidden"  name="AddGroup[id]" id="ah_upinput" class="az-evname" value="">
+
                         </div>
 
                         <div class="clearfix"></div>
@@ -501,7 +546,7 @@ AppAsset::register($this);
 <div id="usersadd" class="window">
     <div class="registr">
         <div class="an-exit">
-            <span class="an-exit__krest"><i class="fa fa-times " aria-hidden="true"></i></span>
+            <a href="#group" rel="modal" class="an-exit__krest"><i class="fa fa-times " aria-hidden="true"></i></a>
         </div>
         <div class="titregbox ah_titregbox">
             <span class="titreg">Добавить список студентов</span>

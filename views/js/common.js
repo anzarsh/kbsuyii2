@@ -160,13 +160,17 @@ $(document).ready(function(){
         $('#group0').text(temp.uname);
         $('#group1').text(temp.users.length);
         id_group2 = temp.id;
+        id_group3 = temp.id;
         
         var k;
         var strtemp = '';
+        searchingusers = new Array();
+        usersin = new Array();
         for (i=0; i<temp.users.length; i++){
             //alert(temp.users[i].id_role);
             //if(temp.users[i].id_role != 0){
             searchingusers.push(temp.users[i].id);
+            usersin.push(temp.users[i].id);
             strtemp += '<tr><td>' + (i+1) + 
                 '</td><td><a dataId="' + temp.users[i].id + '" href="#activist" rel="modal">' + temp.users[i].middlename + ' ' +
                 temp.users[i].uname + ' ' + temp.users[i].lastname +
@@ -176,6 +180,7 @@ $(document).ready(function(){
             //}
         }
         //alert(strtemp);
+        // alert(searchingusers);
         $('#grouptable').html(strtemp);
 
         var strtemp = '';
@@ -183,7 +188,8 @@ $(document).ready(function(){
         for(var i=0; i<temp.users.length; i++){
                 strtemp2 = temp.users[i].middlename + ' ' + temp.users[i].uname + ' ' + temp.users[i].lastname;
                 strtemp2 = strtemp2.length > 25 ? strtemp2.slice(0, 25) + '...' : strtemp2;
-                strtemp += ' <div class="col-md-6 col-sm-6 col-xs-12"><ul class="ah_uplist"><li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>' + 
+                strtemp += ' <div class="col-md-6 col-sm-6 col-xs-12"><ul class="ah_uplist"><li><span class="fa fa-times ah_uplist-span" aria-hidden="true" dataId="'+
+                        temp.users[i].id +'"></span>' + 
                         strtemp2 + '</li></ul></div>';
         }
 
@@ -201,6 +207,7 @@ $(document).ready(function(){
             '</option>';
         }
         // alert(strtemp);
+        $('#usersadd .an-exit a').attr('dataId', id_group2);
         $('#selectuser').html(strtemp);
     }
 /*functions*/
@@ -222,6 +229,12 @@ $(document).ready(function(){
             tempdata = Number($(this).attr('dataid'));
         //alert(tempdata);
         } else if(id == '#usersadd'){
+            senddel = new Array();
+            send = new Array();
+            // searchingusers = new Array();
+            // usersin = new Array();
+            // searchingusers = new Array();
+            // usersin
             // tempdata = $('#finduser').val();
         }
         // alert(tempdata);
@@ -290,47 +303,50 @@ $(document).ready(function(){
 /*online activist searching*/
     var id_group2;
     var searchingusers = new Array();
-    var usersadding = new Array();
+    var usersin = new Array();
+    var send = new Array();
     var delnum = new Array();
+    var senddel = new Array();
 
     function sortNumber(a,b) {
         return a - b;
     }
 
+    function inArray(num, arr){
+        for(var i=0; i<arr.length; i++){
+            if(arr[i] == num){return true;}
+        }
+        return false;
+    }
+
     function union_arr(arr1, arr2) {
-        // var arr = new Array();
-        // есть ли элементы из arr1 в arr2
-        var delnum = new Array();
-        for(var i=0; i<arr1.length; i++){
-            var comp = true;
-            for(var j=0; j<arr2.length; j++){
-                if (arr1[i] == arr2[j]){
+        delnum = new Array();
+        var comp = true;
+        for(var i=0; i<arr2.length; i++){
+            comp = true;
+            for(var j=0; j<arr1.length; j++){
+                if (arr1[j] == arr2[i]){
                     comp = false;
                 }
             }
             if(comp){
-                arr2.push(arr1[i]);
+                arr1.push(arr2[i]);
+                if(!inArray(arr2[i], senddel)){
+                    send.push(arr2[i]);
+                }
             } else{
-                delnum.push(arr1[i]);
+                delnum.push(arr2[i]);
             }
         }
-        // var arr4 = new Array();
-        // for (var i = 0; i < arr2.length; i++) {
-        //     arr4.push(Number(arr2[i], 10));
-        // }
-        // var arr3 = arr1.concat(arr4);
-        // arr3.sort(sortNumber);
-        // var arr = [arr3[0]];
-        // delnum = new Array();
-        // for (var i = 1; i < arr3.length; i++) {
-        //     if (arr3[i] != arr3[i-1]) {
-        //         arr.push(arr3[i]);
-        //         usersadding.push(arr3[i]);
-        //     } else {
-        //         delnum.push(arr3[i]);
-        //     }
-        // }
-        return arr2;
+        for(var i=0; i<arr2.length; i++){
+            for(var j=0; j<senddel.length; j++){
+                if (senddel[j] == arr2[i]){
+                    senddel.splice(j,1);
+                }
+            }
+        }
+        // alert(senddel);
+        return arr1;
     }
 
     function inArray(num, arr){
@@ -359,21 +375,25 @@ $(document).ready(function(){
               }
         });
     });
+    // alert(1);
     $('#selectuserbtn').click(function(e) {
-        var val = $('#selectuser :selected').attr('value');
-        var str = '';
-
+        var val = $('#selectuser').val();
+        // alert(val);
+        // var str = '';
+        // alert(searchingusers);
         // usersadding = union_arr(usersadding, val);
         searchingusers = union_arr(searchingusers, val);
+        // alert(val);
         // alert(searchingusers);
-        alert(delnum);
-        alert(val);
+        // alert(delnum);
+        
         str = '';
         for(var i=0; i<val.length; i++){
             if(!inArray(val[i], delnum)){
                 strtemp = $('#selectuser option[value="' + val[i] + '"]').text();
                 strtemp = strtemp.length > 25 ? strtemp.slice(0, 25) + '...' : strtemp;
-                str += ' <div class="col-md-6 col-sm-6 col-xs-12"><ul class="ah_uplist"><li><span class="fa fa-times ah_uplist-span" aria-hidden="true"></span>' + 
+                str += ' <div class="col-md-6 col-sm-6 col-xs-12"><ul class="ah_uplist"><li><span class="fa fa-times ah_uplist-span" aria-hidden="true" dataId="'+
+                val[i] + '"></span>' + 
                         strtemp + '</li></ul></div>';
             }
         }
@@ -382,27 +402,80 @@ $(document).ready(function(){
 
         return false;
     });
+
+    $('body').on('click','.ah_uplist-span', function(){
+        // alert(searchingusers);
+        temp_id = Number($(this).attr('dataId'));
+        // alert(temp_id);
+        for(var i=0; i<searchingusers.length; i++){
+            if(searchingusers[i] == temp_id){
+                searchingusers.splice(i, 1);
+                $(this).parents('.ah_uplist').parent().remove();
+            }
+        }
+        for(var i1=0; i1<send.length; i1++){
+            if(send[i1] == temp_id){
+                send.splice(i1, 1);
+            }
+        }
+        for(var i2=0; i2<usersin.length; i2++){
+            if(usersin[i2] == temp_id){
+                senddel.push(temp_id);
+            }
+        }
+        // alert(senddel);
+        // alert(searchingusers);
+        
+    });
+    // alert(1);
     $('#selectuseraddbtn').click(function(){
         // alert(id_group2);
         $.ajax({
-            url: "/ajax/Usersadd2",
+            url: "/ajax/usersadd2",
             type: 'get',
             data: {
-                data : searchingusers,
-                id : id_group2
+                data : send,
+                id : id_group2,
+                del : senddel
             },
-            success: function (data) {
-                temp = eval(data);
-                f_finduser(temp.query);
-
+            success: function () {
+                location.href = location.href;
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
                 alert(thrownError);
               }
         });
+        return false;
     });
 /*online activist searching*/
+
+/*change group*/
+var id_group3;
+
+$('#group3').click(function(){
+    $('#changeGroup .an-exit a').attr('dataId', id_group3);
+    $('#changeGroup [name="AddGroup[id]"]').val(id_group3);
+});
+
+$('#group4').click(function(){
+    $.ajax({
+            url: "/ajax/groupremove",
+            type: 'get',
+            data: {
+                id : id_group3,
+            },
+            success: function () {
+                location.href = location.href;
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+              }
+        });
+        return false;
+});
+/*change group*/
 
 // /**/
 

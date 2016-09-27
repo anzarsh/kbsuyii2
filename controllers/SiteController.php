@@ -254,17 +254,34 @@ class SiteController extends Controller
             $query = groups::find();
         }
         if($model2->load(Yii::$app->request->post())){
-            $model2->imageFile = UploadedFile::getInstance($model2, 'imageFile');
-            if ($model2->validate()) {
-                $user = new groups();
-                $user->uname = $model2->uname;
-                $user->save();
-                if($model2->imageFile){
-                    $urltemp = 'views/grouplogo/' . $user->id . '.' . $model2->imageFile->extension;
-                    $model2->imageFile->saveAs($urltemp);
-                    $user->url = $urltemp;
+            if($model2->id == -1){
+                $model2->imageFile = UploadedFile::getInstance($model2, 'imageFile');
+                if ($model2->validate()) {
+                    $user = new groups();
+                    $user->uname = $model2->uname;
+                    $user->save();
+                    if($model2->imageFile){
+                        $urltemp = 'views/grouplogo/' . $user->id . '.' . $model2->imageFile->extension;
+                        $model2->imageFile->saveAs($urltemp);
+                        $user->url = $urltemp;
+                    }
+                    $user->save();
                 }
-                $user->save();
+            } else {
+                $model2->imageFile = UploadedFile::getInstance($model2, 'imageFile');
+                if ($model2->validate()) {
+                    $user = groups::find()->where(['id' => $model2->id])->one();
+                    // $user = groups::findOne($model2->id);
+                    if($model2->uname){
+                        $user->uname = $model2->uname;
+                    }
+                    if($model2->imageFile){
+                        $urltemp = 'views/grouplogo/' . $model2->id . '.' . $model2->imageFile->extension;
+                        $model2->imageFile->saveAs($urltemp);
+                        $user->url = $urltemp;
+                    }
+                    $user->save();
+                }
             }
         }
         

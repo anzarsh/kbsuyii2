@@ -15,6 +15,7 @@ use app\models\users;
 use app\models\event;
 use app\models\groups;
 use app\models\AddGroup;
+use app\models\group_user;
 
 class AjaxController extends Controller
 {
@@ -104,9 +105,57 @@ class AjaxController extends Controller
     {
         $users = $_GET['data'];
         $group_id = $_GET['id'];
-        
-        $user = new groups();
-        $user->uname = $model2->uname;
-        $user->save();
+        $dels = $_GET['del'];
+        // print_r($users);
+        if($users){
+            foreach ($users as $user){
+                $group_user = new group_user();
+                $group_user->id_group = $group_id;
+                $group_user->id_user = $user;
+                $group_user->save();
+            }
+        }
+        if($dels){
+            foreach ($dels as $del){
+                $query = group_user::find()
+                    ->where(['and', 
+                                ['id_group' => $group_id],
+                                ['id_user' => $del],
+                            ])
+                    ->one()
+                    ->delete();
+            }
+        }
+    }
+
+
+        public function actionGroupremove()
+    {
+        // $users = $_GET['data'];
+        $group_id = $_GET['id'];
+        // $dels = $_GET['del'];
+        // print_r($users);
+        if($group_id){
+            // foreach ($users as $user){
+                $group = groups::find()->where(['id' => $group_id])->one();
+                // $group_user->id_group = $group_id;
+                // $group_user->id_user = $user;
+                $group->delete();
+                group_user::deleteAll(['id_group' => $group_id]);
+            // }
+        }
+        // if($dels){
+        //     foreach ($dels as $del){
+        //         $query = group_user::find()
+        //             ->where(['and', 
+        //                         ['id_group' => $group_id],
+        //                         ['id_user' => $del],
+        //                     ])
+        //             ->one()
+        //             ->delete();
+        //     }
+        // }
+         // Yii::$app->response->format = Response::FORMAT_JSON;
+         //    return array("query" => $users);
     }
 }

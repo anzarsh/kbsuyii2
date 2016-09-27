@@ -11,14 +11,16 @@ class AddGroup extends Model
      */
     public $imageFile;
     public $uname;
+    public $id;
 
     public function rules()
     {
         return [
             [['imageFile'], 'file', 'extensions' => 'png, jpg'],
         	['uname', 'string'],
-        	[['uname', 'imageFile'], 'required', 'when' => function () {
-                    if (!$this->uname && !$this->imageFile) {
+            ['id', 'integer'],
+        	[['uname', 'imageFile', 'id'], 'required', 'when' => function () {
+                    if (!$this->uname && !$this->imageFile && !$this->id) {
 
                     }
                 }]
