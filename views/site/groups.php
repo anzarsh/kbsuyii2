@@ -20,6 +20,7 @@ use yii\bootstrap\ActiveForm;
 		<!-- <input type="text" placeholder="Наименование" class="az-col-99-100-px"> -->
 		<a href="#addGroup" rel="modal" class="az-col-100-px az-button-add">Добавить</a>
 	<?php ActiveForm::end(); ?>
+	<?= $_SERVER['ROOT']; ?>
 	<table id="example" class="az-table table table-striped table-hover dt-responsive">
 		<thead class="table-head">
 			<tr>
@@ -30,7 +31,11 @@ use yii\bootstrap\ActiveForm;
 		<tbody class="table-content">
 			<?php foreach ($groups as $group): ?>
 			<tr>
-				<td><a dataId="<?= Html::encode("{$group->id}") ?>" href="#group" rel="modal"><?= Html::encode("{$group->uname}") ?></a></td>
+				<td><a dataId="<?= Html::encode("{$group->id}") ?>" href="#group" rel="modal">
+				<?php if($group->url){ ?>
+				<div style="width: 32px; height: 32px; display: inline-block; vertical-align: middle;"><img style="width: 100%; height: auto;"src="/<?= Html::encode("{$group->url}") ?>"></div>
+				<?php } ?>
+				<?= Html::encode("{$group->uname}") ?></a></td>
 				<td><?= count($group->number); ?></td>
 			</tr>
 			<?php endforeach; ?>

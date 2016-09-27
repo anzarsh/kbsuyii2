@@ -528,8 +528,8 @@ AppAsset::register($this);
                         
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <input type="hidden" name="AddGroup[imageFile]" >
-                            <input type="file" id="f1" class="az-none az-file" accept="image/*" name="AddGroup[imageFile]" value="">
-                            <label for="f1" class="az-file2">Прикрепить фото</label>
+                            <input type="file" id="f2" class="az-none az-file" accept="image/*" name="AddGroup[imageFile]" value="">
+                            <label for="f2" class="az-file2">Прикрепить фото</label>
                         </div>
 
                         <div class="clearfix"></div>
