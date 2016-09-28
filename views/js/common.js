@@ -4,7 +4,7 @@ $(document).ready(function(){
     // alert(1);
 
 /*dates*/
-    $('#datepicker, #datepicker2').datepicker({
+    $('#datepicker, #datepicker2, #datepicker3, #datepicker4').datepicker({
         pickTime: false, language: 'ru'
     });
 
@@ -196,7 +196,7 @@ $(document).ready(function(){
         $('#usersadded').html(strtemp);
     }
 
-    function f_finduser(temp){
+    function f_finduser(temp, tagid){
         var strtemp = '';
         for (i=0; i<temp.length; i++){
             strtemp += '<option value="' + 
@@ -207,8 +207,11 @@ $(document).ready(function(){
             '</option>';
         }
         // alert(strtemp);
-        $('#usersadd .an-exit a').attr('dataId', id_group2);
-        $('#selectuser').html(strtemp);
+        // alert(tagid);
+        if(tagid=='#selectuser'){
+            $('#usersadd .an-exit a').attr('dataId', id_group2);
+        }
+        $(tagid).html(strtemp);
     }
 /*functions*/
 
@@ -238,10 +241,12 @@ $(document).ready(function(){
             // tempdata = $('#finduser').val();
         }
         // alert(tempdata);
-        if (id == '#event' || id == '#activist' || id == '#group' || id == '#usersadd'){
+        if (id == '#event' || id == '#activist' || id == '#group' || id == '#usersadd' || id == '#addEvent'){
             // alert(1);
+            var controllername = (id!='#addEvent')?id.slice(1):'usersadd';
+            // alert(controllername);
             $.ajax({
-                url: "/ajax/" + id.slice(1),
+                url: "/ajax/" + controllername,
                 type: 'get',
                 data: {
                     data : tempdata,
@@ -254,8 +259,10 @@ $(document).ready(function(){
                     if(id == '#event'){f_event(temp.query);}
                     else if(id == '#activist'){f_user(temp.query);}
                     else if(id == '#group'){f_group(temp.query);}
-                    else if(id == '#usersadd'){f_finduser(temp.query);}
-                    //alert(1);
+                    else if(id == '#usersadd'){f_finduser(temp.query, '#selectuser');}
+                    else if(id == '#addEvent'){f_finduser(temp.query, '#selectcoord');}
+
+                    // alert(1);
                     //$('#event9').text(data);
                     //alert(data);
                     // alert(2);
@@ -273,10 +280,12 @@ $(document).ready(function(){
             az_posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
         }
         $(id).css('top', 30);
+
         $(id).css('left', winW/2-$(id).width()/2);
         $(id).fadeIn(500);
         $('.az-fixed').addClass('az-fixed2');
         $('.az-fixed2').css('top',  -az_posTop);
+        $(window).scrollTop(0);
     });
 
 
@@ -358,15 +367,17 @@ $(document).ready(function(){
     
     $('#finduser').keyup(function(e) {
         var val = $('#finduser').val();
+        var fio = val.split(' ', 3);
+        // alert(fio[0]);
         $.ajax({
             url: "/ajax/finduser",
             type: 'get',
             data: {
-                data : val
+                data : fio
             },
             success: function (data) {
                 temp = eval(data);
-                f_finduser(temp.query);
+                f_finduser(temp.query, '#selectuser');
 
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -451,31 +462,54 @@ $(document).ready(function(){
 /*online activist searching*/
 
 /*change group*/
-var id_group3;
+    var id_group3;
 
-$('#group3').click(function(){
-    $('#changeGroup .an-exit a').attr('dataId', id_group3);
-    $('#changeGroup [name="AddGroup[id]"]').val(id_group3);
-});
+    $('#group3').click(function(){
+        $('#changeGroup .an-exit a').attr('dataId', id_group3);
+        $('#changeGroup [name="AddGroup[id]"]').val(id_group3);
+    });
 
-$('#group4').click(function(){
-    $.ajax({
-            url: "/ajax/groupremove",
+    $('#group4').click(function(){
+        $.ajax({
+                url: "/ajax/groupremove",
+                type: 'get',
+                data: {
+                    id : id_group3,
+                },
+                success: function () {
+                    location.href = location.href;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                  }
+            });
+            return false;
+    });
+/*change group*/
+
+/*add new group*/
+    $('#findcoord').keyup(function(e) {
+        var val = $('#findcoord').val();
+        var fio = val.split(' ', 3);
+        $.ajax({
+            url: "/ajax/finduser",
             type: 'get',
             data: {
-                id : id_group3,
+                data : fio
             },
-            success: function () {
-                location.href = location.href;
+            success: function (data) {
+                temp = eval(data);
+                f_finduser(temp.query, '#selectcoord');
+
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
                 alert(thrownError);
               }
         });
-        return false;
-});
-/*change group*/
+    });
+/*add new group*/
 
 // /**/
 

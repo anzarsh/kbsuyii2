@@ -291,13 +291,19 @@ AppAsset::register($this);
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="formwrapper3">
                                         <span class="ah-span ah-mspan">Дата начала:</span>
-                                        <input type="month" name="startdate" placeholder="" class="ah-startdate">
+                                        <div class="input-append date" id="datepicker3" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd.mm.yyyy">
+                                            <input type="text" name="startdate" placeholder="" class="ah-startdate">
+                                            <span class="add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="formwrapper3">
                                         <span class="ah-span ah-mspan">Дата окончания:</span>
-                                        <input type="month" name="finishdate" placeholder="" class="ah-finishdate">
+                                        <div class="input-append date" id="datepicker4" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd.mm.yyyy">
+                                            <input type="text" name="finishdate" placeholder="" class="ah-finishdate">
+                                            <span class="add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -308,22 +314,25 @@ AppAsset::register($this);
                                         <div class="formwrapper4_1">
                                             <span class="ah-span ah-mspan">Координатор:</span>
                                             <div class="checkbox checkbox-info">
-                                                <input type="checkbox" name="coordinator" class="ah-coordinator" id="ah-coordinator">
-                                                <label for="ah-coordinator" class="">Координирует подразделение вуза</label>
+                                                <input type="text" name="coordname" class="az-evname2" id="findcoord" value="" placeholder="поиск координатора">
+                                                <select size="4" class="ah-form-control" id="selectcoord">
+                                                </select>
+                                                <!-- <input type="checkbox" name="coordinator" class="ah-coordinator" id="ah-coordinator"> -->
+                                                <!-- <label for="ah-coordinator" class="">Координирует подразделение вуза</label> -->
                                             </div>
                                         </div>
-                                        <div class="formwrapper4_2">
+                                        <!-- <div class="formwrapper4_2">
                                             <span class="ah-span ah-mspan">Регистратор:</span>
                                             <input type="text" name="reseptionist" placeholder="Поиск по ФИО (среди пользователей).." class="ah-reseptionist">
                                             <input type="text" name="reseptionist1" placeholder="Еще не выбран.." class="ah-reseptionist1">
-                                        </div>
-                                        <div class="formwrapper4_3">
+                                        </div> -->
+                                        <!-- <div class="formwrapper4_3">
                                             <span class="ah-span ah-mspan ">Внешний<br>организатор:</span>
                                             <div class="checkbox checkbox-info">
                                                 <input type="checkbox" name="extorg" class="ah-extorg" id="ah-extorg">
                                                 <label for="ah-extorg" class="">Если организатор НЕ относится к вузу</label>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
 
@@ -430,7 +439,7 @@ AppAsset::register($this);
 
                                 <div class="clearfix"></div>
 
-                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                <!-- <div class="col-md-12 col-sm-12 col-xs-12">
                                     <span class="ah-span padd">Доп. фиксаторы:</span>
                                     <div class="formwrapper7">
                                         <div class="textbox">
@@ -438,7 +447,7 @@ AppAsset::register($this);
                                         </div>
                                         <input type="text" name="dopfixed" placeholder="Поиск по ФИО (среди пользователей).." class="ah-dopfixed">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="clearfix"></div>
                                 <div class="ah-border1"></div>

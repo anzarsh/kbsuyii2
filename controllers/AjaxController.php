@@ -71,12 +71,27 @@ class AjaxController extends Controller
     {
             // print_r($_GET);
             $uname = $_GET['data'];
+            // $argwhere = Array();
+            if(count($uname)==0){$argwhere = '';
+            } else if(count($uname)==1){
+                $argwhere = ['or',
+                                ['like', 'middlename', $uname[0]],
+                                ['like', 'uname', $uname[0]],
+                                ['like', 'lastname', $uname[0]],
+                            ];
+            } else {
+                $argwhere = ['and'];
+                for($i=0; $i<count($uname);$i++){
+                    array_push($argwhere,   ['or',
+                                                ['like', 'middlename', $uname[$i]],
+                                                ['like', 'uname', $uname[$i]],
+                                                ['like', 'lastname', $uname[$i]],
+                                            ]); 
+                }
+            }
+            // print_r($argwhere);
             $query = users::find()
-                 ->where(['or',
-                            ['like', 'middlename', $uname],
-                            ['like', 'uname', $uname],
-                            ['like', 'lastname', $uname],
-                        ])
+                ->where($argwhere)
                 ->limit(10)
                 ->orderBy(['middlename' => SORT_ASC, 'uname' => SORT_ASC, 'lastname' => SORT_ASC])
                 ->asArray()->all();
