@@ -488,7 +488,7 @@ $(document).ready(function(){
     });
 /*change group*/
 
-/*add new group*/
+/*add new event*/
     $('#findcoord').keyup(function(e) {
         var val = $('#findcoord').val();
         var fio = val.split(' ', 3);
@@ -509,7 +509,31 @@ $(document).ready(function(){
               }
         });
     });
-/*add new group*/
+
+    $('.form12').submit(function(e){
+        var temp = $(this).find('input[name="AddEvent[uname]"]');
+        if(temp.val() == ''){
+            temp.addClass('error-input');
+            temp.focus();
+            return false;
+        }
+        temp = $(this).find('input[name="AddEvent[startdate]"]');
+        if(temp.val() == ''){
+            temp.addClass('error-input');
+            temp.focus();
+            return false;
+        }
+        temp = $(this).find('input[name="AddEvent[finishdate]"]');
+        if(temp.val() == ''){
+            temp.addClass('error-input');
+            temp.focus();
+            return false;
+        }
+    });
+    $('.form12 input[name="AddEvent[uname]"], .form12 input[name="AddEvent[startdate]"], .form12 input[name="AddEvent[finishdate]"]').blur(function(){
+        $(this).removeClass('error-input');
+    });
+/*add new event*/
 
 // /**/
 

@@ -19,6 +19,7 @@ use app\models\SearchUser;
 use app\models\SearchEvent;
 use app\models\SearchGroup;
 use app\models\addGroup;
+use app\models\addEvent;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
 
@@ -182,6 +183,7 @@ class SiteController extends Controller
     public function actionEvent()
     {   
         $model = new SearchEvent();
+        $model2 = new AddEvent();
         if($model->load(Yii::$app->request->post()) && $model->validate()){
             $query = event::find()
             ->select('event.*')
@@ -225,6 +227,40 @@ class SiteController extends Controller
         } else {
             $query = event::find();
         }
+
+        if($model2->load(Yii::$app->request->post()) && $model2->validate()){
+            if($model2->id == -1){
+                $event = new event();
+                $event->uname = $model2->uname;
+                $event->location = $model2->location;
+                $event->startdate = date('Y-m-d', strtotime($model2->startdate));
+                $event->finishdate = date('Y-m-d', strtotime($model2->finishdate));
+                $event->comment = $model2->comment;
+
+    //             public $id_eventlevel;
+    // public $location;
+    // public $startdate;
+    // public $finishdate;
+    // public $id_activity0;
+    // public $id_activity1;
+    // public $id_activity2;
+    // public $id_activity3;
+    // public $id_eventtype0;
+    // public $id_eventtype1;
+    // public $id_eventtype2;
+    // public $id_eventtype3;
+    // public $id_eventtype4;
+    // public $id_eventtype5;
+    // public $id_eventtype6;
+    // public $id_eventtype7;
+    // public $id_eventtype8;
+    // public $id_eventcomp;
+    // public $comment;
+                $event->save();
+            }
+        }
+
+
         $pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),

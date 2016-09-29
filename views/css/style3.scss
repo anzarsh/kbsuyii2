@@ -8,6 +8,9 @@ input{
 a:active, a:focus, a:hover, a:visited{
     text-decoration: none !important;
 }
+.error-input{
+    border: 1px solid red !important;
+}
 .az-fixed{
     width: 100%;
     height: 100%;
