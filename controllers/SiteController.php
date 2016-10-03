@@ -20,6 +20,9 @@ use app\models\SearchEvent;
 use app\models\SearchGroup;
 use app\models\addGroup;
 use app\models\addEvent;
+use app\models\event_user_status_role;
+use app\models\event_activity;
+use app\models\event_eventtype;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
 
@@ -236,12 +239,94 @@ class SiteController extends Controller
                 $event->startdate = date('Y-m-d', strtotime($model2->startdate));
                 $event->finishdate = date('Y-m-d', strtotime($model2->finishdate));
                 $event->comment = $model2->comment;
-
-    //             public $id_eventlevel;
-    // public $location;
-    // public $startdate;
-    // public $finishdate;
-    // public $id_activity0;
+                $event->id_eventlevel = $model2->id_eventlevel;
+                $event->id_eventcomp = $model2->id_eventcomp == 1 ? 1: 0;
+                $event->save();
+                $event_user_status_role = new event_user_status_role();
+                $event_user_status_role->id_event = $event->id;
+                $event_user_status_role->id_user = $model2->id_coordinator;
+                $event_user_status_role->id_status = 2;
+                $event_user_status_role->id_role = 0;
+                $event_user_status_role->save();
+                if($model2->id_activity0 == '0'){
+                    $event_activity = new event_activity();
+                    $event_activity->id_event = $event->id;
+                    $event_activity->id_activity = 0;
+                    $event_activity->save();
+                }
+                if($model2->id_activity1 == 1){
+                    $event_activity = new event_activity();
+                    $event_activity->id_event = $event->id;
+                    $event_activity->id_activity = 1;
+                    $event_activity->save();
+                }
+                if($model2->id_activity2 == 2){
+                    $event_activity = new event_activity();
+                    $event_activity->id_event = $event->id;
+                    $event_activity->id_activity = 2;
+                    $event_activity->save();
+                }
+                if($model2->id_activity3 == 3){
+                    $event_activity = new event_activity();
+                    $event_activity->id_event = $event->id;
+                    $event_activity->id_activity = 3;
+                    $event_activity->save();
+                }
+                if($model2->id_eventtype0 == '0'){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 0;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype1 == 1){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 1;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype2 == 2){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 2;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype3 == 3){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 3;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype4 == 4){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 4;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype5 == 5){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 5;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype6 == 6){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 6;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype7 == 7){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 7;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype8 == 8){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 8;
+                    $event_eventtype->save();
+                }
+    //             public $id_activity0;
     // public $id_activity1;
     // public $id_activity2;
     // public $id_activity3;
@@ -254,9 +339,6 @@ class SiteController extends Controller
     // public $id_eventtype6;
     // public $id_eventtype7;
     // public $id_eventtype8;
-    // public $id_eventcomp;
-    // public $comment;
-                $event->save();
             }
         }
 

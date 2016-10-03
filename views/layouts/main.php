@@ -277,7 +277,15 @@ AppAsset::register($this);
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                                     <div class="formwrapper2">
                                         <span class="ah-span ah-mspan">Уровень:</span>
-                                        <input type="text" name="AddEvent[id_eventlevel]" placeholder="" class="ah-evlevel">
+                                        <select name="AddEvent[id_eventlevel]" placeholder="" class="ah-evlevel">
+                                            <option value="0">Факультетский</option>
+                                            <option value="1">Университетский</option>
+                                            <option value="2">Городской</option>
+                                            <option value="3">Республиканский</option>
+                                            <option value="4">Окружной</option>
+                                            <option value="5">Всероссийский</option>
+                                            <option value="6">Международный</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-12">

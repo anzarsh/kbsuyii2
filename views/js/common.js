@@ -529,6 +529,13 @@ $(document).ready(function(){
             temp.focus();
             return false;
         }
+        temp = $(this).find('select[name="AddEvent[id_coordinator]"]');
+        alert(temp.val());
+        if(temp.val() == null){
+            temp.prev().addClass('error-input');
+            temp.prev().focus();
+            return false;
+        }
     });
     $('.form12 input[name="AddEvent[uname]"], .form12 input[name="AddEvent[startdate]"], .form12 input[name="AddEvent[finishdate]"]').blur(function(){
         $(this).removeClass('error-input');
