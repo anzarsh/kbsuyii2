@@ -120,7 +120,7 @@ AppAsset::register($this);
                 </div>
             </div>
             <div class="az-form az-row">
-                <a id="group2" href="#usersadd" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить активиста</a>
+                <a id="group2" href="#usersadd" data-status="usersadd2" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить активиста</a>
                 <a id="group3" href="#changeGroup" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Изменить группу</a>
                 <a id="group4" href="#" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Удалить группу</a>
             </div>
@@ -227,7 +227,13 @@ AppAsset::register($this);
             </div>
             <div class="az-form az-row">
             <span class="az-style2 az-col-100">Комментарий:</span>
-                <span id="event9" class="az-style1 az-col-100">Несмотря на внутренние противоречия, элемент политического процесса теоретически представляет собой эмпирический субъект политического процесса. Политическое учение Руссо, несмотря на внешние воздействия, фактически символизирует постиндустриализм. Технология коммуникации теоретически доказывает прагматический коллапс Советского Союза.</span>
+            <span id="event9" class="az-style1 az-col-100">Несмотря на внутренние противоречия, элемент политического процесса теоретически представляет собой эмпирический субъект политического процесса. Политическое учение Руссо, несмотря на внешние воздействия, фактически символизирует постиндустриализм. Технология коммуникации теоретически доказывает прагматический коллапс Советского Союза.</span>
+
+            </div>
+            <div class="az-form az-row">
+                <a id="group2" href="#usersadd" data-status="regadd" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить регистраторов</a>
+                <a id="group3" href="#changeGroup" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Изменить мероприятие</a>
+                <a id="group4" href="#" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Удалить мероприятие</a>
             </div>
             <table class="az-table">
         <thead class="table-head">
@@ -277,7 +283,7 @@ AppAsset::register($this);
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                                     <div class="formwrapper2">
                                         <span class="ah-span ah-mspan">Уровень:</span>
-                                        <select name="AddEvent[id_eventlevel]" placeholder="" class="ah-evlevel">
+                                        <select name="AddEvent[id_eventlevel]" placeholder="" class="event-input az-block az-select">
                                             <option value="0">Факультетский</option>
                                             <option value="1">Университетский</option>
                                             <option value="2">Городской</option>
@@ -291,7 +297,7 @@ AppAsset::register($this);
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                                     <div class="formwrapper2">
                                         <span class="ah-span ah-mspan">Место:</span>
-                                        <input type="text" name="AddEvent[location]" placeholder="" class="ah-evplace">
+                                        <input type="text" name="AddEvent[location]" placeholder="" class="event-input az-block">
                                     </div>
                                 </div>
 
@@ -300,8 +306,8 @@ AppAsset::register($this);
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="formwrapper3">
                                         <span class="ah-span ah-mspan">Дата начала:</span>
-                                        <div class="input-append date" id="datepicker3" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd.mm.yyyy">
-                                            <input type="text" name="AddEvent[startdate]" placeholder="" class="ah-startdate">
+                                        <div class="input-append date date-input" id="datepicker3" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd.mm.yyyy">
+                                            <input type="text" name="AddEvent[startdate]" placeholder="" class="ah-startdate az-col-100-24-px">
                                             <span class="add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                         </div>
                                     </div>
@@ -309,8 +315,8 @@ AppAsset::register($this);
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="formwrapper3">
                                         <span class="ah-span ah-mspan">Дата окончания:</span>
-                                        <div class="input-append date" id="datepicker4" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd.mm.yyyy">
-                                            <input type="text" name="AddEvent[finishdate]" placeholder="" class="ah-finishdate">
+                                        <div class="input-append date date-input" id="datepicker4" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd.mm.yyyy">
+                                            <input type="text" name="AddEvent[finishdate]" placeholder="" class="ah-finishdate az-col-100-24-px">
                                             <span class="add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                         </div>
                                     </div>
@@ -322,26 +328,12 @@ AppAsset::register($this);
                                     <div class="formwrapper4">
                                         <div class="formwrapper4_1">
                                             <span class="ah-span ah-mspan">Координатор:</span>
-                                            <div class="checkbox checkbox-info">
-                                                <input type="text" class="az-evname2" id="findcoord" value="" placeholder="поиск координатора">
-                                                <select size="4" class="ah-form-control" id="selectcoord" name="AddEvent[id_coordinator]">
+                                            <div class="">
+                                                <input type="text" class="az-evname2 az-margin" id="findcoord" value="" placeholder="поиск координатора">
+                                                <select size="4" class="ah-form-control az-select" id="selectcoord" name="AddEvent[id_coordinator]">
                                                 </select>
-                                                <!-- <input type="checkbox" name="coordinator" class="ah-coordinator" id="ah-coordinator"> -->
-                                                <!-- <label for="ah-coordinator" class="">Координирует подразделение вуза</label> -->
                                             </div>
                                         </div>
-                                        <!-- <div class="formwrapper4_2">
-                                            <span class="ah-span ah-mspan">Регистратор:</span>
-                                            <input type="text" name="reseptionist" placeholder="Поиск по ФИО (среди пользователей).." class="ah-reseptionist">
-                                            <input type="text" name="reseptionist1" placeholder="Еще не выбран.." class="ah-reseptionist1">
-                                        </div> -->
-                                        <!-- <div class="formwrapper4_3">
-                                            <span class="ah-span ah-mspan ">Внешний<br>организатор:</span>
-                                            <div class="checkbox checkbox-info">
-                                                <input type="checkbox" name="extorg" class="ah-extorg" id="ah-extorg">
-                                                <label for="ah-extorg" class="">Если организатор НЕ относится к вузу</label>
-                                            </div>
-                                        </div> -->
                                     </div>
                                 </div>
 
@@ -578,7 +570,7 @@ AppAsset::register($this);
 <div id="usersadd" class="window">
     <div class="registr">
         <div class="an-exit">
-            <a href="#group" rel="modal" class="an-exit__krest"><i class="fa fa-times " aria-hidden="true"></i></a>
+            <a href="#" rel="modal" class="an-exit__krest"><i class="fa fa-times " aria-hidden="true"></i></a>
         </div>
         <div class="titregbox ah_titregbox">
             <span class="titreg">Добавить список студентов</span>
@@ -594,6 +586,7 @@ AppAsset::register($this);
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="text" name="uname" class="az-evname2" id="finduser" value="">
+                        <input type="hidden" name="status" class="az-evname2" id="finduser" value="">
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <p id="finduser2"></p>

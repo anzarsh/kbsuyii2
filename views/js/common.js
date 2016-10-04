@@ -59,6 +59,8 @@ $(document).ready(function(){
 
     function f_event(temp){
         //alert(temp.startdate);
+        id_event2 = temp.id;
+        $('#usersadd .an-exit a').attr('dataId', id_event2);
         $('#event0').text(temp.uname);
         $('#event1').text(temp.eventlevel.uname);
         $('#event2').text(
@@ -70,7 +72,12 @@ $(document).ready(function(){
         // alert(asdfd.toLocaleDateString());
         $('#event3').text(datetemp.toLocaleDateString());
         var strtemp = '';
+        searchingusers = new Array();
+        usersin = new Array();
+        
         temp.registrator.forEach(function(item, j){
+            searchingusers.push(item.id);
+            usersin.push(item.id);
             strtemp +=  (j==0)?(
                         item.uname.slice(0,1) + '.' +
                         item.lastname.slice(0,1) + '.' +
@@ -82,7 +89,23 @@ $(document).ready(function(){
                         item.middlename
                         );
         });
+
+
+
         $('#event4').text(strtemp);
+
+        var strtemp = '';
+
+        for(var i=0; i<temp.registrator.length; i++){
+                strtemp2 = temp.registrator[i].middlename + ' ' + temp.registrator[i].uname + ' ' + temp.registrator[i].lastname;
+                strtemp2 = strtemp2.length > 25 ? strtemp2.slice(0, 25) + '...' : strtemp2;
+                strtemp += ' <div class="col-md-6 col-sm-6 col-xs-12"><ul class="ah_uplist"><li><span class="fa fa-times ah_uplist-span" aria-hidden="true" dataId="'+
+                        temp.registrator[i].id +'"></span>' + 
+                        strtemp2 + '</li></ul></div>';
+        }
+
+        $('#usersadded').html(strtemp);
+
         var datetemp = new Date(temp.finishdate);
         $('#event5').text(datetemp.toLocaleDateString());
         strtemp = '';
@@ -99,6 +122,7 @@ $(document).ready(function(){
         $('#event9').text(temp.comment);
         var k;
         var strtemp = '';
+        
         for (i=0; i<temp.roles.length; i++){
             if(temp.roles[i].id_role != 0){
             strtemp += '<tr><td>' + (i+1) + 
@@ -161,7 +185,7 @@ $(document).ready(function(){
         $('#group1').text(temp.users.length);
         id_group2 = temp.id;
         id_group3 = temp.id;
-        
+        $('#usersadd .an-exit a').attr('dataId', id_group2);
         var k;
         var strtemp = '';
         searchingusers = new Array();
@@ -208,9 +232,9 @@ $(document).ready(function(){
         }
         // alert(strtemp);
         // alert(tagid);
-        if(tagid=='#selectuser'){
-            $('#usersadd .an-exit a').attr('dataId', id_group2);
-        }
+        // if(tagid=='#selectuser'){
+            
+        // }
         $(tagid).html(strtemp);
     }
 /*functions*/
@@ -226,14 +250,17 @@ $(document).ready(function(){
         }
         e.preventDefault();
         var id = $(this).attr('href');
+
         // alert(id);
         var tempdata = -1;
         if (id == '#event' || id == '#activist' || id == '#group'){
             tempdata = Number($(this).attr('dataid'));
+            $('#usersadd .an-exit__krest').attr('href', id);
         //alert(tempdata);
         } else if(id == '#usersadd'){
             senddel = new Array();
             send = new Array();
+            $('#usersadd input[name="status"]').val($(this).attr('data-status'));
             // searchingusers = new Array();
             // usersin = new Array();
             // searchingusers = new Array();
@@ -261,6 +288,7 @@ $(document).ready(function(){
                     else if(id == '#group'){f_group(temp.query);}
                     else if(id == '#usersadd'){f_finduser(temp.query, '#selectuser');}
                     else if(id == '#addEvent'){f_finduser(temp.query, '#selectcoord');}
+                    // else if(id == '#addEvent'){f_finduser(temp.query, '#selectcoord');}
 
                     // alert(1);
                     //$('#event9').text(data);
@@ -310,6 +338,7 @@ $(document).ready(function(){
 /*popups*/
 
 /*online activist searching*/
+    var id_event2;
     var id_group2;
     var searchingusers = new Array();
     var usersin = new Array();
@@ -441,15 +470,18 @@ $(document).ready(function(){
     // alert(1);
     $('#selectuseraddbtn').click(function(){
         // alert(id_group2);
+        // alert(id_event2);
+        var temp = $('#usersadd input[name="status"]').val();
         $.ajax({
-            url: "/ajax/usersadd2",
+            url: "/ajax/" + temp,
             type: 'get',
             data: {
                 data : send,
-                id : id_group2,
+                id : temp=="usersadd2"?id_group2:temp=="regadd"?id_event2:'',
                 del : senddel
             },
             success: function () {
+                alert(1);
                 location.href = location.href;
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -530,7 +562,7 @@ $(document).ready(function(){
             return false;
         }
         temp = $(this).find('select[name="AddEvent[id_coordinator]"]');
-        alert(temp.val());
+        // alert(temp.val());
         if(temp.val() == null){
             temp.prev().addClass('error-input');
             temp.prev().focus();

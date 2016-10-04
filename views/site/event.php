@@ -32,14 +32,14 @@ use yii\jui\DatePicker;
 			<?= $inputt; ?>
 			
 			<div class="input-append date az-col-150-px az-col-xs-49" id="datepicker" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd.mm.yyyy">
-				<?php $inputt = $form->field($model,'startdate')->textInput(['maxlength' => 18, 'class' => 'span2 startdate', 'placeholder' => 'с', 'size' => '16'])->label(false); ?>
+				<?php $inputt = $form->field($model,'startdate')->textInput(['maxlength' => 18, 'class' => 'az-col-100-20-px startdate', 'placeholder' => 'с', 'size' => '16'])->label(false); ?>
 				<?php $inputt->template = "{input}"; ?>
 				<?= $inputt; ?>
 			    <!-- <input class="span2" size="16" type="text" readonly="readonly"/> -->
 			    <span class="add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
 			</div>
 			<div class="input-append date az-col-150-px az-col-xs-49" id="datepicker2" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd.mm.yyyy">
-				<?php $inputt = $form->field($model,'finishdate')->textInput(['maxlength' => 18, 'class' => 'span2 finishdate', 'placeholder' => 'по', 'size' => '16'])->label(false); ?>
+				<?php $inputt = $form->field($model,'finishdate')->textInput(['maxlength' => 18, 'class' => 'az-col-100-20-px finishdate', 'placeholder' => 'по', 'size' => '16'])->label(false); ?>
 				<?php $inputt->template = "{input}"; ?>
 				<?= $inputt; ?>
 			    <!-- <input class="span2" size="16" type="text" readonly="readonly"/> -->

@@ -16,6 +16,7 @@ use app\models\event;
 use app\models\groups;
 use app\models\AddGroup;
 use app\models\group_user;
+use app\models\event_user_status_role;
 
 class AjaxController extends Controller
 {
@@ -101,14 +102,7 @@ class AjaxController extends Controller
     }
     public function actionUsersadd()
     {
-            // print_r($_GET);
-            // $uname = $_GET['data'];
             $query = users::find()
-                 // ->where(['or',
-                 //            ['like', 'middlename', $uname],
-                 //            ['like', 'uname', $uname],
-                 //            ['like', 'lastname', $uname],
-                 //        ])
                 ->limit(10)
                 ->orderBy(['middlename' => SORT_ASC, 'uname' => SORT_ASC, 'lastname' => SORT_ASC])
                 ->asArray()->all();
@@ -143,6 +137,36 @@ class AjaxController extends Controller
         }
     }
 
+    public function actionRegadd()
+    {
+        $users = $_GET['data'];
+        $event_id = $_GET['id'];
+        $dels = $_GET['del'];
+        // print_r($users);
+        if($users){
+            foreach ($users as $user){
+                $event_user_status_role = new event_user_status_role();
+                $event_user_status_role->id_event = $event_id;
+                $event_user_status_role->id_user = $user;
+                $event_user_status_role->id_status = 1;
+                $event_user_status_role->id_role = 0;
+                $event_user_status_role->save();
+            }
+        }
+        if($dels){
+            foreach ($dels as $del){
+                $query = event_user_status_role::find()
+                    ->where(['and', 
+                                ['id_group' => $event_id],
+                                ['id_user' => $del],
+                                ['id_status' => 1],
+                                ['id_role' => 0],
+                            ])
+                    ->one()
+                    ->delete();
+            }
+        }
+    }
 
         public function actionGroupremove()
     {

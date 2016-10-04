@@ -344,6 +344,20 @@ div.icons_style{
     font-size: 12px;
     vertical-align: top;
 }
+.az-col-100-20-px{
+    display: inline-block;
+    width: calc(100% - 20px);
+    margin-right: 1%;
+    font-size: 12px;
+    //vertical-align: top;
+}
+.az-col-100-24-px{
+    display: inline-block;
+    width: calc(100% - 24px);
+    margin-right: 1%;
+    font-size: 12px;
+    //vertical-align: top;
+}
 .az-col-99-100-px{
     display: inline-block;
     width: calc(99% - 100px);
@@ -737,6 +751,35 @@ div.icons_style{
     font-size: 13px;
 }
 
+.event-input{
+    cursor: pointer;
+    margin-top: 5px;
+    padding: 0 5px;
+    width: 100% !important;
+}
+.date-input{
+    cursor: pointer;
+    margin-top: 5px;
+    /*padding: 0 5px;*/
+    width: 100% !important;
+}
+.az-block{
+    display: block;
+    width: 100%;
+}
+.az-margin{
+    margin-top: 5px;
+    margin-bottom: 0px !important;
+}
+.az-select{
+    font-size: 14px;
+    padding: 0 5px;
+    height: 25px;
+}
+textarea{
+    font-size: 14px;
+    padding: 5px;
+}
 
 /*==========  Desktop First Method  ==========*/
 
