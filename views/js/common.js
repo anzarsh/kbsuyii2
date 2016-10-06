@@ -61,6 +61,7 @@ $(document).ready(function(){
         //alert(temp.startdate);
         id_event2 = temp.id;
         $('#usersadd .an-exit a').attr('dataId', id_event2);
+        $('#activeadd .an-exit a').attr('dataId', id_event2);
         $('#event0').text(temp.uname);
         $('#event1').text(temp.eventlevel.uname);
         $('#event2').text(
@@ -122,9 +123,12 @@ $(document).ready(function(){
         $('#event9').text(temp.comment);
         var k;
         var strtemp = '';
-        
+        var strtemp3 = '';
+        var strtemp4 = '';
         for (i=0; i<temp.roles.length; i++){
             if(temp.roles[i].id_role != 0){
+            searchingusers2.push(temp.roles[i].user.id);
+            usersin2.push(temp.roles[i].user.id);
             strtemp += '<tr><td>' + (i+1) + 
                 '</td><td><a dataId="' + temp.roles[i].user.id + '" href="#activist" rel="modal">' + temp.roles[i].user.middlename + ' ' +
                 temp.roles[i].user.uname + ' ' + temp.roles[i].user.lastname +
@@ -133,9 +137,16 @@ $(document).ready(function(){
                 '</td><td>' + temp.roles[i].user.department.shortname + ':'
                 + temp.roles[i].user.department.unit.shortname +
                 '</td></tr>';
+
+                strtemp4 = temp.roles[i].user.middlename + ' ' + temp.roles[i].user.uname + ' ' + temp.roles[i].user.lastname;
+                strtemp4 = strtemp4.length > 25 ? strtemp4.slice(0, 25) + '...' : strtemp4;
+                strtemp3 += ' <div class="col-md-6 col-sm-6 col-xs-12"><ul class="ah_uplist"><li><span class="fa fa-times ah_uplist-span" aria-hidden="true" dataId="'+
+                        temp.roles[i].user.id +'"></span>' + 
+                        strtemp4 + '</li></ul></div>';
             }
         }
         $('#eventtable').html(strtemp);
+        $('#activeadded').html(strtemp3);
     }
 
     function f_user(temp){
@@ -257,10 +268,12 @@ $(document).ready(function(){
             tempdata = Number($(this).attr('dataid'));
             $('#usersadd .an-exit__krest').attr('href', id);
         //alert(tempdata);
-        } else if(id == '#usersadd'){
+        } else if(id == '#usersadd' || id == '#activeadd'){
             senddel = new Array();
             send = new Array();
-            $('#usersadd input[name="status"]').val($(this).attr('data-status'));
+            if(id == '#usersadd'){
+                $('#usersadd input[name="status"]').val($(this).attr('data-status'));
+            }
             // searchingusers = new Array();
             // usersin = new Array();
             // searchingusers = new Array();
@@ -268,7 +281,7 @@ $(document).ready(function(){
             // tempdata = $('#finduser').val();
         }
         // alert(tempdata);
-        if (id == '#event' || id == '#activist' || id == '#group' || id == '#usersadd' || id == '#addEvent'){
+        if (id == '#event' || id == '#activist' || id == '#group' || id == '#usersadd' || id == '#addEvent' || id == '#activeadd'){
             // alert(1);
             var controllername = (id!='#addEvent')?id.slice(1):'usersadd';
             // alert(controllername);
@@ -288,6 +301,8 @@ $(document).ready(function(){
                     else if(id == '#group'){f_group(temp.query);}
                     else if(id == '#usersadd'){f_finduser(temp.query, '#selectuser');}
                     else if(id == '#addEvent'){f_finduser(temp.query, '#selectcoord');}
+                    else if(id == '#activeadd'){f_finduser(temp.query, '#selectactive');}
+
                     // else if(id == '#addEvent'){f_finduser(temp.query, '#selectcoord');}
 
                     // alert(1);
@@ -346,6 +361,7 @@ $(document).ready(function(){
     var delnum = new Array();
     var senddel = new Array();
 
+
     function sortNumber(a,b) {
         return a - b;
     }
@@ -383,21 +399,13 @@ $(document).ready(function(){
                 }
             }
         }
-        // alert(senddel);
         return arr1;
     }
 
-    function inArray(num, arr){
-        for(var i=0; i<arr.length; i++){
-            if(arr[i] == num){return true;}
-        }
-        return false;
-    }
     
     $('#finduser').keyup(function(e) {
         var val = $('#finduser').val();
         var fio = val.split(' ', 3);
-        // alert(fio[0]);
         $.ajax({
             url: "/ajax/finduser",
             type: 'get',
@@ -415,17 +423,9 @@ $(document).ready(function(){
               }
         });
     });
-    // alert(1);
     $('#selectuserbtn').click(function(e) {
         var val = $('#selectuser').val();
-        // alert(val);
-        // var str = '';
-        // alert(searchingusers);
-        // usersadding = union_arr(usersadding, val);
         searchingusers = union_arr(searchingusers, val);
-        // alert(val);
-        // alert(searchingusers);
-        // alert(delnum);
         
         str = '';
         for(var i=0; i<val.length; i++){
@@ -437,16 +437,13 @@ $(document).ready(function(){
                         strtemp + '</li></ul></div>';
             }
         }
-        
         $('#usersadded').html($('#usersadded').html() + str);
-
+        alert(send);
         return false;
     });
 
-    $('body').on('click','.ah_uplist-span', function(){
-        // alert(searchingusers);
+    $('body').on('click','#usersadd .ah_uplist-span', function(){
         temp_id = Number($(this).attr('dataId'));
-        // alert(temp_id);
         for(var i=0; i<searchingusers.length; i++){
             if(searchingusers[i] == temp_id){
                 searchingusers.splice(i, 1);
@@ -463,14 +460,9 @@ $(document).ready(function(){
                 senddel.push(temp_id);
             }
         }
-        // alert(senddel);
-        // alert(searchingusers);
         
     });
-    // alert(1);
     $('#selectuseraddbtn').click(function(){
-        // alert(id_group2);
-        // alert(id_event2);
         var temp = $('#usersadd input[name="status"]').val();
         $.ajax({
             url: "/ajax/" + temp,
@@ -481,7 +473,7 @@ $(document).ready(function(){
                 del : senddel
             },
             success: function () {
-                alert(1);
+                // alert(1);
                 location.href = location.href;
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -573,6 +565,131 @@ $(document).ready(function(){
         $(this).removeClass('error-input');
     });
 /*add new event*/
+
+/*add activist*/
+    
+    var status = new Array();
+    var searchingusers2 = new Array();
+    var usersin2 = new Array();
+    
+    function union_arr2(arr1, num1) {
+        delnum = new Array();
+        var comp = true;
+        // for(var i=0; i<arr2.length; i++){
+            // comp = true;
+            for(var j=0; j<arr1.length; j++){
+                if (arr1[j] == num1){
+                    comp = false;
+                }
+            }
+            if(comp){
+                arr1.push(num1);
+                if(!inArray(num1, senddel)){
+                    send.push(num1);
+                    status.push($('select[name="id_status"]').val());
+                    // status.push()
+                }
+            } else{
+                delnum.push(num1);
+            }
+        // }
+        // for(var i=0; i<arr2.length; i++){
+            for(var j=0; j<senddel.length; j++){
+                if (senddel[j] == num1){
+                    senddel.splice(j,1);
+                }
+            }
+        // }
+        return arr1;
+    }
+
+    $('#findactive').keyup(function(e) {
+        var val = $('#findactive').val();
+        var fio = val.split(' ', 3);
+        $.ajax({
+            url: "/ajax/finduser",
+            type: 'get',
+            data: {
+                data : fio
+            },
+            success: function (data) {
+                temp = eval(data);
+                f_finduser(temp.query, '#selectactive');
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+              }
+        });
+    });
+
+    $('#selectactivebtn').click(function(e) {
+        var val = $('#selectactive').val();
+        // alert(send);
+        searchingusers2 = union_arr2(searchingusers2, val);
+        // alert(val);
+        // alert(send);
+        str = '';
+        // for(var i=0; i<val.length; i++){
+            if(!inArray(val, delnum)){
+                var strtemp = $('#selectactive option[value="' + val + '"]').text();
+                strtemp = strtemp.length > 25 ? strtemp.slice(0, 25) + '...' : strtemp;
+                str += ' <div class="col-md-6 col-sm-6 col-xs-12"><ul class="ah_uplist"><li><span class="fa fa-times ah_uplist-span" aria-hidden="true" dataId="'+
+                val + '"></span>' + 
+                        strtemp + '</li></ul></div>';
+            }
+        // }
+        $('#activeadded').html($('#activeadded').html() + str);
+        alert(send);
+        alert(status);
+        return false;
+    });
+    $('body').on('click','#activeadd .ah_uplist-span', function(){
+        temp_id = Number($(this).attr('dataId'));
+        for(var i=0; i<searchingusers2.length; i++){
+            if(searchingusers2[i] == temp_id){
+                searchingusers2.splice(i, 1);
+                $(this).parents('.ah_uplist').parent().remove();
+            }
+        }
+        for(var i1=0; i1<send.length; i1++){
+            if(send[i1] == temp_id){
+                send.splice(i1, 1);
+                status.splice(i1, 1);
+            }
+        }
+        for(var i2=0; i2<usersin2.length; i2++){
+            if(usersin2[i2] == temp_id){
+                senddel.push(temp_id);
+            }
+        }
+        
+    });
+    $('#selectactiveaddbtn').click(function(){
+        // var temp = $('#activeadd input[name="status"]').val();
+        $.ajax({
+            url: "/ajax/activeadd",
+            type: 'get',
+            data: {
+                data : send,
+                id : id_event2,
+                del : senddel,
+                role : status
+            },
+            success: function () {
+                // alert(1);
+                location.href = location.href;
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+              }
+        });
+        return false;
+    });
+/*add activist*/
+
 
 // /**/
 

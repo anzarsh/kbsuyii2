@@ -14,6 +14,7 @@ use app\models\entryForm;
 use app\models\users;
 use app\models\event;
 use app\models\groups;
+use app\models\role;
 use app\models\AddGroup;
 use app\models\group_user;
 use app\models\event_user_status_role;
@@ -157,7 +158,7 @@ class AjaxController extends Controller
             foreach ($dels as $del){
                 $query = event_user_status_role::find()
                     ->where(['and', 
-                                ['id_group' => $event_id],
+                                ['id_event' => $event_id],
                                 ['id_user' => $del],
                                 ['id_status' => 1],
                                 ['id_role' => 0],
@@ -168,7 +169,51 @@ class AjaxController extends Controller
         }
     }
 
-        public function actionGroupremove()
+    public function actionActiveadd()
+    {
+        $users = $_GET['data'];
+        $event_id = $_GET['id'];
+        $dels = $_GET['del'];
+        $roles = $_GET['role'];
+        // print_r($users);
+        if($users){
+            for($i=0;$i<count($users); $i++){
+            // foreach ($users as $user){
+                $event_user_status_role = new event_user_status_role();
+                $event_user_status_role->id_event = $event_id;
+                $event_user_status_role->id_user = $users[$i];
+                $event_user_status_role->id_status = 0;
+                $event_user_status_role->id_role = $roles[$i];
+                $event_user_status_role->save();
+                $rate = role::find()
+                    ->where(['id' => $roles[$i]])
+                    ->one();
+                $mark = $rate->mark;
+                $users_temp = users::find()
+                    ->where(['id' => $users[$i]])
+                    ->one();
+                $rate = $users_temp->rate;
+                $summ = $rate + $mark;
+                $users_temp->rate = $summ;//$users_temp->rate + $rate->mark;
+                $users_temp->save();
+            }
+        }
+        if($dels){
+            foreach ($dels as $del){
+                $query = event_user_status_role::find()
+                    ->where(['and', 
+                                ['id_event' => $event_id],
+                                ['id_user' => $del],
+                                ['id_status' => 0],
+                                // ['id_role' => 0],
+                            ])
+                    ->one()
+                    ->delete();
+            }
+        }
+    }
+
+    public function actionGroupremove()
     {
         // $users = $_GET['data'];
         $group_id = $_GET['id'];

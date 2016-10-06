@@ -234,6 +234,8 @@ AppAsset::register($this);
                 <a id="group2" href="#usersadd" data-status="regadd" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить регистраторов</a>
                 <a id="group3" href="#changeGroup" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Изменить мероприятие</a>
                 <a id="group4" href="#" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Удалить мероприятие</a>
+                <a id="group5" href="#activeadd" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить активиста</a>
+                
             </div>
             <table class="az-table">
         <thead class="table-head">
@@ -453,18 +455,6 @@ AppAsset::register($this);
                                 </div>
 
                                 <div class="clearfix"></div>
-
-                                <!-- <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <span class="ah-span padd">Доп. фиксаторы:</span>
-                                    <div class="formwrapper7">
-                                        <div class="textbox">
-                                            <p class="ah-span2 ah-color"><span>Доп. фиксаторы</span> – пользователи системы Карты активиста (не студенты), которые также смогут добавлять вовлеченных в создаваемое мероприятие. По умолчанию фиксатором является сам пользователь, указанный ответственный и все сотрудники указанного подразделения вуза</p>
-                                        </div>
-                                        <input type="text" name="dopfixed" placeholder="Поиск по ФИО (среди пользователей).." class="ah-dopfixed">
-                                    </div>
-                                </div> -->
-
-                                <div class="clearfix"></div>
                                 <div class="ah-border1"></div>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <span class="ah-span">Комментарий:</span>
@@ -586,7 +576,7 @@ AppAsset::register($this);
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="text" name="uname" class="az-evname2" id="finduser" value="">
-                        <input type="hidden" name="status" class="az-evname2" id="finduser" value="">
+                        <input type="hidden" name="status" class="az-evname2" id="" value="">
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <p id="finduser2"></p>
@@ -617,6 +607,68 @@ AppAsset::register($this);
         </form>
     </div>
 </div>
+
+<div id="activeadd" class="window">
+    <div class="registr">
+        <div class="an-exit">
+            <a href="#" rel="modal" class="an-exit__krest"><i class="fa fa-times " aria-hidden="true"></i></a>
+        </div>
+        <div class="titregbox ah_titregbox">
+            <span class="titreg">Добавить список участников</span>
+        </div>
+        <form action="" class="common-form ah_form form1">
+            <div class="row">
+                <div class="formwrapper ah_formwrapper">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <!-- <label for="ah_upinput" class="ah_uplabel">Текст для заголовка input-a</label> -->
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <input type="text" name="uname" class="az-evname2" id="findactive" value="">
+                        <input type="hidden" name="status" class="az-evname2" id="" value="">
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <p id="findactive2"></p>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <select size="4" class="ah-form-control" id="selectactive">
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <select size="1" class="ah-form-control" id="selectactiverole" name="id_status">
+                            <option value="1">Участник</option>
+                            <option value="2">Помощник организатора</option>
+                            <option value="3">Организатор</option>
+                            <option value="4">Главный организатор</option>
+                        </select>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button type="submit" class="ah_btn" id="selectactivebtn">Выбрать</button>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    
+                    <div id="activeadded">
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button type="submit" class="ah_btn" id="selectactiveaddbtn">Добавить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <?php //$this->endBody() ?>
 <script src="../../views/js/common.js"></script>
 </body>
