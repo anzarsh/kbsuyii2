@@ -4,7 +4,7 @@ $(document).ready(function(){
     // alert(1);
 
 /*dates*/
-    $('#datepicker, #datepicker2, #datepicker3, #datepicker4').datepicker({
+    $('#datepicker, #datepicker2, #datepicker3, #datepicker4, #datepicker5, #datepicker6').datepicker({
         pickTime: false, language: 'ru'
     });
 
@@ -60,18 +60,31 @@ $(document).ready(function(){
     function f_event(temp){
         //alert(temp.startdate);
         id_event2 = temp.id;
+        id_event3 = temp.id;
         $('#usersadd .an-exit a').attr('dataId', id_event2);
         $('#activeadd .an-exit a').attr('dataId', id_event2);
+        $('#changeEvent .an-exit a').attr('dataId', id_event2);
         $('#event0').text(temp.uname);
+        $('#changeEvent input[name="AddEvent[uname]"]').val(temp.uname);
         $('#event1').text(temp.eventlevel.uname);
+        $('#changeEvent select[name="AddEvent[id_eventlevel]"]').val(temp.eventlevel.id);
+        
         $('#event2').text(
             temp.iCoordinator.uname.slice(0,1)+'.'+
             temp.iCoordinator.lastname.slice(0,1)+'.'+
             temp.iCoordinator.middlename
             );
+        coordd = temp.iCoordinator.middlename+' '+
+            temp.iCoordinator.uname+' '+
+            temp.iCoordinator.lastname;
+        $('#findcoord2').val(coordd);
+        coordd_id = temp.iCoordinator.id;
+
         var datetemp = new Date(temp.startdate);//.format("dd.mm.yyyy");
         // alert(asdfd.toLocaleDateString());
         $('#event3').text(datetemp.toLocaleDateString());
+        $('#changeEvent input[name="AddEvent[startdate]"]').val(datetemp.toLocaleDateString());
+        
         var strtemp = '';
         searchingusers = new Array();
         usersin = new Array();
@@ -109,18 +122,29 @@ $(document).ready(function(){
 
         var datetemp = new Date(temp.finishdate);
         $('#event5').text(datetemp.toLocaleDateString());
+        $('#changeEvent input[name="AddEvent[finishdate]"]').val(datetemp.toLocaleDateString());
         strtemp = '';
             temp.activity.forEach(function(item, j){
                 strtemp +=  (j==0)?(item.uname):(', ' + item.uname);
+                $('#changeEvent input[type="checkbox"][name="AddEvent[id_activity'+ item.id +']"]').attr('checked', 'checked');
             });
         $('#event6').text(strtemp);
         $('#event7').text(temp.location);
+        $('#changeEvent input[name="AddEvent[location]"').val(temp.location);
+        
         strtemp = '';
         temp.eventtype.forEach(function(item, j){
             strtemp +=  (j==0)?(item.uname):(', ' + item.uname);
+            $('#changeEvent input[type="checkbox"][name="AddEvent[id_eventtype'+ item.id +']"]').attr('checked', 'checked');
         });
         $('#event8').text(strtemp);
+        // alert(temp.id_eventcomp);
+        if(temp.id_eventcomp == 1){
+            $('#changeEvent input[type="checkbox"][name="AddEvent[id_eventcomp]"]').attr('checked', 'checked');
+        }
+        
         $('#event9').text(temp.comment);
+        $('#changeEvent textarea[name="AddEvent[comment]"]').text(temp.comment);
         var k;
         var strtemp = '';
         var strtemp3 = '';
@@ -232,6 +256,7 @@ $(document).ready(function(){
     }
 
     function f_finduser(temp, tagid){
+
         var strtemp = '';
         for (i=0; i<temp.length; i++){
             strtemp += '<option value="' + 
@@ -243,10 +268,14 @@ $(document).ready(function(){
         }
         // alert(strtemp);
         // alert(tagid);
-        // if(tagid=='#selectuser'){
+
             
         // }
         $(tagid).html(strtemp);
+        if(tagid=='#selectcoord2'){
+            $('#selectcoord2').val(coordd_id);
+            // alert(coordd_id);
+        }
     }
 /*functions*/
 
@@ -267,6 +296,8 @@ $(document).ready(function(){
         if (id == '#event' || id == '#activist' || id == '#group'){
             tempdata = Number($(this).attr('dataid'));
             $('#usersadd .an-exit__krest').attr('href', id);
+            $('#activeadd .an-exit__krest').attr('href', id);
+
         //alert(tempdata);
         } else if(id == '#usersadd' || id == '#activeadd'){
             senddel = new Array();
@@ -279,11 +310,14 @@ $(document).ready(function(){
             // searchingusers = new Array();
             // usersin
             // tempdata = $('#finduser').val();
+        } else if(id=='#changeEvent'){
+            tempdata = coordd.split(' ', 3);
+            // alert(tempdata);
         }
         // alert(tempdata);
-        if (id == '#event' || id == '#activist' || id == '#group' || id == '#usersadd' || id == '#addEvent' || id == '#activeadd'){
+        if (id == '#event' || id == '#activist' || id == '#group' || id == '#usersadd' || id == '#addEvent' || id == '#activeadd' || id == '#changeEvent'){
             // alert(1);
-            var controllername = (id!='#addEvent')?id.slice(1):'usersadd';
+            var controllername = (id!='#addEvent'&&id!='#activeadd'&&id!='#changeEvent')?id.slice(1):(id=='#changeEvent')?'finduser':'usersadd';
             // alert(controllername);
             $.ajax({
                 url: "/ajax/" + controllername,
@@ -301,6 +335,7 @@ $(document).ready(function(){
                     else if(id == '#group'){f_group(temp.query);}
                     else if(id == '#usersadd'){f_finduser(temp.query, '#selectuser');}
                     else if(id == '#addEvent'){f_finduser(temp.query, '#selectcoord');}
+                    else if(id == '#changeEvent'){f_finduser(temp.query, '#selectcoord2');}
                     else if(id == '#activeadd'){f_finduser(temp.query, '#selectactive');}
 
                     // else if(id == '#addEvent'){f_finduser(temp.query, '#selectcoord');}
@@ -438,7 +473,7 @@ $(document).ready(function(){
             }
         }
         $('#usersadded').html($('#usersadded').html() + str);
-        alert(send);
+        // alert(send);
         return false;
     });
 
@@ -533,7 +568,26 @@ $(document).ready(function(){
               }
         });
     });
+    $('#findcoord2').keyup(function(e) {
+        var val = $('#findcoord2').val();
+        var fio = val.split(' ', 3);
+        $.ajax({
+            url: "/ajax/finduser",
+            type: 'get',
+            data: {
+                data : fio
+            },
+            success: function (data) {
+                temp = eval(data);
+                f_finduser(temp.query, '#selectcoord2');
 
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+              }
+        });
+    });
     $('.form12').submit(function(e){
         var temp = $(this).find('input[name="AddEvent[uname]"]');
         if(temp.val() == ''){
@@ -641,8 +695,8 @@ $(document).ready(function(){
             }
         // }
         $('#activeadded').html($('#activeadded').html() + str);
-        alert(send);
-        alert(status);
+        // alert(send);
+        // alert(status);
         return false;
     });
     $('body').on('click','#activeadd .ah_uplist-span', function(){
@@ -690,231 +744,36 @@ $(document).ready(function(){
     });
 /*add activist*/
 
+/*change event*/
+    var coordd;
+    var coordd_id;
+    var id_event3;
 
-// /**/
+    $('#event_3').click(function(){
+        $('#changeEvent .an-exit a').attr('dataId', id_event3);
+        $('#changeEvent [name="AddEvent[id]"]').val(id_event3);
+    });
 
-
+    $('#event_4').click(function(){
+        // alert(id_event3);
+        $.ajax({
+                url: "/ajax/eventremove",
+                type: 'get',
+                data: {
+                    id : id_event3,
+                },
+                success: function () {
+                    // alert(1);
+                    location.href = location.href;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                  }
+            });
+            return false;
+    });
+/*change event*/
 
 });
 
-
-// *****************************************************************
-    // $('input[type="text"]').mousedown(function() { 
-    //     $('input[type="text"]').removeClass("error-input");
-    // });
-
-
-    // $('#azfile').on("change", function(){ 
-    //     alert($(this).val().match(/(\\.+?\\).+?/));
-        
-    // });
-
-
-
-    // if($('.current-link').text() == 'мероприятия'){
-    //     $('.main-menu2').css('display', 'block');
-    // } 
-
-    //funcun = function(){$('.menu-list-pressed').css({'animation-duration': '1s'});}
-    //setTimeout(funcun,1000);
-
-// $('.az-form1').submit(function(){
-//     var form_data = $(this).serialize();
-// });
-
-
-     // $(".ah-requestform").submit(function() {
-
-     //        var tel = $(this).find('input[name="tel"]');
-     //        var empty = false;
-     //        if (tel.val() == ""){
-     //            empty = true;
-     //        }
-     //        if (empty == true){
-     //            tel.addClass("error-input");
-     //            tel.focus();
-     //        }else{
-     //            var form_data = $(this).serialize(); 
-     //            $.ajax({
-     //                type: "POST", 
-     //                url: "/sendmessage.php", 
-     //                data: form_data,
-     //                success: function() {
-     //                    cleanTnakns(this);
-     //                }
-     //            });
-     //        }
-     //        return false;
-     //    });
-
-// ***********************************************************************************
-// function getFormData($form){
-//     var unindexed_array = $form.serializeArray();
-//     var indexed_array = {};
-
-//     $.map(unindexed_array, function(n, i){
-//         indexed_array[n['name']] = n['value'];
-//     });
-
-//     return indexed_array;
-// }
-    // $(".form5").submit(function(e) { 
-
-    //     // alert(JSON.stringify($(this).serializeArray()));
-    //     //  if ($('.az-fixed').hasClass('az-fixed2')){
-    //     //     $('#mask, .window').hide();
-    //     //     $('.window').hide();
-    //     //     $('.az-fixed').removeClass('az-fixed2');
-    //     // }
-    //     //alert(1);
-    //     //e.preventDefault();
-    //     //var $form = $(this);
-    //     // var form_data = getFormData($form);
-    //     // var form_data = JSON.stringify($(this).serializeArray());
-    //     // form_data = JSON.parse(form_data);
-    //     //$.toJSON(form_data);[{"name":"uname","value":"ab"}]
-    //     // document.write(form_data);
-    //     $.ajax({
-    //         url: "/ajax/groupsadd/",
-    //         type: "POST",
-    //         contentType: "application/json",
-    //         dataType: "json",
-    //         //datatype: 'json',
-    //         //var form_data = $(this).serialize(); 
-    //         data: '{"form_data"}' ,
-    //         success: function (data) {
-    //             alert(data);
-    //             //data = '('+data+')';
-    //             //temp = eval(data);
-    //             //if(id == '#event'){f_event(temp.query);}
-    //             //else if(id == '#activist'){f_user(temp.query);}
-    //             //else if(id == '#group'){f_group(temp.query);}
-    //             //alert(1);
-    //             //$('#event9').text(data);
-    //             //alert(data);
-    //         },
-    //         error: function (xhr, ajaxOptions, thrownError) {
-    //             alert(xhr.status);
-    //             alert(thrownError);
-    //           }
-    //     });
-    //     e.preventDefault();
-    //     //alert(1);
-
-    //     // var maskHeight = $(document).height();
-    //     // var maskWidth = $(window).width() + 30;
-    //     // $('#mask').css({'width':maskWidth,'height':maskHeight});
-    //     // $('#mask').fadeTo("slow",0.8); 
-    //     // var winH = $(window).height();
-    //     // var winW = $(window).width();
-    //     // if (az_posTop == -1){
-    //     //     az_posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-    //     // }
-    //     // $(id).css('top', 30);
-    //     // $(id).css('left', winW/2-$(id).width()/2);
-    //     // $(id).fadeIn(500);
-    //     // $('.az-fixed').addClass('az-fixed2');
-    //     // $('.az-fixed2').css('top',  -az_posTop);
-    // });
-
-    // $(".form255").submit(function() { 
-    //     var tel = $(this).find('input[name="tel"]');
-    //     var empty = false;
-    //     if (tel.val() == ""){
-    //         empty = true;
-    //     }
-    //     if (empty == true){
-    //         tel.addClass("error-input");
-    //         tel.focus();
-    //     }else{
-    //         var form_data = $(this).serialize();
-    //         $.ajax({
-    //             type: "POST", 
-    //             url: "/sendmessage.php", 
-    //             data: form_data,
-    //             success: function() {
-    //                 cleanTnakns(this);
-    //             }
-    //         });
-    //     }
-    //     return false;
-    // });
-    // $(".form355").submit(function() { 
-    //     var tel = $(this).find('input[name="tel"]');
-    //     var empty = false;
-    //     if (tel.val() == ""){
-    //         empty = true;
-    //     }
-    //     if (empty == true){
-    //         tel.addClass("error-input");
-    //         tel.focus();
-    //     }else{
-    //         var form_data = $(this).serialize(); 
-    //         $.ajax({
-    //             type: "POST", 
-    //             url: "/sendmessage.php", 
-    //             data: form_data,
-    //             success: function() {
-    //                 cleanTnakns(this);
-    //             }
-    //         });
-    //     }
-    //     return false;
-    // });
-    // $(".form455").submit(function() { 
-    //     var tel = $(this).find('input[name="email"]');
-    //     var empty = false;
-    //     if (tel.val() == ""){
-    //         empty = true;
-    //     }
-    //     if (empty == true){
-    //         tel.addClass("error-input");
-    //         tel.focus();
-    //     }else{
-    //         var form_data = $(this).serialize(); 
-    //         $.ajax({
-    //             type: "POST", 
-    //             url: "/sendmessage.php", 
-    //             data: form_data,
-    //             success: function() {
-    //                 cleanTnakns(this);
-    //             }
-    //         });
-    //     }
-    //     return false;
-    // });
-
-
-
-
-
-// (function() {
-//  function toJSONString( form ) {
-//   var obj = {};
-//   var elements = form.querySelectorAll( "input, select, textarea" );
-//   for( var i = 0; i < elements.length; ++i ) {
-//    var element = elements[i];
-//    var name = element.name;
-//    var value = element.value;
-
-//    if( name ) {
-//     obj[ name ] = value;
-//    }
-//   }
-
-//   return JSON.stringify( obj );
-//  }
-
-//  document.addEventListener( "DOMContentLoaded", function() {
-//   var form = document.getElementById( "test" );
-//   var output = document.getElementById( "output" );
-//   form.addEventListener( "submit", function( e ) {
-//    e.preventDefault();
-//    var json = toJSONString( this );
-//    output.innerHTML = json;
-
-//   }, false);
-
-//  });
-
-// })();

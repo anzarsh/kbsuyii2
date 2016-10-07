@@ -326,19 +326,99 @@ class SiteController extends Controller
                     $event_eventtype->id_eventtype = 8;
                     $event_eventtype->save();
                 }
-    //             public $id_activity0;
-    // public $id_activity1;
-    // public $id_activity2;
-    // public $id_activity3;
-    // public $id_eventtype0;
-    // public $id_eventtype1;
-    // public $id_eventtype2;
-    // public $id_eventtype3;
-    // public $id_eventtype4;
-    // public $id_eventtype5;
-    // public $id_eventtype6;
-    // public $id_eventtype7;
-    // public $id_eventtype8;
+            } else {
+                $event = event::find()->where(['id' => $model2->id])->one();
+                $event->uname = $model2->uname;
+                $event->location = $model2->location;
+                $event->startdate = date('Y-m-d', strtotime($model2->startdate));
+                $event->finishdate = date('Y-m-d', strtotime($model2->finishdate));
+                $event->comment = $model2->comment;
+                $event->id_eventlevel = $model2->id_eventlevel;
+                $event->id_eventcomp = $model2->id_eventcomp == 1 ? 1: 0;
+                $event->save();
+                $event_user_status_role = event_user_status_role::find()->where(['and',['id_event' => $model2->id], ['id_status' => 2], ['id_role' => 0]])->one();
+                $event_user_status_role->id_user = $model2->id_coordinator;
+                $event_user_status_role->save();
+                event_activity::deleteAll(['id_event' => $model2->id]);
+                if($model2->id_activity0 == '0'){
+                    $event_activity = new event_activity();
+                    $event_activity->id_event = $event->id;
+                    $event_activity->id_activity = 0;
+                    $event_activity->save();
+                }
+                if($model2->id_activity1 == 1){
+                    $event_activity = new event_activity();
+                    $event_activity->id_event = $event->id;
+                    $event_activity->id_activity = 1;
+                    $event_activity->save();
+                }
+                if($model2->id_activity2 == 2){
+                    $event_activity = new event_activity();
+                    $event_activity->id_event = $event->id;
+                    $event_activity->id_activity = 2;
+                    $event_activity->save();
+                }
+                if($model2->id_activity3 == 3){
+                    $event_activity = new event_activity();
+                    $event_activity->id_event = $event->id;
+                    $event_activity->id_activity = 3;
+                    $event_activity->save();
+                }
+                event_eventtype::deleteAll(['id_event' => $model2->id]);
+                if($model2->id_eventtype0 == '0'){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 0;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype1 == 1){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 1;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype2 == 2){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 2;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype3 == 3){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 3;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype4 == 4){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 4;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype5 == 5){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 5;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype6 == 6){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 6;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype7 == 7){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 7;
+                    $event_eventtype->save();
+                }
+                if($model2->id_eventtype8 == 8){
+                    $event_eventtype = new event_eventtype();
+                    $event_eventtype->id_event = $event->id;
+                    $event_eventtype->id_eventtype = 8;
+                    $event_eventtype->save();
+                }
             }
         }
 
@@ -389,7 +469,6 @@ class SiteController extends Controller
                 $model2->imageFile = UploadedFile::getInstance($model2, 'imageFile');
                 if ($model2->validate()) {
                     $user = groups::find()->where(['id' => $model2->id])->one();
-                    // $user = groups::findOne($model2->id);
                     if($model2->uname){
                         $user->uname = $model2->uname;
                     }

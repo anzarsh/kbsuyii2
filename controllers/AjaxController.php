@@ -24,8 +24,6 @@ class AjaxController extends Controller
   
     public function actionEvent()
     {
-        //$id = $_GET['id'];
-        //if ($id == '#event'){
             $id_event = $_GET['data'];
             $query = event::find()
                 ->where(['id' => $id_event])
@@ -39,20 +37,16 @@ class AjaxController extends Controller
                 ->asArray()->one();
         
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return array("query" => $query); //array('the_event' => '$query', 'users' => '$users');
-            //return array("query" => $id_event);
-        //}
+            return array("query" => $query);
     }
     public function actionActivist()
     {
             $id_user = $_GET['data'];
-            //print_r('dfg dfgg dfg dfg dsfg dfg dfg dsfg id_user');
             $query = users::find()
                 ->where(['id' => $id_user])
                 ->with('department')
                 ->with('groups')
                 ->with('events')
-                //->orderBy(['id' => SORT_ASC])
                 ->asArray()->one();
         
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -71,9 +65,7 @@ class AjaxController extends Controller
     }
     public function actionFinduser()
     {
-            // print_r($_GET);
             $uname = $_GET['data'];
-            // $argwhere = Array();
             if(count($uname)==0){$argwhere = '';
             } else if(count($uname)==1){
                 $argwhere = ['or',
@@ -91,7 +83,6 @@ class AjaxController extends Controller
                                             ]); 
                 }
             }
-            // print_r($argwhere);
             $query = users::find()
                 ->where($argwhere)
                 ->limit(10)
@@ -116,7 +107,6 @@ class AjaxController extends Controller
         $users = $_GET['data'];
         $group_id = $_GET['id'];
         $dels = $_GET['del'];
-        // print_r($users);
         if($users){
             foreach ($users as $user){
                 $group_user = new group_user();
@@ -143,7 +133,6 @@ class AjaxController extends Controller
         $users = $_GET['data'];
         $event_id = $_GET['id'];
         $dels = $_GET['del'];
-        // print_r($users);
         if($users){
             foreach ($users as $user){
                 $event_user_status_role = new event_user_status_role();
@@ -175,10 +164,8 @@ class AjaxController extends Controller
         $event_id = $_GET['id'];
         $dels = $_GET['del'];
         $roles = $_GET['role'];
-        // print_r($users);
         if($users){
             for($i=0;$i<count($users); $i++){
-            // foreach ($users as $user){
                 $event_user_status_role = new event_user_status_role();
                 $event_user_status_role->id_event = $event_id;
                 $event_user_status_role->id_user = $users[$i];
@@ -194,7 +181,7 @@ class AjaxController extends Controller
                     ->one();
                 $rate = $users_temp->rate;
                 $summ = $rate + $mark;
-                $users_temp->rate = $summ;//$users_temp->rate + $rate->mark;
+                $users_temp->rate = $summ;
                 $users_temp->save();
             }
         }
@@ -205,41 +192,50 @@ class AjaxController extends Controller
                                 ['id_event' => $event_id],
                                 ['id_user' => $del],
                                 ['id_status' => 0],
-                                // ['id_role' => 0],
                             ])
-                    ->one()
-                    ->delete();
+                    ->one();
+                $role = $query->id_role;
+                $query->delete();
+                $rate = role::find()
+                    ->where(['id' => $role])
+                    ->one();
+                $mark = $rate->mark;
+                $users_temp = users::find()
+                    ->where(['id' => $del])
+                    ->one();
+                $rate2 = $users_temp->rate;
+                $summ = $rate2 - $mark;
+                $users_temp->rate = $summ;//$users_temp->rate + $rate->mark;
+                $users_temp->save();
             }
         }
     }
 
     public function actionGroupremove()
     {
-        // $users = $_GET['data'];
         $group_id = $_GET['id'];
-        // $dels = $_GET['del'];
-        // print_r($users);
         if($group_id){
-            // foreach ($users as $user){
                 $group = groups::find()->where(['id' => $group_id])->one();
-                // $group_user->id_group = $group_id;
-                // $group_user->id_user = $user;
                 $group->delete();
                 group_user::deleteAll(['id_group' => $group_id]);
-            // }
         }
-        // if($dels){
-        //     foreach ($dels as $del){
-        //         $query = group_user::find()
-        //             ->where(['and', 
-        //                         ['id_group' => $group_id],
-        //                         ['id_user' => $del],
-        //                     ])
-        //             ->one()
-        //             ->delete();
-        //     }
-        // }
-         // Yii::$app->response->format = Response::FORMAT_JSON;
-         //    return array("query" => $users);
+    }
+    public function actionEventremove()
+    {
+        $event_id = $_GET['id'];
+        print_r('$event_id');
+        if($event_id){
+                $role = role::find()->all();
+                $event_users = event_user_status_role::find()->where(['id_event' => $event_id])->all();
+                foreach ($event_users as $event_user){
+                    $user = users::find()->where(['id' => $event_user->id_user])->one();
+                    $mark = $role[$event_user->id_role]->mark;
+                    $user->rate = $user->rate - $mark;
+                    $user->save();
+                }
+                event_user_status_role::deleteAll(['id_event' => $event_id]);
+                $event = event::find()->where(['id' => $event_id])->one();
+                $event->delete();
+        }
     }
 }
