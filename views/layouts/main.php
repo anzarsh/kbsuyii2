@@ -109,7 +109,7 @@ AppAsset::register($this);
 <div id="group" class="window">
     <div class="az-popup">
             <div class="an-exit">
-                <span class="an-exit__krest an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <a rel="modal" class="an-exit__krest an-exit__krest2 an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></a>
             </div>
             <h2 id="group0"></h2>
             <div class="az-form az-row">
@@ -141,7 +141,7 @@ AppAsset::register($this);
 <div id="activist" class="window">
     <div class="az-popup">
             <div class="an-exit">
-                <span class="an-exit__krest an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <a rel="modal" class="an-exit__krest an-exit__krest2 an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></a>
             </div>
             <h2>карта активиста</h2>
             <div class="az-form az-row">
@@ -178,7 +178,7 @@ AppAsset::register($this);
 <div id="event" class="window">
     <div class="az-popup">
             <div class="an-exit">
-                <span class="an-exit__krest an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <a rel="modal" class="an-exit__krest an-exit__krest2 an-exit__krest_style2"><i class="fa fa-times" aria-hidden="true"></i></a>
             </div>
             <h2 id="event0"></h2>
             <div class="az-form az-row">
