@@ -252,6 +252,10 @@ div.icons_style{
 }
 /*table*/
 
+.az-center{
+    text-align: center;
+}
+
 
 /*cols*/
 .az-row{
@@ -333,6 +337,13 @@ div.icons_style{
 .az-col-150-px{
     display: inline-block;
     width: 150px;
+    margin-right: 1%;
+    font-size: 12px;
+    vertical-align: top;
+}
+.az-col-175-px{
+    display: inline-block;
+    width: 175px;
     margin-right: 1%;
     font-size: 12px;
     vertical-align: top;

@@ -118,10 +118,10 @@ AppAsset::register($this);
                     <span class="az-style1 az-col-99-150-px" id="group1"></span>
                 </div>
             </div>
-            <div class="az-form az-row">
+            <div class="az-form az-row az-center">
                 <a id="group2" href="#usersadd" data-status="usersadd2" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить активиста</a>
-                <a id="group3" href="#changeGroup" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Изменить группу</a>
-                <a id="group4" href="#" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Удалить группу</a>
+                <a id="group3" href="#changeGroup" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-refresh" aria-hidden="true"></i> Изменить группу</a>
+                <a id="group4" href="#" class="az-col-200-px az-button-add"><i class="fa fa-trash" aria-hidden="true"></i> Удалить группу</a>
             </div>
             <table class="az-table">
                 <thead class="table-head">
@@ -212,12 +212,11 @@ AppAsset::register($this);
             <span id="event9" class="az-style1 az-col-100">Несмотря на внутренние противоречия, элемент политического процесса теоретически представляет собой эмпирический субъект политического процесса. Политическое учение Руссо, несмотря на внешние воздействия, фактически символизирует постиндустриализм. Технология коммуникации теоретически доказывает прагматический коллапс Советского Союза.</span>
 
             </div>
-            <div class="az-form az-row">
-                <a id="event_2" href="#usersadd" data-status="regadd" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить регистраторов</a>
-                <a id="event_3" href="#changeEvent" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Изменить мероприятие</a>
-                <a id="event_4" href="#" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Удалить мероприятие</a>
-                <a id="event_5" href="#activeadd" rel="modal" class="az-col-200-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить активиста</a>
-                
+            <div class="az-form az-row az-center">
+                <a id="event_2" href="#usersadd" data-status="regadd" rel="modal" class="az-col-175-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить регистраторов</a>
+                <a id="event_5" href="#activeadd" rel="modal" class="az-col-175-px az-button-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить активиста</a>
+                <a id="event_3" href="#changeEvent" rel="modal" class="az-col-175-px az-button-add"><i class="fa fa-refresh" aria-hidden="true"></i> Изменить</a>
+                <a id="event_4" href="#" class="az-col-175-px az-button-add"><i class="fa fa-trash" aria-hidden="true"></i> Удалить</a>
             </div>
             <table class="az-table">
         <thead class="table-head">
