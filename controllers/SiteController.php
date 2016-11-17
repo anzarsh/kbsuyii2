@@ -32,6 +32,7 @@ class SiteController extends Controller
      * @inheritdoc
      */
 
+    public $layout = "main";
     public $enableCsrfValidation = false;
 
     public function behaviors()
@@ -134,6 +135,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = 'main2';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -144,6 +146,7 @@ class SiteController extends Controller
         }
         return $this->render('login', [
             'model' => $model,
+            // 'layoutmy' => $this->layout,
         ]);
     }
 

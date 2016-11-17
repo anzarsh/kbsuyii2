@@ -306,9 +306,9 @@ $(document).ready(function(){
                     $(id + ' .an-exit__krest').attr('dataid', prevpop_id[prevpop.length-2]);
                     $(id + ' .an-exit__krest').attr('rel', 'modal');
                 } else {
-                    $(id + ' .an-exit__krest').attr('href', '');
-                    $(id + ' .an-exit__krest').attr('dataid', '');
-                    $(id + ' .an-exit__krest').attr('rel', '');
+                    $(id + ' .an-exit__krest').removeAttr('href');
+                    $(id + ' .an-exit__krest').removeAttr('dataid');
+                    $(id + ' .an-exit__krest').attr('rel','');
                 }
             } else if($(this).hasClass('an-exit__krest2')){
                 prevpop.pop();
@@ -318,11 +318,13 @@ $(document).ready(function(){
                     $(id + ' .an-exit__krest').attr('dataid', prevpop_id[prevpop.length-2]);
                     $(id + ' .an-exit__krest').attr('rel', 'modal');
                 } else {
-                    $(id + ' .an-exit__krest').attr('href', '');
-                    $(id + ' .an-exit__krest').attr('dataid', '');
-                    $(id + ' .an-exit__krest').attr('rel', '');
+                    $(id + ' .an-exit__krest').removeAttr('href');
+                    $(id + ' .an-exit__krest').removeAttr('dataid');
+                    $(id + ' .an-exit__krest').attr('rel','');
                 }
+
             }
+            // alert(prevpop.length);
             tempdata = Number($(this).attr('dataid'));
             $('#usersadd .an-exit__krest').attr('href', id);
             $('#activeadd .an-exit__krest').attr('href', id);
@@ -403,8 +405,15 @@ $(document).ready(function(){
         $('.az-fixed').removeClass('az-fixed2');
         $(document).scrollTop(az_posTop);
         az_posTop = -1;
+
     }); 
 
+    $('.an-exit__krest2').click(function () {
+        if(prevpop.length == 1){
+            prevpop.pop();
+            prevpop_id.pop();
+        }
+    });
 
    function cleanTnakns(form){
         $('input[type="text"]').removeClass("error-input");
