@@ -90,6 +90,8 @@ h2 {
 /*header*/
 .log-exit {
   text-align: right; }
+  .log-exit form {
+    display: inline-block; }
 
 .az-login {
   height: 60px;
@@ -104,7 +106,9 @@ h2 {
   line-height: 60px;
   font-family: "OpenSans-Regular";
   font-size: 12px;
-  display: inline-block; }
+  display: inline-block;
+  border: none;
+  background: none; }
 
 /*header*/
 /*menu style*/

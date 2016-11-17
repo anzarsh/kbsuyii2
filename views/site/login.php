@@ -55,15 +55,16 @@ use yii\widgets\ActiveForm;
 		<? //var_dump($layoutmy); ?>
 		<!-- sdsdf -->
 		<h2>карта активиста</h2>
-		<?php $inputt = $form->field($model, 'username')->textInput(['maxlength' => 18, 'class' => '', 'placeholder' => "Логин"])->label(false); ?>
+		<?php $inputt = $form->field($modellog, 'username')->textInput(['maxlength' => 18, 'class' => '', 'placeholder' => "Логин"])->label(false); ?>
 		<?php $inputt->template = "{input}"; ?>
 		<?= $inputt; ?>
 		<!-- <input type="text" placeholder="логин"> -->
-		<?php $inputt = $form->field($model, 'password')->textInput(['maxlength' => 18, 'class' => '', 'placeholder' => "Пароль"])->label(false); ?>
+		<?php $inputt = $form->field($modellog, 'password')->passwordInput(['maxlength' => 18, 'class' => '', 'placeholder' => "Пароль"])->label(false); ?>
 		<?php $inputt->template = "{input}"; ?>
 		<?= $inputt; ?>
 		<!-- <input type="password" placeholder="пароль"> -->
-		<?= Html::submitButton('Отправить', ['class' => '']) ?>
+		<?= Html::submitInput('вход', ['class' => '']); ?>
+		
 		<!-- <input type="submit" value="вход"> -->
 		<div class="icons icons_style">
 			<a href="/rating.php"><i class="fa fa-vk" aria-hidden="true"></i></a>

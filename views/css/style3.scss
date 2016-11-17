@@ -103,6 +103,9 @@ h2{
 .log-exit{
     text-align: right;
     //padding-right: 50px;
+    form{
+        display: inline-block;
+    }
 }
 .az-login{
     height: 60px;
@@ -118,6 +121,9 @@ h2{
     font-family: "OpenSans-Regular";
     font-size: 12px;
     display: inline-block;
+    border: none;
+    background: none;
+
 }
 /*header*/
 

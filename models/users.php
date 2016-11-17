@@ -10,6 +10,10 @@ use app\models\group_user;
 
 class users extends ActiveRecord
 {
+    public static function tableName()
+    {
+        return 'users';
+    }
 	public function getDepartment()
     {
         return $this->hasOne(department::className(), ['id' => 'id_department'])

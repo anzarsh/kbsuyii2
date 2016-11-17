@@ -56,7 +56,10 @@ AppAsset::register($this);
                 <div class="col-md-6 col-sm-6 col-xs-9">
                     <div class="log-exit">
                         <span class="az-login">Люев Азамат</span>
-                        <a href="/" class="az-exit">Выход</a>
+                        <form method="post" action="/site/logout">
+                            <input type="submit" class="az-exit" value="Выход">
+                        </form>
+                        <!-- <a href="/site/logout" class="az-exit">Выход</a> -->
                     </div>
                 </div>
             </div>
